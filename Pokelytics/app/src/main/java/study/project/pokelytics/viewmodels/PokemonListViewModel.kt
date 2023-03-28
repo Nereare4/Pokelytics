@@ -7,7 +7,7 @@ import kotlinx.coroutines.launch
 import study.project.pokelytics.api.models.Pokemon
 import study.project.pokelytics.usecases.GetPokemonUseCase
 
-class PokemonListViewModelFragment(
+class PokemonListViewModel(
     val getPokemonUseCase: GetPokemonUseCase
 ) : ViewModalBase() {
 
