@@ -33,7 +33,7 @@ class PokemonListFragment : FragmentBase<FragmentPokemonListBinding>() {
     override fun subscribe() {
         viewModel.state.observe(this) {
             when (it) {
-                ViewState.IDLE -> {}
+                ViewState.IDLE -> viewModel.getPokemons(0)
                 else -> {}
             }
         }

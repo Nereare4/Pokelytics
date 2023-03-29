@@ -1,11 +1,14 @@
 package study.project.pokelytics
 
 import android.app.Application
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.FlowPreview
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.GlobalContext.startKoin
 import study.project.pokelytics.di.viewModelModule
 
 class PokelyticsApp : Application() {
+    @OptIn(ExperimentalCoroutinesApi::class, FlowPreview::class)
     override fun onCreate() {
         super.onCreate()
         startKoin {
