@@ -11,9 +11,10 @@
             android:id="@+id/pokemon_recycler"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="8dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tool:listitem="@layout/pokemon_list_item"/>
+            tool:layout_editor_absoluteX="198dp"
+            tool:layout_editor_absoluteY="-284dp"
+            tool:listitem="@layout/pokemon_list_item" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

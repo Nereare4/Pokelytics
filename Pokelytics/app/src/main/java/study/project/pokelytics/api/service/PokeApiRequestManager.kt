@@ -33,7 +33,7 @@ object PokeApiRequestManager {
         return list
     }
 
-    fun getAllPokemon(): ArrayList<Pokemon> {
+    /*fun getAllPokemon(): ArrayList<Pokemon> {
         val list = arrayListOf<Pokemon>()
         var count = 1
         var res: Pokemon
@@ -56,7 +56,7 @@ object PokeApiRequestManager {
 
     fun getPokemon(num: Int): Pokemon {
         return pokemonManager.getPokemonFromURL(URL("$POKE_API_POKEMONS_URL/$num"))
-    }
+    }*/
 
     fun getAllMovesPages(): ArrayList<ItemResponse> {
         val list = arrayListOf<ItemResponse>()
