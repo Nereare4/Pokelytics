@@ -18,7 +18,6 @@ data class Pokemon(
     @SerializedName("moves") var moves: ArrayList<Moves> = arrayListOf(),
     @SerializedName("name") var name: String? = null,
     @SerializedName("order") var order: Int? = null,
-    @SerializedName("past_types") var pastTypes: ArrayList<String> = arrayListOf(),
     @SerializedName("species") var species: ItemResponse? = ItemResponse(),
     @SerializedName("sprites") var sprites: Sprites? = Sprites(),
     @SerializedName("stats") var stats: ArrayList<Stats> = arrayListOf(),
