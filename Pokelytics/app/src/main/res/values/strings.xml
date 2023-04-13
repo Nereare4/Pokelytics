@@ -1,3 +1,17 @@
 <resources>
     <string name="app_name">Pokelytics</string>
+    <string name="welcome">Welcome</string>
+    <string name="consult">Pokelytics is an app to consult pokemons</string>
+    <string name="letsStart">Let\'s start!</string>
+    <string name="ready">You\'re all set!</string>
+    <string name="inicioOpcional">MENSAJE INICIO SESION OPCIONAL</string>
+    <string name="txtIniciarSesion">Log in to Pokelytics</string>
+    <string name="txtGetStarted">LETS GET STARTES</string>
+    <string name="btnSignUp">SIGN UP </string>
+    <string name="btnLogIn">LOG IN</string>
+
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 </resources>
