@@ -18,14 +18,10 @@
         <item name="android:fontFamily">@font/roboto</item>
         <item name="android:textStyle">bold</item>
     </style>
-    <style name="buttonOutlinedRoundBlue" parent="Widget.MaterialComponents.Button.OutlinedButton">
-        <item name="android:layout_width">24dp</item>
-        <item name="android:layout_height">24dp</item>
-        <item name="android:textColor">@color/colorPrimary</item>
-        <item name="android:backgroundTint">@color/white</item>
-        <item name="cornerRadius">100dp</item>
-        <item name="android:drawableTop">@drawable/ic_arrow_left</item>
-        <item name="android:shape">oval</item>
-
+    <style name="lineET" parent="Theme.AppCompat.Light">
+        <item name="colorControlNormal">@color/white</item>
+        <item name="colorControlActivated">@color/white</item>
+        <item name="android:textColorHighlight">@color/white</item>
+        <item name="android:fontFamily">@font/roboto</item>
     </style>
 </resources>

@@ -70,9 +70,9 @@
         android:label="LogInFragment"
         tools:layout="@layout/fragment_log_in">
         <!--BOTON LOG IN QUE VA A LISTA DE POKEMONS-->
-        <action
+       <!-- <action
             android:id="@+id/signUpFragmentToListaPokemonsFragment"
-            app:destination="@id/onBoardingFragment"/>
+            app:destination="@id/onBoardingFragment"/>-->
         <!--BOTON CANCELAR QUE VA A LOGIN SELECTION-->
         <action
             android:id="@+id/logInFragmentToLoginSelectionFragment"
@@ -90,13 +90,13 @@
         android:label="ResetPasswordFragment"
         tools:layout="@layout/fragment_reset_password">
         <!--BOTON RESET PASSWORD QUE VA A LOG IN-->
-        <action
+        <!--<action
             android:id="@+id/signUpFragmentToListaPokemons"
-            app:destination="@id/onBoardingFragment"/><!--ESTE IRIA A LISTA POKEMOSN-->
+            app:destination="@id/onBoardingFragment"/>ESTE IRIA A LISTA POKEMOSN-->
         <!--BOTON CANCELAR QUE VA A LOG IN-->
         <action
-            android:id="@+id/signUpFragmentToLoginSelectionFragment"
-            app:destination="@id/loginSelectionFragment"/>
+            android:id="@+id/resetPasswordFragmentToLogInFragment"
+            app:destination="@id/logInFragment"/>
 
     </fragment>
 
