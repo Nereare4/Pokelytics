@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+<navigation app:startDestination="@id/pokemonList"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/nav_graph_main"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/nav_graph_main">
+    xmlns:tools="http://schemas.android.com/tools">
 
+    <fragment
+        android:id="@+id/pokemonList"
+        android:name="study.project.pokelytics.fragments.PokemonListFragment"
+        tools:layout="@layout/fragment_pokemon_list"/>
 
 </navigation>
