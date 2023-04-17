@@ -22,6 +22,7 @@ data class Pokemon(
     @SerializedName("sprites") var sprites: Sprites? = Sprites(),
     @SerializedName("stats") var stats: ArrayList<Stats> = arrayListOf(),
     @SerializedName("types") var types: ArrayList<Types> = arrayListOf(),
-    @SerializedName("weight") var weight: Int? = null
+    @SerializedName("weight") var weight: Int? = null,
+    var extraInfo: PokemonExtraInfo = PokemonExtraInfo()
 
 )
