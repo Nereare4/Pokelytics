@@ -9,7 +9,7 @@
     <color name="colorBackground">#E9DDDD</color>
     <color name="colorItemLight">#6E8274</color>
     <color name="colorItemDark">#575858</color>
-    <color name="colorOnItem">#80575858</color>
+    <color name="colorOnItem">#C6000000</color>
     <color name="colorOnPrimary">@color/white</color>
     <color name="green">#66DA86</color>
     <color name="blue">#1E88E5</color>
