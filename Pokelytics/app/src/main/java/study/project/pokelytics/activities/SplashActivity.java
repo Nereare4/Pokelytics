@@ -1,11 +1,13 @@
-package study.project.pokelytics;
+package study.project.pokelytics.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.widget.ImageView;
 
-public class Splash extends AppCompatActivity {
+import study.project.pokelytics.R;
+
+public class SplashActivity extends AppCompatActivity {
 
 
     ImageView logo;

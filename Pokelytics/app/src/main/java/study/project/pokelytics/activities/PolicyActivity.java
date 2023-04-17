@@ -1,10 +1,12 @@
-package study.project.pokelytics;
+package study.project.pokelytics.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-public class Policy_eng extends AppCompatActivity {
+import study.project.pokelytics.R;
+
+public class PolicyActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

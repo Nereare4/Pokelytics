@@ -9,12 +9,12 @@
         app:layout_constraintEnd_toEndOf="@id/line_bottom"
         app:layout_editor_absoluteX="1dp"
         app:layout_editor_absoluteY="1dp"
-        tools:context=".Policy_eng">
+        tools:context=".activities.PolicyActivity">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:context=".PolicyActivity">
+            tools:context=".activities.PolicyActivity">
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/line_left"
