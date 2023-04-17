@@ -5,6 +5,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.GlobalContext.startKoin
+import study.project.pokelytics.di.appModule
 import study.project.pokelytics.di.repositoryModule
 import study.project.pokelytics.di.useCaseModule
 import study.project.pokelytics.di.viewModelModule
@@ -19,7 +20,8 @@ class PokelyticsApp : Application() {
                 listOf(
                     viewModelModule,
                     useCaseModule,
-                    repositoryModule
+                    repositoryModule,
+                    appModule
                 )
             )
         }
