@@ -71,7 +71,7 @@
         tools:layout="@layout/fragment_log_in">
         <!--BOTON LOG IN QUE VA A LISTA DE POKEMONS-->
        <!-- <action
-            android:id="@+id/signUpFragmentToListaPokemonsFragment"
+            android:id="@+id/logInFragmentToListaPokemonsFragment"
             app:destination="@id/onBoardingFragment"/>-->
         <!--BOTON CANCELAR QUE VA A LOGIN SELECTION-->
         <action

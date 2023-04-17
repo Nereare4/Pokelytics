@@ -42,7 +42,7 @@ class OnBoardingFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         //return inflater.inflate(R.layout.fragment_welcome, container, false)
-        _binding = FragmentOnBoardingBinding.inflate(inflater, container, true)
+        _binding = FragmentOnBoardingBinding.inflate(inflater, container, false)
         //AQUI VA EL CODIGO
        /* binding.btnEmpezar.setOnClickListener{
             findNavController().navigate(R.id.onBoardingFragmentFragmentToListaPokemons)

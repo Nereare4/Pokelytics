@@ -2,26 +2,28 @@ package study.project.pokelytics.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.navigation.fragment.NavHostFragment
 import study.project.pokelytics.R
 import study.project.pokelytics.databinding.ActivityLoginBinding
 
 class LoginActivity : ActivityBase<ActivityLoginBinding>() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
-    }
 
-    override fun getResourceLayout(): Int = R.layout.activity_main
+
+    override fun getResourceLayout(): Int = R.layout.activity_login
 
     override fun initializeView() {
-        TODO("Not yet implemented")
+        val navHost = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        val graph = navHost.navController.navInflater.inflate(R.navigation.nav_graph_login)
+        navHost.navController.graph = graph
     }
-
     override fun bindViewModel() {
-        TODO("Not yet implemented")
+        binding.apply {
+            lifecycleOwner = this@LoginActivity
+        }
+    }
+    override fun subscribe() {
+
     }
 
-    override fun subscribe() {
-        TODO("Not yet implemented")
-    }
+
 }

@@ -42,7 +42,7 @@ class LoginSelectionFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         //return inflater.inflate(R.layout.fragment_welcome, container, false)
-        _binding = FragmentLoginSelectionBinding.inflate(inflater, container, true)
+        _binding = FragmentLoginSelectionBinding.inflate(inflater, container, false)
         //AQUI VA EL CODIGO
         binding.btnSignUp.setOnClickListener{
             findNavController().navigate(R.id.loginSelectionFragmentToSignUpFragment)

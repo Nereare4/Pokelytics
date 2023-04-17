@@ -34,9 +34,10 @@ class WelcomeFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         //return inflater.inflate(R.layout.fragment_welcome, container, false)
-        _binding = FragmentWelcomeBinding.inflate(inflater, container, true)
+        _binding = FragmentWelcomeBinding.inflate(inflater, container, false)
         //AQUI VA EL CODIGO
         binding.btnNext.setOnClickListener{
+            //funcion de navegar a main activity
             findNavController().navigate(R.id.welcomeFragmentToOnBoardingFragment)
         }
         return binding.root
