@@ -3,19 +3,12 @@ package study.project.pokelytics;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-import android.widget.ImageView;
 
-public class Splash extends AppCompatActivity {
-
-
-    ImageView logo;
+public class Policy_es extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_splash);
-        logo = findViewById(R.id.pokeballSplash);
-
-
+        setContentView(R.layout.activity_policy);
     }
 }
