@@ -1,5 +1,6 @@
 package study.project.pokelytics.api
 
+import android.util.Log
 import com.google.gson.Gson
 import java.io.BufferedReader
 import java.io.InputStream
@@ -13,7 +14,12 @@ fun <T> getUrlObject(url: URL, classOfT: Class<T>): T {
     val inputStream: InputStream = connection.inputStream
     val reader = BufferedReader(InputStreamReader(inputStream))
     val response = reader.readText()
-    return Gson().fromJson(response, classOfT)
+    return try {
+        Gson().fromJson(response, classOfT)
+    } catch (e: Exception) {
+        Log.e("Pokemon Error", "Error parsing pokemon: $url")
+        throw e
+    }
 }
 
 fun <T> getUrlObjectReplace(url: URL, classOfT: Class<T>): T {
