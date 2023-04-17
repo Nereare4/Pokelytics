@@ -4,7 +4,7 @@
     <string name="consult">Pokelytics is an app to consult pokemons</string>
     <string name="letsStart">Let\'s start!</string>
     <string name="ready">You\'re all set!</string>
-    <string name="inicioOpcional">MENSAJE INICIO SESION OPCIONAL</string>
+    <string name="inicioOpcional">Start checking pokemons now</string>
     <string name="txtIniciarSesion">Log in to Pokelytics</string>
     <string name="txtGetStarted">LETS GET STARTES</string>
     <string name="btnSignUp">SIGN UP </string>

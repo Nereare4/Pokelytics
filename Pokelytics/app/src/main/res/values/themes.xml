@@ -14,7 +14,7 @@
         <!-- Customize your theme here. -->
     </style>
     <style name="Theme.Pokelytics.NoActionBar">
-        <item name="android:windowActionBar">false</item>
-        <item name="android:windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
     </style>
 </resources>
