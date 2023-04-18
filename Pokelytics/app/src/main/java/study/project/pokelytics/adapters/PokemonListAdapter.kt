@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import study.project.pokelytics.api.models.Pokemon
 import study.project.pokelytics.databinding.PokemonListItemBinding
-import study.project.pokelytics.fragments.PokemonListFragment
+import study.project.pokelytics.fragments.main.PokemonListFragment
 import study.project.pokelytics.viewholders.PokemonViewHolder
 
 class PokemonListAdapter(

@@ -1,7 +1,7 @@
 package study.project.pokelytics.activities
 
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
+import android.content.Context
+import android.content.Intent
 import androidx.navigation.fragment.NavHostFragment
 import study.project.pokelytics.R
 import study.project.pokelytics.databinding.ActivityLoginBinding
@@ -25,5 +25,7 @@ class LoginActivity : ActivityBase<ActivityLoginBinding>() {
 
     }
 
-
+    companion object {
+        fun getIntent(context: Context) = Intent(context, LoginActivity::class.java)
+    }
 }

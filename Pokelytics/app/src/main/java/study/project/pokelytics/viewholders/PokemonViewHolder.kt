@@ -6,7 +6,7 @@ import study.project.pokelytics.R
 import study.project.pokelytics.api.models.Pokemon
 import study.project.pokelytics.databinding.PokemonListItemBinding
 import study.project.pokelytics.event.observeEvent
-import study.project.pokelytics.fragments.PokemonListFragment
+import study.project.pokelytics.fragments.main.PokemonListFragment
 import study.project.pokelytics.setImageToUrl
 import java.util.Locale
 
