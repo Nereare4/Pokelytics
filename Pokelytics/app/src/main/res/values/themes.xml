@@ -1,16 +1,12 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
+<resources>
     <style name="Theme.Pokelytics" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <!-- Primary brand color. -->
+        <item name="android:windowIsTranslucent">true</item>
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryVariant">@color/colorPrimary</item>
         <item name="colorOnPrimary">@color/colorOnPrimary</item>
-        <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/colorSecondary</item>
         <item name="colorSecondaryVariant">@color/colorSecondary</item>
         <item name="colorOnSecondary">@color/black</item>
-        <!-- Status bar color. -->
         <item name="android:statusBarColor">@color/colorBackground</item>
-        <!-- Customize your theme here. -->
     </style>
 </resources>

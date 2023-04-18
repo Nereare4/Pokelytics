@@ -1,4 +1,4 @@
-package study.project.pokelytics.fragments
+package study.project.pokelytics.fragments.main
 
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -9,6 +9,7 @@ import study.project.pokelytics.adapters.PokemonListAdapter
 import study.project.pokelytics.api.models.Pokemon
 import study.project.pokelytics.api.models.pages.PaginationRange
 import study.project.pokelytics.databinding.FragmentPokemonListBinding
+import study.project.pokelytics.fragments.FragmentBase
 import study.project.pokelytics.usecases.GetPokemonMoreInfoUseCase
 import study.project.pokelytics.viewmodels.MoreInfoViewModel
 import study.project.pokelytics.viewmodels.PokemonListViewModel

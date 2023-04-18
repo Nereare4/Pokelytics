@@ -4,25 +4,25 @@
     xmlns:tools="http://schemas.android.com/tools">
 
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".fragments.login.OnBoardingFragment"
-        android:background="@color/colorPrimary">
+        android:background="@color/colorPrimary"
+        android:orientation="vertical"
+        android:gravity="center">
 
-        <!-- TODO: Update blank fragment layout -->
         <TextView
             android:id="@+id/ready"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="64dp"
             android:fontFamily="@font/roboto"
             android:text="@string/ready"
             android:textColor="@color/white"
             android:textSize="25sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="@id/rightguide"
-            app:layout_constraintStart_toStartOf="@id/leftguide"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
@@ -34,17 +34,17 @@
             android:text="@string/inicioOpcional"
             android:textColor="@color/white"
             android:textSize="20sp"
-            app:layout_constraintEnd_toEndOf="@id/rightguide"
-            app:layout_constraintStart_toStartOf="@id/leftguide"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@id/ready"/>
 
         <Button
-            android:id="@+id/btnEmpezar"
+            android:id="@+id/btn_start"
             android:layout_marginTop="64dp"
             android:text="@string/letsStart"
             style="@style/buttonOutlinedBlue"
-            app:layout_constraintEnd_toEndOf="@id/rightguide"
-            app:layout_constraintStart_toStartOf="@id/leftguide"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/iniOpcional"/>
 
         <TextView
@@ -56,32 +56,19 @@
             android:text="@string/txtIniciarSesion"
             android:textColor="@color/white"
             android:textSize="20sp"
-            app:layout_constraintEnd_toEndOf="@id/rightguide"
-            app:layout_constraintStart_toStartOf="@id/leftguide"
-            app:layout_constraintTop_toBottomOf="@+id/btnEmpezar"/>
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_start"/>
 
         <Button
             android:id="@+id/btnLogin"
             android:text="@string/btnLogIn"
             android:layout_marginTop="64dp"
             style="@style/buttonOutlinedWhite"
-            app:layout_constraintEnd_toEndOf="@id/rightguide"
-            app:layout_constraintStart_toStartOf="@id/leftguide"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txtLogin"/>
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/leftguide"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.1" />
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/rightguide"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.9" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
 </layout>

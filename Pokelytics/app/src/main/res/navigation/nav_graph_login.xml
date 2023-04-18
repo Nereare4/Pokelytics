@@ -10,7 +10,6 @@
         android:name="study.project.pokelytics.fragments.login.WelcomeFragment"
         android:label="Welcome"
         tools:layout="@layout/fragment_welcome">
-        <!--BOTON FLECHA QUE VA A ONBOARDING-->
         <action
             android:id="@+id/welcomeFragmentToOnBoardingFragment"
             app:destination="@id/onBoardingFragment"/>
@@ -22,11 +21,6 @@
         android:name="study.project.pokelytics.fragments.login.OnBoardingFragment"
         android:label="OnBoarding"
         tools:layout="@layout/fragment_on_boarding">
-        <!--BOTON SIN INICIAR SESION QUE VA A LA LISTA DE POKEMONS-->
-        <!--<action
-            android:id="@+id/onBoardingFragmentToListaPokemonsFragment"
-            app:destination="@id/onBoardingFragment"/>ESTE IRIA A LISTA POKEMOSN-->
-        <!--BOTON INICIAR SESION QUE VA A LOGIN SELECTION-->
         <action
             android:id="@+id/onBoardingFragmentToLoginSelectionFragment"
             app:destination="@id/loginSelectionFragment"/>
@@ -37,11 +31,9 @@
         android:name="study.project.pokelytics.fragments.login.LoginSelectionFragment"
         android:label="LoginSelection"
         tools:layout="@layout/fragment_login_selection">
-        <!--BOTON SIGN UP QUE VA A SIGN UP-->
         <action
             android:id="@+id/loginSelectionFragmentToSignUpFragment"
             app:destination="@id/signUpFragment"/>
-        <!--BOTON LOG IN QUE VA A LOG IN-->
         <action
             android:id="@+id/loginSelectionFragmentToLogInFragment"
             app:destination="@id/logInFragment"/>
@@ -53,11 +45,6 @@
         android:name="study.project.pokelytics.fragments.login.SignUpFragment"
         android:label="SignUpFragment"
         tools:layout="@layout/fragment_sign_up">
-        <!--BOTON SIGN UP QUE VA A LISTA DE POKEMONS-->
-        <!-- <action
-             android:id="@+id/signUpFragmentToListaPokemonsFragment"
-                 app:destination="@id/onBoardingFragment"/>ESTE IRIA A LISTA POKEMOSN-->
-        <!--BOTON CANCELAR QUE VA A LOGIN SELECTION-->
         <action
             android:id="@+id/signUpFragmentToLoginSelectionFragment"
             app:destination="@id/loginSelectionFragment"/>
@@ -69,15 +56,9 @@
         android:name="study.project.pokelytics.fragments.login.LogInFragment"
         android:label="LogInFragment"
         tools:layout="@layout/fragment_log_in">
-        <!--BOTON LOG IN QUE VA A LISTA DE POKEMONS-->
-       <!-- <action
-            android:id="@+id/logInFragmentToListaPokemonsFragment"
-            app:destination="@id/onBoardingFragment"/>-->
-        <!--BOTON CANCELAR QUE VA A LOGIN SELECTION-->
         <action
             android:id="@+id/logInFragmentToLoginSelectionFragment"
             app:destination="@id/loginSelectionFragment"/>
-        <!--BOTON RESET PASSWORD QUE VA A RESET PASSWORD-->
         <action
             android:id="@+id/logInFragmentToResetPasswordFragment"
             app:destination="@id/resetPasswordFragment"/>
@@ -89,11 +70,6 @@
         android:name="study.project.pokelytics.fragments.login.ResetPasswordFragment"
         android:label="ResetPasswordFragment"
         tools:layout="@layout/fragment_reset_password">
-        <!--BOTON RESET PASSWORD QUE VA A LOG IN-->
-        <!--<action
-            android:id="@+id/signUpFragmentToListaPokemons"
-            app:destination="@id/onBoardingFragment"/>ESTE IRIA A LISTA POKEMOSN-->
-        <!--BOTON CANCELAR QUE VA A LOG IN-->
         <action
             android:id="@+id/resetPasswordFragmentToLogInFragment"
             app:destination="@id/logInFragment"/>
