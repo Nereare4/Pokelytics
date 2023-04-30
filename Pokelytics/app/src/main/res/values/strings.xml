@@ -20,6 +20,14 @@
     <string name="pass">Password</string>
     <string name="repass">Repeat password</string>
     <string name="forgotPassword">Forgot password?</string>
+    <string name="emailRequired">Email is required</string>
+    <string name="passRequired">Password is required</string>
+    <string name="repassRequired">Repeat password is required</string>
+    <string name="emailValid">Email is not valid</string>
+    <string name="backAgain">Please click BACK again to exit</string>
+    <string name="emailOrPassWrong">Please provide valid credentials</string>
+
+
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

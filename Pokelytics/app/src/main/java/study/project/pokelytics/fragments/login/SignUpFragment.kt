@@ -1,5 +1,6 @@
 package study.project.pokelytics.fragments.login
 
+import androidx.activity.OnBackPressedCallback
 import androidx.navigation.fragment.findNavController
 import study.project.pokelytics.R
 import study.project.pokelytics.databinding.FragmentSignUpBinding
@@ -22,6 +23,12 @@ class SignUpFragment : FragmentBase<FragmentSignUpBinding>() {
     override fun getResourceLayout(): Int = R.layout.fragment_sign_up
 
     override fun subscribe() {}
+
+    val callback = object : OnBackPressedCallback(true){
+        override fun handleOnBackPressed() {
+            findNavController().navigate(R.id.signUpFragmentToLoginSelectionFragment)
+        }
+    }
 
 
 }

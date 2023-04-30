@@ -1,5 +1,6 @@
 package study.project.pokelytics.fragments.login
 
+import androidx.activity.OnBackPressedCallback
 import androidx.navigation.fragment.findNavController
 import study.project.pokelytics.R
 import study.project.pokelytics.databinding.FragmentResetPasswordBinding
@@ -27,5 +28,11 @@ class ResetPasswordFragment : FragmentBase<FragmentResetPasswordBinding>() {
     }
 
     override fun subscribe() {
+    }
+
+    val callback = object : OnBackPressedCallback(true){
+        override fun handleOnBackPressed() {
+            findNavController().navigate(R.id.resetPasswordFragmentToLogInFragment)
+        }
     }
 }

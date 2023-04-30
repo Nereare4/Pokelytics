@@ -1,9 +1,27 @@
 package study.project.pokelytics.viewmodels
 
-class LoginViewModel () : ViewModalBase() {
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.launch
+import study.project.pokelytics.models.LoginCredentials
+import study.project.pokelytics.usecases.DoLoginUseCase
 
+class LoginViewModel (
 
-    fun login(email: String, password: String ){
+        val doLoginUseCase: DoLoginUseCase
 
+    ) : ViewModalBase() {
+
+    fun login(loginCredentials: LoginCredentials){
+        mutableState.postValue(ViewState.LOADING)
+        viewModelScope.launch {
+            doLoginUseCase(
+                loginCredentials,
+                {
+                    mutableState.postValue(ViewState.SUCCESS)
+                }, {
+                    mutableState.postValue(ViewState.ERROR)
+                }
+            )
+        }
     }
 }

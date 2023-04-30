@@ -37,6 +37,9 @@
         <action
             android:id="@+id/loginSelectionFragmentToLogInFragment"
             app:destination="@id/logInFragment"/>
+        <action
+            android:id="@+id/loginSelectionFragmentToOnBoardinfFragment"
+            app:destination="@id/onBoardingFragment"/>
 
     </fragment>
 
