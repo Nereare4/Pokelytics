@@ -12,5 +12,5 @@ import study.project.pokelytics.usecases.GetPokemonUseCase
 val useCaseModule = module {
     factory { GetPokemonUseCase(get()) }
     factory { GetPokemonMoreInfoUseCase(get()) }
-    factory { DoLoginUseCase() }
+    factory { DoLoginUseCase(get()) }
 }

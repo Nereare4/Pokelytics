@@ -1,6 +1,7 @@
 package study.project.pokelytics
 
 import android.app.Application
+import com.google.firebase.FirebaseApp
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import org.koin.android.ext.koin.androidContext
@@ -14,6 +15,7 @@ class PokelyticsApp : Application() {
     @OptIn(ExperimentalCoroutinesApi::class, FlowPreview::class)
     override fun onCreate() {
         super.onCreate()
+        FirebaseApp.initializeApp(this)
         startKoin {
             androidContext(this@PokelyticsApp)
             modules(

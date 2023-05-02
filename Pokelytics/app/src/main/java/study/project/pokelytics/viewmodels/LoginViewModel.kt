@@ -5,13 +5,11 @@ import kotlinx.coroutines.launch
 import study.project.pokelytics.models.LoginCredentials
 import study.project.pokelytics.usecases.DoLoginUseCase
 
-class LoginViewModel (
+class LoginViewModel(
+    val doLoginUseCase: DoLoginUseCase
+) : ViewModalBase() {
 
-        val doLoginUseCase: DoLoginUseCase
-
-    ) : ViewModalBase() {
-
-    fun login(loginCredentials: LoginCredentials){
+    fun login(loginCredentials: LoginCredentials) {
         mutableState.postValue(ViewState.LOADING)
         viewModelScope.launch {
             doLoginUseCase(
