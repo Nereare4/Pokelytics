@@ -13,5 +13,5 @@ import study.project.pokelytics.viewmodels.PokemonListViewModel
 val viewModelModule = module {
     viewModel { PokemonListViewModel(get()) }
     viewModel { MoreInfoViewModel(get()) }
-    viewModel { LoginViewModel(get()) }
+    viewModel { LoginViewModel(get(), get()) }
 }

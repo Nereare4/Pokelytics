@@ -1,16 +1,19 @@
 package study.project.pokelytics.usecases
 
+import android.util.Log
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOf
 import study.project.pokelytics.models.LoginCredentials
+import study.project.pokelytics.models.User
 
 
 class DoLoginUseCase (
     private val fAuth: FirebaseAuth
-) : FlowUseCase<Unit, LoginCredentials>() { //Unit, LoginCredentials(mail, pass)
+) : FlowUseCase<User, LoginCredentials>() { //Unit, LoginCredentials(mail, pass)
 
-    override suspend fun execute(params: LoginCredentials): Flow<Unit> {
+    override suspend fun execute(params: LoginCredentials): Flow<User> = flow {
 
         //AQUI HAGO MI LOGIN NORMAL
         val email = params.email
@@ -19,9 +22,13 @@ class DoLoginUseCase (
         fAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener {
             if (!it.isSuccessful) {
                 throw(Exception(""))
+
             }
         }
-        return flowOf()
+        //donde esta el emit tengo que recoger el usuario de bd el usuario entero
+        //añado en Models>user los datos que recoja :)
+
+        emit(User("añskdñ", "dñkxn"))
     }
 
 

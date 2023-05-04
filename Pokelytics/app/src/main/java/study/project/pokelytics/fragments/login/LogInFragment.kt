@@ -10,6 +10,7 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.material.textfield.TextInputLayout
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import study.project.pokelytics.R
+import study.project.pokelytics.activities.ActivityBase
 import study.project.pokelytics.databinding.FragmentLogInBinding
 import study.project.pokelytics.fragments.FragmentBase
 import study.project.pokelytics.models.LoginCredentials
@@ -22,17 +23,15 @@ class LogInFragment : FragmentBase<FragmentLogInBinding>() {
     override fun getResourceLayout(): Int = R.layout.fragment_log_in
 
     private val loginViewModel: LoginViewModel by viewModel()
-    lateinit var emailTIL: TextInputLayout
-    lateinit var passwordTIL: TextInputLayout
 
     override fun initializeView() {
         binding.apply {
             btnLogin.setOnClickListener {
                 if (email.text.isEmpty() && password.text.isEmpty()){
-                    showError(emailTIL, resources.getString(R.string.emailRequired))
-                    showError(passwordTIL, resources.getString(R.string.passRequired))
+                    showError(binding.etemail, resources.getString(R.string.emailRequired))
+                    showError(binding.etpassword, resources.getString(R.string.passRequired))
                 }else if(!email.text.contains("@")) {
-                    showError(emailTIL, resources.getString(R.string.emailValid))
+                    showError(binding.etemail, resources.getString(R.string.emailValid))
                 }else{
                     val credentials = LoginCredentials(email.text.toString(), password.text.toString())
                     loginViewModel.login(credentials)
@@ -57,7 +56,7 @@ class LogInFragment : FragmentBase<FragmentLogInBinding>() {
         loginViewModel.state.observe(viewLifecycleOwner){
             when(it){
                 ViewState.SUCCESS -> {
-                    funciona()
+                    (activity as ActivityBase<*>).navigator.goToMain()
                 }
                 ViewState.ERROR ->{
                     showErrorLogin()
@@ -72,9 +71,6 @@ class LogInFragment : FragmentBase<FragmentLogInBinding>() {
     }
     private fun showErrorLogin(){
         Toast.makeText(requireContext(), resources.getString(R.string.emailOrPassWrong), Toast.LENGTH_SHORT).show()
-    }
-    private fun funciona(){
-        Toast.makeText(requireContext(), "FUNCIONA", Toast.LENGTH_SHORT).show()
     }
 
     /*private var doubleBackToExitPressedOnce = false
