@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
         <androidx.drawerlayout.widget.DrawerLayout
+            android:id="@+id/drawer_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
@@ -13,6 +14,7 @@
                 tools:context=".activities.MainActivity">
 
                 <include
+                    android:id="@+id/top_bar"
                     layout="@layout/main_top_bar"
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize" />
