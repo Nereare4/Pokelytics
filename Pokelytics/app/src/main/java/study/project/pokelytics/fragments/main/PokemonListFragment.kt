@@ -21,7 +21,6 @@ class PokemonListFragment : FragmentBase<FragmentPokemonListBinding>() {
     private lateinit var adapter: PokemonListAdapter
     private val layoutManager: LinearLayoutManager = LinearLayoutManager(context)
     private val paginationRange = PaginationRange()
-    private var loadable = false
     private val pokemonMoreInfoUseCase: GetPokemonMoreInfoUseCase by inject()
 
     override fun bindViewModel() {
@@ -39,8 +38,6 @@ class PokemonListFragment : FragmentBase<FragmentPokemonListBinding>() {
             pokemonRecycler.layoutManager = layoutManager
             pokemonRecycler.adapter = adapter
         }
-
-        loadScrollListener()
     }
 
     private fun createPokemonInterface(): PokemonViewHolderInterface {
@@ -55,24 +52,6 @@ class PokemonListFragment : FragmentBase<FragmentPokemonListBinding>() {
                 )
             }
         }
-    }
-
-    private fun loadScrollListener() {
-        binding.pokemonRecycler.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                super.onScrolled(recyclerView, dx, dy)
-
-                val lastVisibleItemPosition = layoutManager.findLastVisibleItemPosition()
-                val totalItemCount = layoutManager.itemCount
-
-                if (lastVisibleItemPosition > totalItemCount - 15 && loadable) {
-                    loadable = false
-                    paginationRange.next()
-                    viewModel.getPokemons(paginationRange)
-                }
-            }
-        })
-
     }
 
     override fun onResume() {
@@ -91,9 +70,13 @@ class PokemonListFragment : FragmentBase<FragmentPokemonListBinding>() {
         }
 
         viewModel.pokemons.observe(this) {
-            adapter.items.addAll(it)
-            adapter.notifyDataSetChanged()
-            loadable = true
+            it.forEachIndexed { index, pokemon ->
+                adapter.items.add(pokemon)
+                adapter.notifyItemInserted(layoutManager.itemCount + index)
+            }
+
+            paginationRange.next()
+            viewModel.getPokemons(paginationRange)
         }
     }
 

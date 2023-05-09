@@ -10,7 +10,7 @@ class NavItemViewHolder(
     override fun bind(item: NavItem) {
         binding.apply {
             title.text = item.title
-            icon.setImageResource(item.iconResId)
+            icon.setBackgroundResource(item.iconResId)
         }
     }
 

@@ -16,6 +16,7 @@ import study.project.pokelytics.models.NavItem
 class MainActivity : ActivityBase<ActivityMainBinding>() {
 
     override fun getResourceLayout(): Int = R.layout.activity_main
+    private val
     private lateinit var navLayoutManager: LinearLayoutManager
     private lateinit var settingsLayoutManager: LinearLayoutManager
     override fun initializeView() {
@@ -43,7 +44,7 @@ class MainActivity : ActivityBase<ActivityMainBinding>() {
                     NavItem("Moves", R.drawable.ic_pokeball),
                     NavItem("Items", R.drawable.ic_pokeball),
                     NavItem("Abilities", R.drawable.ic_pokeball),
-                    NavItem("Locations", R.drawable.ic_pokeball),
+                    NavItem("Locations", R.drawable.ic_location),
                     NavItem("Type Charts", R.drawable.ic_pokeball),
                     NavItem("Egg Groups", R.drawable.ic_pokeball),
                     NavItem("Berries", R.drawable.ic_pokeball),
@@ -54,8 +55,8 @@ class MainActivity : ActivityBase<ActivityMainBinding>() {
 
             settingsRecycler.adapter = NavAdapter().apply {
                 items = mutableListOf(
-                    NavItem("About", R.drawable.ic_pokeball),
-                    NavItem("Settings", R.drawable.ic_pokeball),
+                    NavItem("About", R.drawable.ic_info),
+                    NavItem("Settings", R.drawable.ic_settings),
                     NavItem("Logout", R.drawable.ic_pokeball)
                 )
                 notifyDataSetChanged()
