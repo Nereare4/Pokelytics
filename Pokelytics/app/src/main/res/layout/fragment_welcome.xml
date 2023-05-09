@@ -3,12 +3,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".fragments.login.WelcomeFragment"
-        android:background="@color/colorPrimary">
+        android:background="@color/colorPrimary"
+        android:orientation="vertical"
+        android:gravity="center">
 
         <!-- TODO: Update blank fragment layout -->
         <TextView
@@ -19,9 +20,9 @@
             android:fontFamily="@font/roboto"
             android:text="@string/welcome"
             android:textColor="@color/white"
-            android:textSize="20sp"
-            app:layout_constraintEnd_toEndOf="@id/rightguide"
-            app:layout_constraintStart_toStartOf="@id/leftguide"
+            android:textSize="25sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
 
         <TextView
@@ -33,8 +34,8 @@
             android:text="@string/app_name"
             android:textColor="@color/white"
             android:textSize="40sp"
-            app:layout_constraintEnd_toEndOf="@id/rightguide"
-            app:layout_constraintStart_toStartOf="@id/leftguide"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/welcome"/>
 
         <TextView
@@ -47,8 +48,8 @@
             android:textColor="@color/white"
             android:textSize="25sp"
             android:gravity="center"
-            app:layout_constraintEnd_toEndOf="@id/rightguide"
-            app:layout_constraintStart_toStartOf="@id/leftguide"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/nameApp"/>
 
         <TextView
@@ -59,9 +60,9 @@
             android:fontFamily="@font/roboto"
             android:text="@string/letsStart"
             android:textColor="@color/white"
-            android:textSize="20sp"
-            app:layout_constraintEnd_toEndOf="@id/rightguide"
-            app:layout_constraintStart_toStartOf="@id/leftguide"
+            android:textSize="25sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/consult"/>
 
         <ImageButton
@@ -71,23 +72,9 @@
             android:layout_marginTop="64dp"
             android:scaleType="centerCrop"
             android:background="@drawable/rounded_button"
-            app:layout_constraintEnd_toEndOf="@id/rightguide"
-            app:layout_constraintStart_toStartOf="@id/leftguide"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/letsStart"/>
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/leftguide"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.1" />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/rightguide"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.9" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
 </layout>
