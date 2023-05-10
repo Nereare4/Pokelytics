@@ -28,10 +28,10 @@ class LogInFragment : FragmentBase<FragmentLogInBinding>() {
         binding.apply {
             btnLogin.setOnClickListener {
                 if (email.text.isEmpty() && password.text.isEmpty()){
-                    showError(binding.etemail, resources.getString(R.string.emailRequired))
-                    showError(binding.etpassword, resources.getString(R.string.passRequired))
+                    showError(etemail, resources.getString(R.string.emailRequired))
+                    showError(etpassword, resources.getString(R.string.passRequired))
                 }else if(!email.text.contains("@")) {
-                    showError(binding.etemail, resources.getString(R.string.emailValid))
+                    showError(etemail, resources.getString(R.string.emailValid))
                 }else{
                     val credentials = LoginCredentials(email.text.toString(), password.text.toString())
                     loginViewModel.login(credentials)

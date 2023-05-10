@@ -5,7 +5,11 @@ import android.content.SharedPreferences
 class PreferenceService (
         private val sharedPreferences: SharedPreferences
     ){
-        fun savePreference(key: String, value: String?){}
+        fun savePreference(key: String, value: String?){
+            val editor: SharedPreferences.Editor = sharedPreferences.edit()
+            editor.putString(key, value)
+            editor.apply()
+        }
         fun removePreference(key: String){}
         fun getPreference(key: String): String?{
             return ""

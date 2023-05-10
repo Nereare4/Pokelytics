@@ -26,6 +26,9 @@
     <string name="emailValid">Email is not valid</string>
     <string name="backAgain">Please click BACK again to exit</string>
     <string name="emailOrPassWrong">Please provide valid credentials</string>
+    <string name="passNeeds">Password needs: Capital letters, small letters, numbers and must be longer than 6 characters</string>
+    <string name="passSame">Passwords must be the same</string>
+    <string name="emailExists">This email alredy exists</string>
 
 
 
