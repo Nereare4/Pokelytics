@@ -6,7 +6,7 @@
     <string name="ready">You\'re all set!</string>
     <string name="inicioOpcional">Start checking pokemons now</string>
     <string name="txtIniciarSesion">Log in to Pokelytics</string>
-    <string name="txtGetStarted">LETS GET STARTES</string>
+    <string name="txtGetStarted">LETS GET STARTED</string>
     <string name="btnSignUp">SIGN UP </string>
     <string name="btnLogIn">LOG IN</string>
     <string name="resetPass">RESET PASSWORD</string>
@@ -20,6 +20,18 @@
     <string name="pass">Password</string>
     <string name="repass">Repeat password</string>
     <string name="forgotPassword">Forgot password?</string>
+    <string name="emailRequired">Email is required</string>
+    <string name="passRequired">Password is required</string>
+    <string name="repassRequired">Repeat password is required</string>
+    <string name="emailValid">Email is not valid</string>
+    <string name="backAgain">Please click BACK again to exit</string>
+    <string name="emailOrPassWrong">Please provide valid credentials</string>
+    <string name="passNeeds">Password needs: Capital letters, small letters, numbers and must be longer than 6 characters</string>
+    <string name="passSame">Passwords must be the same</string>
+    <string name="emailExists">This email alredy exists</string>
+    <string name="startWithoutLogin">Or start without login</string>
+
+
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

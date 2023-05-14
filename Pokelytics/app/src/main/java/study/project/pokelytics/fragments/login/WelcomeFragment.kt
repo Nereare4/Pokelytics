@@ -12,7 +12,7 @@ class WelcomeFragment : FragmentBase<FragmentWelcomeBinding>() {
 
     override fun initializeView() {
         binding.btnNext.setOnClickListener{
-            findNavController().navigate(R.id.welcomeFragmentToOnBoardingFragment)
+            findNavController().navigate(R.id.welcomeFragmentToLoginSelectionFragment)
         }
     }
 

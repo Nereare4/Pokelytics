@@ -41,6 +41,7 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/email"
                 android:theme="@style/lineET"
+                android:textColor="@color/white"
                 android:gravity="top"
                 android:inputType="textMultiLine"
                 android:maxLines="2"/>
@@ -64,6 +65,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:hint="@string/pass"
+                android:textColor="@color/white"
                 android:inputType="textPassword"
                 android:theme="@style/lineET" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -85,6 +87,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:hint="@string/repass"
+                android:textColor="@color/white"
                 android:inputType="textPassword"
                 android:theme="@style/lineET" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -118,16 +121,16 @@
             app:layout_constraintTop_toBottomOf="@id/btnCancel">
         </TextView>
 
-        <!--<ImageButton
+        <ImageButton
             android:id="@+id/btngoogle"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
             android:layout_marginTop="20dp"
-            android:background="@drawable/google"
+            android:background="@drawable/ic_google"
             app:layout_constraintEnd_toStartOf="@id/rightguide"
             app:layout_constraintStart_toStartOf="@id/leftguide"
             app:layout_constraintTop_toBottomOf="@id/tvother"
-            android:paddingBottom="30dp"/>-->
+            android:paddingBottom="30dp"/>
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/leftguide"
@@ -147,7 +150,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent=".3"/>
+            app:layout_constraintGuide_percent=".25"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
 
