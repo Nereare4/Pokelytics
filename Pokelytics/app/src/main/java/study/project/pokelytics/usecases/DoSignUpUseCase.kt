@@ -1,15 +1,15 @@
 package study.project.pokelytics.usecases
 
-import android.util.Log
+import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.ktx.storage
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.flowOf
 import study.project.pokelytics.models.LoginCredentials
 import study.project.pokelytics.models.User
 
-
-class DoLoginUseCase (
+class DoSignUpUseCase (
     private val fAuth: FirebaseAuth
 ) : FlowUseCase<User, LoginCredentials>() { //Unit, LoginCredentials(mail, pass)
 
@@ -19,8 +19,12 @@ class DoLoginUseCase (
         val email = params.email
         val password = params.password
 
-        fAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener {
-            if (!it.isSuccessful) {
+        fAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener{
+            if (it.isSuccessful){
+                fAuth.currentUser?.sendEmailVerification()?.addOnSuccessListener {
+                    //Toast.makeText(this, resources.getString(R.string.verifyEmail), Toast.LENGTH_LONG).show()
+                }
+            }else{
                 throw(Exception(""))
             }
         }
@@ -29,4 +33,6 @@ class DoLoginUseCase (
 
         emit(User("añskdñ", "dñkxn"))
     }
+
+
 }

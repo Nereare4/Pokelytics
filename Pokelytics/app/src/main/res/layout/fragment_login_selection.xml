@@ -15,7 +15,7 @@
             android:id="@+id/getStarted"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="10dp"
             android:fontFamily="@font/carterone_regular"
             android:text="@string/txtGetStarted"
             android:textColor="@color/white"
@@ -26,22 +26,58 @@
             app:layout_constraintTop_toTopOf="parent"/>
 
         <Button
-            android:id="@+id/btnSignUp"
-            style="@style/buttonOutlinedWhite"
+            android:id="@+id/btnLogin"
+            style="@style/buttonOutlinedBlue"
             android:layout_marginTop="50dp"
-            android:text="@string/btnSignUp"
+            android:text="@string/btnLogIn"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/getStarted"/>
 
+        <TextView
+            android:id="@+id/or"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/or"
+            android:textColor="@color/white"
+            android:textSize="13sp"
+            android:layout_marginTop="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnLogin"/>
+
         <Button
-            android:id="@+id/btnLogin"
+            android:id="@+id/btnSignUp"
             style="@style/buttonOutlinedWhite"
             android:layout_marginTop="10dp"
-            android:text="@string/btnLogIn"
+            android:text="@string/btnSignUp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/or"/>
+
+        <TextView
+            android:id="@+id/or2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/startWithoutLogin"
+            android:textColor="@color/white"
+            android:textSize="13sp"
+            android:layout_marginTop="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/btnSignUp"/>
+
+        <ImageButton
+            android:id="@+id/btnNext"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="20dp"
+            android:scaleType="centerCrop"
+            android:background="@drawable/rounded_button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/or2"
+            android:contentDescription="@string/startWithoutLogin"/>
 
     </LinearLayout>
 </layout>

@@ -1,22 +1,20 @@
 package study.project.pokelytics.viewmodels
 
-import android.util.Log
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import study.project.pokelytics.models.LoginCredentials
 import study.project.pokelytics.models.User
-import study.project.pokelytics.usecases.DoLoginUseCase
+import study.project.pokelytics.usecases.DoSignUpUseCase
 import study.project.pokelytics.usecases.SaveUserPreferencesUseCase
 
-class LoginViewModel(
-    val doLoginUseCase: DoLoginUseCase,
+class SignUpViewModel (
+    val doSignUpUseCase: DoSignUpUseCase,
     val saveUserPreferencesUseCase: SaveUserPreferencesUseCase
-) : ViewModalBase() {
-
-    fun login(loginCredentials: LoginCredentials) {
+): ViewModalBase(){
+    fun signUp(loginCredentials: LoginCredentials) {
         mutableState.postValue(ViewState.LOADING)
         viewModelScope.launch {
-            doLoginUseCase(
+            doSignUpUseCase(
                 loginCredentials,
                 {
                     mutableState.postValue(ViewState.SUCCESS)
@@ -33,5 +31,4 @@ class LoginViewModel(
             saveUserPreferencesUseCase(user)
         }
     }
-
 }

@@ -9,8 +9,7 @@
         android:background="@color/colorPrimary"
         tools:context=".activities.SplashActivity">
 
-
-        <ImageView
+        <!--<ImageView
             android:id="@+id/app_logo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -18,7 +17,27 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/logo_pokelytics" />
+            app:srcCompat="@drawable/logo_pokelytics" />-->
+
+        <ImageView
+            android:id="@+id/fuego"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/fuego"
+            app:layout_constraintTop_toTopOf="@+id/pokeball"
+            app:layout_constraintBottom_toBottomOf="@+id/pokeball"
+            app:layout_constraintEnd_toStartOf="@id/rightguide" />
+
+        <ImageView
+            android:id="@+id/pokeball"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/pokeball"
+            android:paddingBottom="10dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/centerguide"
+            />
 
         <TextView
             android:id="@+id/title"
@@ -31,6 +50,20 @@
             android:textSize="50sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/app_logo" />
+            app:layout_constraintTop_toBottomOf="@+id/pokeball" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/centerguide"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.40"/>
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/rightguide"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.58"/>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
