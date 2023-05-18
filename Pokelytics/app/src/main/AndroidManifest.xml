@@ -20,6 +20,7 @@
 
         <activity
             android:name=".activities.SplashActivity"
+            android:theme="@style/Theme.Pokelytics.NoActionBar"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -38,6 +39,7 @@
 
         <activity
             android:name=".activities.LoginActivity"
+            android:theme="@style/Theme.Pokelytics.NoActionBar"
             android:exported="false"/>
 
         <meta-data
