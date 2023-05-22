@@ -20,6 +20,11 @@
     <string name="pass">Password</string>
     <string name="repass">Repeat password</string>
     <string name="forgotPassword">Forgot password?</string>
+    <string name="barOpt1">info</string>
+    <string name="barOpt2">attacks</string>
+    <string name="barOpt3">more</string>
+    <string name="habilities">Habilidades</string>
+    <string name="statistics">Estadisticas</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
