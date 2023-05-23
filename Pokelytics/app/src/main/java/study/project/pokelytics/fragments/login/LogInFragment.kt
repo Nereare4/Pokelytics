@@ -1,13 +1,21 @@
 package study.project.pokelytics.fragments.login
 
+import android.content.ContentValues
+import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.navigation.fragment.findNavController
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.common.api.ApiException
 import com.google.android.material.textfield.TextInputLayout
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.GoogleAuthProvider
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import study.project.pokelytics.R
 import study.project.pokelytics.activities.ActivityBase
@@ -21,8 +29,8 @@ import study.project.pokelytics.viewmodels.ViewState
 class LogInFragment : FragmentBase<FragmentLogInBinding>() {
 
     override fun getResourceLayout(): Int = R.layout.fragment_log_in
-
     private val loginViewModel: LoginViewModel by viewModel()
+    private val GOOGLE_SIGN_IN = 1
 
     override fun initializeView() {
         binding.apply {
@@ -43,6 +51,10 @@ class LogInFragment : FragmentBase<FragmentLogInBinding>() {
             resetPass.setOnClickListener{
                 findNavController().navigate(R.id.logInFragmentToResetPasswordFragment)
             }
+            btnGoogle.setOnClickListener{
+                loginGoogle()
+            }
+
         }
     }
 
@@ -73,29 +85,56 @@ class LogInFragment : FragmentBase<FragmentLogInBinding>() {
         Toast.makeText(requireContext(), resources.getString(R.string.emailOrPassWrong), Toast.LENGTH_SHORT).show()
     }
 
-    /*private var doubleBackToExitPressedOnce = false
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() {
-                if (doubleBackToExitPressedOnce) {
-                    requireActivity().finish()
-                    return
-                }
-
-                this@LogInFragment.doubleBackToExitPressedOnce = true
-                Toast.makeText(requireContext(), resources.getString(R.string.backAgain), Toast.LENGTH_SHORT).show()
-
-                Handler(Looper.getMainLooper()).postDelayed(Runnable { doubleBackToExitPressedOnce = false }, 2000)
-            }
-        })
-    }*/
-
     val callback = object : OnBackPressedCallback(true){
         override fun handleOnBackPressed() {
             findNavController().navigate(R.id.logInFragmentToLoginSelectionFragment)
+        }
+    }
+
+    fun loginGoogle(){
+        val googleConf = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken(getString(R.string.default_web_client_id))
+            .requestEmail()
+            .build()
+        val googleClient = GoogleSignIn.getClient(requireContext(), googleConf)
+        googleClient.signOut()
+        startActivityForResult(googleClient.signInIntent, GOOGLE_SIGN_IN)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == GOOGLE_SIGN_IN && data != null) {
+            val task = GoogleSignIn.getSignedInAccountFromIntent(data)
+            try {
+                val account = task.getResult(ApiException::class.java)
+                val email = account.email
+                if (email != null) {
+                    FirebaseAuth.getInstance().fetchSignInMethodsForEmail(email)
+                        .addOnCompleteListener { task ->
+                            if (task.isSuccessful) {
+                                val signInMethods = task.result?.signInMethods ?: emptyList<String>()
+                                if (signInMethods.isEmpty()) {
+                                    Toast.makeText(requireContext(), resources.getString(R.string.accountNotExists), Toast.LENGTH_LONG).show()
+                                } else {
+                                    val credential = GoogleAuthProvider.getCredential(account.idToken, null)
+                                    FirebaseAuth.getInstance().signInWithCredential(credential)
+                                        .addOnCompleteListener { authTask ->
+                                            if (authTask.isSuccessful) {
+                                                //fAuth.currentUser?.email?.let { PreferencesManager.getDefaultSharedPreferences(this).saveEmail(it) }
+                                                (activity as ActivityBase<*>).navigator.goToMain()
+                                            }
+                                        }
+                                }
+                            } else {
+                                // Error al verificar el correo electrónico en Firebase
+                                Log.w(ContentValues.TAG, "Error fetching sign-in methods for email", task.exception)
+                            }
+                        }
+                }
+
+            } catch (e: ApiException) {
+                Log.w(ContentValues.TAG, "Google sign in failed", e)
+            }
         }
     }
 

@@ -22,7 +22,7 @@ class DoSignUpUseCase (
         fAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener{
             if (it.isSuccessful){
                 fAuth.currentUser?.sendEmailVerification()?.addOnSuccessListener {
-                    //Toast.makeText(this, resources.getString(R.string.verifyEmail), Toast.LENGTH_LONG).show()
+                    //
                 }
             }else{
                 throw(Exception(""))
