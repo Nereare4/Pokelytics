@@ -3,13 +3,15 @@ package study.project.pokelytics.viewmodels
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.google.gson.Gson
 import kotlinx.coroutines.launch
-import study.project.pokelytics.event.postEvent
+import study.project.pokelytics.api.ApiConstants.COLLECTIONS_NAV_ITEMS
+import study.project.pokelytics.api.ApiConstants.NAV_ITEMS_ID
+import study.project.pokelytics.firebase.FirebaseHelper
 import study.project.pokelytics.models.NavItem
-import study.project.pokelytics.usecases.GetNavItemsUseCase
 
 class NavigationViewModel(
-    val getNavItemsUseCase: GetNavItemsUseCase
+    private val firebaseHelper: FirebaseHelper
 ): ViewModalBase() {
 
     private val mutableNavItems = MutableLiveData<List<NavItem>>()
@@ -19,11 +21,19 @@ class NavigationViewModel(
     fun getNavItems() {
         mutableState.postValue(ViewState.LOADING)
         viewModelScope.launch {
-            getNavItemsUseCase(
-                {
-                    mutableState.postValue(ViewState.SUCCESS)
-                    mutableNavItems.postEvent(it)
-                }, {
+            firebaseHelper.subscribeToKeyResponse<String>(
+                COLLECTIONS_NAV_ITEMS,
+                NAV_ITEMS_ID,
+                onResult = {
+                    try {
+                        val res = Gson().fromJson(it, Array<NavItem>::class.java)
+                        mutableState.postValue(ViewState.SUCCESS)
+                        mutableNavItems.postValue(res.toList())
+                    } catch (e: Exception) {
+                        mutableState.postValue(ViewState.ERROR)
+                    }
+                },
+                onError = {
                     mutableState.postValue(ViewState.ERROR)
                 }
             )

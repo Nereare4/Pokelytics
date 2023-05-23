@@ -23,7 +23,7 @@
             android:id="@+id/fuego"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/fuego"
+            android:src="@drawable/fire"
             app:layout_constraintTop_toTopOf="@+id/pokeball"
             app:layout_constraintBottom_toBottomOf="@+id/pokeball"
             app:layout_constraintEnd_toStartOf="@id/rightguide" />

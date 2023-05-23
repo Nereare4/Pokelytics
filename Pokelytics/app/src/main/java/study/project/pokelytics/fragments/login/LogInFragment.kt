@@ -1,9 +1,5 @@
 package study.project.pokelytics.fragments.login
 
-import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
-import android.view.View
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.navigation.fragment.findNavController
@@ -14,7 +10,6 @@ import study.project.pokelytics.activities.ActivityBase
 import study.project.pokelytics.databinding.FragmentLogInBinding
 import study.project.pokelytics.fragments.FragmentBase
 import study.project.pokelytics.models.LoginCredentials
-import study.project.pokelytics.usecases.FlowUseCase
 import study.project.pokelytics.viewmodels.LoginViewModel
 import study.project.pokelytics.viewmodels.ViewState
 

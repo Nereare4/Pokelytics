@@ -6,22 +6,27 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import study.project.pokelytics.R
 import study.project.pokelytics.adapters.NavAdapter
 import study.project.pokelytics.databinding.ActivityMainBinding
 import study.project.pokelytics.databinding.NavigationDrawerLayoutBinding
 import study.project.pokelytics.models.NavItem
+import study.project.pokelytics.viewmodels.NavigationViewModel
 
 
 class MainActivity : ActivityBase<ActivityMainBinding>() {
 
     override fun getResourceLayout(): Int = R.layout.activity_main
-    private val
+    private val viewModel: NavigationViewModel by viewModel()
     private lateinit var navLayoutManager: LinearLayoutManager
     private lateinit var settingsLayoutManager: LinearLayoutManager
+    private lateinit var navAdapter: NavAdapter
     override fun initializeView() {
         navLayoutManager = LinearLayoutManager(this)
         settingsLayoutManager = LinearLayoutManager(this)
+        navAdapter = NavAdapter()
+        viewModel.getNavItems()
         initializeNavGraph()
         initializeDrawer()
         setOnClickListeners()
@@ -37,27 +42,14 @@ class MainActivity : ActivityBase<ActivityMainBinding>() {
         val navDrawerBinding = NavigationDrawerLayoutBinding.inflate(LayoutInflater.from(this), binding.root as ViewGroup, false).apply {
             navRecycler.layoutManager = navLayoutManager
             settingsRecycler.layoutManager = settingsLayoutManager
-            navRecycler.adapter = NavAdapter().apply {
-                items = mutableListOf(
-                    NavItem("Home", R.drawable.ic_pokeball),
-                    NavItem("Pokedex", R.drawable.ic_pokeball),
-                    NavItem("Moves", R.drawable.ic_pokeball),
-                    NavItem("Items", R.drawable.ic_pokeball),
-                    NavItem("Abilities", R.drawable.ic_pokeball),
-                    NavItem("Locations", R.drawable.ic_location),
-                    NavItem("Type Charts", R.drawable.ic_pokeball),
-                    NavItem("Egg Groups", R.drawable.ic_pokeball),
-                    NavItem("Berries", R.drawable.ic_pokeball),
-                    NavItem("Natures", R.drawable.ic_pokeball),
-                )
-                notifyDataSetChanged()
-            }
+
+            navRecycler.adapter = navAdapter
 
             settingsRecycler.adapter = NavAdapter().apply {
                 items = mutableListOf(
-                    NavItem("About", R.drawable.ic_info),
-                    NavItem("Settings", R.drawable.ic_settings),
-                    NavItem("Logout", R.drawable.ic_pokeball)
+                    NavItem("About", "About"),
+                    NavItem("Settings", "Settings"),
+                    NavItem("Logout", "Logout")
                 )
                 notifyDataSetChanged()
             }
@@ -79,7 +71,11 @@ class MainActivity : ActivityBase<ActivityMainBinding>() {
         }
     }
     override fun subscribe() {
-
+        viewModel.navItems.observe(this) {
+            it.forEach { it.mapId() }
+            navAdapter.items.addAll(it)
+            navAdapter.notifyDataSetChanged()
+        }
     }
 
     companion object {
