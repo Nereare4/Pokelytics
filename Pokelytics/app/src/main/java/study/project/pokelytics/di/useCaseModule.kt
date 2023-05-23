@@ -13,4 +13,5 @@ val useCaseModule = module {
     factory { DoLoginUseCase(get()) }
     factory { SaveUserPreferencesUseCase(get()) }
     factory { DoSignUpUseCase(get()) }
+    factory { ResetPasswordUseCase(get()) }
 }

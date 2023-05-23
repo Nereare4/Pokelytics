@@ -1,9 +1,16 @@
 package study.project.pokelytics.fragments.login
 
+import android.content.Intent
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.navigation.fragment.findNavController
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.common.api.ApiException
 import com.google.android.material.textfield.TextInputLayout
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.GoogleAuthProvider
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import study.project.pokelytics.R
 import study.project.pokelytics.activities.ActivityBase
@@ -18,8 +25,7 @@ class SignUpFragment : FragmentBase<FragmentSignUpBinding>() {
 
     override fun getResourceLayout(): Int = R.layout.fragment_sign_up
     private val signUpViewModel: SignUpViewModel by viewModel()
-
-
+    private val GOOGLE_SIGN_IN = 1
 
     override fun initializeView() {
         binding.apply {
@@ -40,9 +46,14 @@ class SignUpFragment : FragmentBase<FragmentSignUpBinding>() {
                     val credentials = LoginCredentials(email.text.toString(), password.text.toString())
                     signUpViewModel.signUp(credentials)
                 }
-                binding.btnCancel.setOnClickListener {
-                    findNavController().navigate(R.id.signUpFragmentToLoginSelectionFragment)
-                }
+            }
+            btnCancel.setOnClickListener {
+                findNavController().navigate(R.id.signUpFragmentToLoginSelectionFragment)
+            }
+            btnGoogle.setOnClickListener {
+                signUpGoogle()
+                //val credentials = LoginCredentials(email.text.toString(), "")
+                //signUpViewModel.signUp(credentials)
             }
         }
     }
@@ -56,6 +67,7 @@ class SignUpFragment : FragmentBase<FragmentSignUpBinding>() {
         signUpViewModel.state.observe(viewLifecycleOwner){
             when(it){
                 ViewState.SUCCESS -> {
+                    Toast.makeText(requireContext(), resources.getString(R.string.verifyEmail), Toast.LENGTH_LONG).show()
                     (activity as ActivityBase<*>).navigator.goToMain()
                 }
                 ViewState.ERROR ->{
@@ -80,5 +92,40 @@ class SignUpFragment : FragmentBase<FragmentSignUpBinding>() {
         }
     }
 
+    fun signUpGoogle(){
+        val googleConf = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken(getString(R.string.default_web_client_id))
+            .requestEmail()
+            .build()
+        val googleClient = GoogleSignIn.getClient(requireContext(), googleConf)
+        googleClient.signOut()
+        startActivityForResult(googleClient.signInIntent, GOOGLE_SIGN_IN)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == GOOGLE_SIGN_IN){
+            val task = GoogleSignIn.getSignedInAccountFromIntent(data)
+            try {
+                val account = task.getResult(ApiException::class.java)
+                if (account != null) {
+                    val credential = GoogleAuthProvider.getCredential(account.idToken, null)
+                    FirebaseAuth.getInstance().signInWithCredential(credential).addOnCompleteListener {
+                        if (it.isSuccessful){
+                            FirebaseAuth.getInstance().currentUser?.sendEmailVerification()?.addOnSuccessListener {
+                                Toast.makeText(requireContext(), resources.getString(R.string.verifyEmail), Toast.LENGTH_LONG).show()
+                                (activity as ActivityBase<*>).navigator.goToMain()
+                            }
+                        }else{
+                            Toast.makeText(requireContext(), resources.getString(R.string.emailExists), Toast.LENGTH_LONG).show()
+                        }
+                    }
+                }
+            }catch (e: ApiException){
+                Log.w("ERROR", " " + e)
+            }
+
+        }
+    }
 
 }

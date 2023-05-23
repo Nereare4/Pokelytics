@@ -30,6 +30,10 @@
     <string name="passSame">Passwords must be the same</string>
     <string name="emailExists">This email alredy exists</string>
     <string name="startWithoutLogin">Or start without login</string>
+    <string name="checkMail">Check your email to reset your password</string>
+    <string name="verifyEmail">Please verify your email</string>
+    <string name="accountNotExists">The account does not exists. Please register</string>
+
 
 
 
