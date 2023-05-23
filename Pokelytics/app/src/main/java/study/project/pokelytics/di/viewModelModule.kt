@@ -9,6 +9,7 @@ import study.project.pokelytics.viewmodels.MoreInfoViewModel
 import study.project.pokelytics.viewmodels.NavigationViewModel
 import study.project.pokelytics.viewmodels.PokemonListViewModel
 import study.project.pokelytics.viewmodels.SignUpViewModel
+import study.project.pokelytics.viewmodels.*
 
 @ExperimentalCoroutinesApi
 @FlowPreview
@@ -17,5 +18,6 @@ val viewModelModule = module {
     viewModel { MoreInfoViewModel(get()) }
     viewModel { LoginViewModel(get(), get()) }
     viewModel { SignUpViewModel(get(), get()) }
+    viewModel { ResetPasswordViewModel(get())}
     viewModel { NavigationViewModel(get())}
 }

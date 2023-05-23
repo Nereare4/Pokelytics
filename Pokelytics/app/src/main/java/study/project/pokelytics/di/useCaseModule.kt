@@ -13,4 +13,5 @@ val useCaseModule = module {
     factory { GetPokemonUseCase(get()) }
     factory { GetPokemonMoreInfoUseCase(get()) }
     factory { SaveUserPreferencesUseCase(get()) }
+    factory { ResetPasswordUseCase(get()) }
 }
