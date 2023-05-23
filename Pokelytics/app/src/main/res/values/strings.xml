@@ -20,6 +20,11 @@
     <string name="pass">Password</string>
     <string name="repass">Repeat password</string>
     <string name="forgotPassword">Forgot password?</string>
+    <string name="barOpt1">info</string>
+    <string name="barOpt2">attacks</string>
+    <string name="barOpt3">more</string>
+    <string name="habilities">Habilidades</string>
+    <string name="statistics">Estadisticas</string>
     <string name="emailRequired">Email is required</string>
     <string name="passRequired">Password is required</string>
     <string name="repassRequired">Repeat password is required</string>
@@ -33,8 +38,6 @@
     <string name="checkMail">Check your email to reset your password</string>
     <string name="verifyEmail">Please verify your email</string>
     <string name="accountNotExists">The account does not exists. Please register</string>
-
-
 
 
     <!-- TODO: Remove or change this placeholder text -->
