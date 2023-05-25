@@ -14,19 +14,22 @@ import java.net.URL
 
 class PokemonRepository {
     private fun getResponseFromURL(url: URL): BasePage {
-        return getUrlObjectReplace(url, BasePage::class.java)
+        return try {
+            getUrlObjectReplace(url, BasePage::class.java)
+        } catch (e: Exception) {
+            BasePage()
+        }
     }
 
     fun getPokemonFromURL(paginationRange: PaginationRange): Flow<List<Pokemon>> {
         val url = POKE_API_POKEMONS_URL + "?limit=${paginationRange.count}&offset=${paginationRange.from}"
-        val response =
-            try {
-                getResponseFromURL(URL(url))
-            } catch (e: Exception) {
-                return flowOf(listOf())
-            }
+        val response = getResponseFromURL(URL(url))
         val result = response.results.map {
-            getUrlObjectReplace(URL(it.url), Pokemon::class.java)
+            try {
+                getUrlObjectReplace(URL(it.url), Pokemon::class.java)
+            } catch (e: Exception) {
+                Pokemon()
+            }
         }
         return flowOf(result)
     }

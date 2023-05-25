@@ -74,8 +74,10 @@ class PokemonListFragment : FragmentBase<FragmentPokemonListBinding>() {
                 adapter.notifyItemInserted(layoutManager.itemCount + index)
             }
 
-            paginationRange.next()
-            viewModel.getPokemons(paginationRange)
+            if(it.isNotEmpty() && it.last().id != null) {
+                paginationRange.next()
+                viewModel.getPokemons(paginationRange)
+            }
         }
     }
 

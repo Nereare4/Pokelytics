@@ -23,7 +23,7 @@ class PokemonListViewModel(
                 paginationRange,
                 {
                     mutableState.postValue(ViewState.SUCCESS)
-                    mutablePokemons.postValue(it)
+                    mutablePokemons.postValue(it.filter { it.id != null })
                 }, {
                     mutableState.postValue(ViewState.ERROR)
                 }
