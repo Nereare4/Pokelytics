@@ -13,13 +13,18 @@ import study.project.pokelytics.api.models.responses.SpecieResponse
 import java.net.URL
 
 class PokemonRepository {
-    fun getResponseFromURL(url: URL): BasePage {
+    private fun getResponseFromURL(url: URL): BasePage {
         return getUrlObjectReplace(url, BasePage::class.java)
     }
 
     fun getPokemonFromURL(paginationRange: PaginationRange): Flow<List<Pokemon>> {
         val url = POKE_API_POKEMONS_URL + "?limit=${paginationRange.count}&offset=${paginationRange.from}"
-        val response = getResponseFromURL(URL(url))
+        val response =
+            try {
+                getResponseFromURL(URL(url))
+            } catch (e: Exception) {
+                return flowOf(listOf())
+            }
         val result = response.results.map {
             getUrlObjectReplace(URL(it.url), Pokemon::class.java)
         }

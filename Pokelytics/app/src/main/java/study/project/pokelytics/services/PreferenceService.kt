@@ -10,8 +10,12 @@ class PreferenceService (
             editor.putString(key, value)
             editor.apply()
         }
-        fun removePreference(key: String){}
+        fun removePreference(key: String){
+            val editor: SharedPreferences.Editor = sharedPreferences.edit()
+            editor.remove(key)
+            editor.apply()
+        }
         fun getPreference(key: String): String?{
-            return ""
+            return sharedPreferences.getString(key, null)
         }
 }

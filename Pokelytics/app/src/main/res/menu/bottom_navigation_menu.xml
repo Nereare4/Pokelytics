@@ -16,7 +16,7 @@
     <item
         android:id="@+id/attack"
         android:title="@string/barOpt2"
-        android:icon="@drawable/ic_attack"
+        android:icon="@drawable/ic_sword"
         android:contentDescription="none"
         app:showAsAction="always"
         />
