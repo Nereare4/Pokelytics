@@ -4,8 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
-import study.project.pokelytics.api.models.Pokemon
-import study.project.pokelytics.api.models.pages.PaginationRange
+import study.project.pokelytics.api.model.PaginationRange
+import study.project.pokelytics.api.model.Pokemon
 import study.project.pokelytics.usecases.GetPokemonUseCase
 
 class PokemonListViewModel(
@@ -21,9 +21,9 @@ class PokemonListViewModel(
         viewModelScope.launch {
             getPokemonUseCase(
                 paginationRange,
-                {
+                { pokemonList ->
                     mutableState.postValue(ViewState.SUCCESS)
-                    mutablePokemons.postValue(it.filter { it.id != null })
+                    mutablePokemons.postValue(pokemonList)
                 }, {
                     mutableState.postValue(ViewState.ERROR)
                 }

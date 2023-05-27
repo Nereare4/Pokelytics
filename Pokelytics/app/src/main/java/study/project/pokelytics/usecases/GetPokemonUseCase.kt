@@ -1,15 +1,15 @@
 package study.project.pokelytics.usecases
 
 import kotlinx.coroutines.flow.Flow
-import study.project.pokelytics.api.models.Pokemon
-import study.project.pokelytics.api.models.pages.PaginationRange
-import study.project.pokelytics.repositories.PokemonRepository
+import study.project.pokelytics.api.model.PaginationRange
+import study.project.pokelytics.api.datasources.PokemonDataSource
+import study.project.pokelytics.api.model.Pokemon
 
 class GetPokemonUseCase(
-    private val pokemonRepository: PokemonRepository
+    private val pokemonDataSource: PokemonDataSource
 ) : FlowUseCase<List<Pokemon>, PaginationRange>() {
 
     override suspend fun execute(params: PaginationRange): Flow<List<Pokemon>> {
-        return pokemonRepository.getPokemonFromURL(params)
+        return pokemonDataSource.getPokemonFromPage(params)
     }
 }

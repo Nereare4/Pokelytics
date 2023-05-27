@@ -3,7 +3,7 @@ package study.project.pokelytics.viewholders
 import android.annotation.SuppressLint
 import androidx.core.view.isVisible
 import study.project.pokelytics.R
-import study.project.pokelytics.api.models.Pokemon
+import study.project.pokelytics.api.model.Pokemon
 import study.project.pokelytics.databinding.PokemonListItemBinding
 import study.project.pokelytics.event.observeEvent
 import study.project.pokelytics.fragments.main.PokemonListFragment
@@ -39,21 +39,21 @@ class PokemonViewHolder(
                     else -> id.text = "#$it"
                 }
             }
-            primaryType.text = item.types[0].type?.name ?: ""
+            primaryType.text = item.types[0].type.name
             if (item.types.size > 1) {
-                secondaryType.text = item.types[1].type?.name ?: ""
+                secondaryType.text = item.types[1].type.name
                 secondaryType.isVisible = true
             } else {
                 secondaryType.isVisible = false
             }
             binding.image.setImageToUrl(
-                item.sprites?.other?.official_artwork?.frontDefault?.replace("_", "-") ?: "")
+                item.sprites.other?.officialArtwork?.frontDefault ?: "",)
         }
     }
 
     private fun loadExtraInfo(item: Pokemon) {
         binding.apply {
-            binding.pokemonContainer.setBackgroundResource(getBackground(item.extraInfo.species?.color?.name ?: ""))
+            binding.pokemonContainer.setBackgroundResource(getBackground(item.name))
         }
     }
 

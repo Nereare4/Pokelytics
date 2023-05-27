@@ -1,15 +1,15 @@
 package study.project.pokelytics.usecases
 
 import kotlinx.coroutines.flow.Flow
-import study.project.pokelytics.api.models.Pokemon
-import study.project.pokelytics.repositories.PokemonRepository
+import study.project.pokelytics.api.datasources.PokemonDataSource
+import study.project.pokelytics.api.model.Pokemon
 
 class GetPokemonMoreInfoUseCase(
-    private val pokemonRepository: PokemonRepository
+    private val pokemonDataSource: PokemonDataSource
 ) : FlowUseCase<Pokemon, Pokemon>() {
 
     override suspend fun execute(params: Pokemon): Flow<Pokemon> {
-        return pokemonRepository.getPokemonExtraInfo(params)
+        return pokemonDataSource.getPokemonExtraInfo(params)
     }
 
 }

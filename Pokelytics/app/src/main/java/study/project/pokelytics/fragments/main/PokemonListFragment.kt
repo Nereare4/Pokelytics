@@ -5,8 +5,8 @@ import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import study.project.pokelytics.R
 import study.project.pokelytics.adapters.PokemonListAdapter
-import study.project.pokelytics.api.models.Pokemon
-import study.project.pokelytics.api.models.pages.PaginationRange
+import study.project.pokelytics.api.model.PaginationRange
+import study.project.pokelytics.api.model.Pokemon
 import study.project.pokelytics.databinding.FragmentPokemonListBinding
 import study.project.pokelytics.fragments.FragmentBase
 import study.project.pokelytics.usecases.GetPokemonMoreInfoUseCase
@@ -74,7 +74,7 @@ class PokemonListFragment : FragmentBase<FragmentPokemonListBinding>() {
                 adapter.notifyItemInserted(layoutManager.itemCount + index)
             }
 
-            if(it.isNotEmpty() && it.last().id != null) {
+            if(it.isNotEmpty() && it.lastOrNull()?.id != null) {
                 paginationRange.next()
                 viewModel.getPokemons(paginationRange)
             }
