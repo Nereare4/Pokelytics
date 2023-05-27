@@ -24,14 +24,6 @@ class FirebaseHelper(
         }
     }
 
-    fun subscribeToLogoutListener(
-        onResult: () -> Unit = {},
-        onError: (Throwable) -> Unit = {}
-    ) {
-        firebaseAuth.signOut()
-        onResult()
-    }
-
     fun subscribeToAnonymousLoginListener(
         onResult: () -> Unit = {},
         onError: (Throwable) -> Unit = {}
