@@ -1,5 +1,6 @@
 package study.project.pokelytics.fragments.main
 
+import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -63,7 +64,7 @@ class PokemonListFragment : FragmentBase<FragmentPokemonListBinding>() {
     override fun subscribe() {
         viewModel.state.observe(this) {
             when (it) {
-                ViewState.IDLE -> viewModel.getPokemons(paginationRange)
+                ViewState.IDLE -> viewModel.getPokemonList(paginationRange)
                 else -> {}
             }
         }
@@ -75,8 +76,11 @@ class PokemonListFragment : FragmentBase<FragmentPokemonListBinding>() {
             }
 
             if(it.isNotEmpty() && it.lastOrNull()?.id != null) {
+                if (paginationRange.stop) {
+                    return@observe
+                }
                 paginationRange.next()
-                viewModel.getPokemons(paginationRange)
+                viewModel.getPokemonList(paginationRange)
             }
         }
     }

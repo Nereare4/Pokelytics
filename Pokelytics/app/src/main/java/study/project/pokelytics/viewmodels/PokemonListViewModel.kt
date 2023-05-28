@@ -1,5 +1,6 @@
 package study.project.pokelytics.viewmodels
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -16,7 +17,7 @@ class PokemonListViewModel(
     val pokemons: LiveData<List<Pokemon>>
         get() = mutablePokemons
 
-    fun getPokemons(paginationRange: PaginationRange) {
+    fun getPokemonList(paginationRange: PaginationRange) {
         mutableState.postValue(ViewState.LOADING)
         viewModelScope.launch {
             getPokemonUseCase(

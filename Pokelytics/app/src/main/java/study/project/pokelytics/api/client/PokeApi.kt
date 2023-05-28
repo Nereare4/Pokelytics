@@ -241,7 +241,7 @@ interface PokeApi {
 
     fun getPokemonShape(id: Int): Flow<PokemonShape>
 
-    fun getPokemonSpecies(id: Int): Flow<PokemonSpecies>
+    fun getPokemonSpecies(id: Int): PokemonSpecies
 
     fun getStat(id: Int): Flow<Stat>
 

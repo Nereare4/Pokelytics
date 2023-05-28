@@ -127,7 +127,12 @@ data class Pokemon(
     val moves: List<PokemonMove>,
     val stats: List<PokemonStat>,
     val types: List<PokemonType>,
-    val sprites: PokemonSprites
+    val sprites: PokemonSprites,
+    val extraInfo: PokemonExtraInfo? = null
+)
+
+data class PokemonExtraInfo (
+    val species: PokemonSpecies? = null
 )
 
 data class PokemonSpritesOther (

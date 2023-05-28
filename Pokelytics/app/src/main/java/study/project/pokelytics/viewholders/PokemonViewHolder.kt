@@ -22,7 +22,7 @@ class PokemonViewHolder(
         moreInfoViewModel.pokemon.observeEvent(this) {
             loadExtraInfo(it)
         }
-        moreInfoViewModel.getPokemons(item)
+        moreInfoViewModel.getPokemonExtraInfo(item)
     }
 
     @SuppressLint("SetTextI18n")
@@ -53,7 +53,7 @@ class PokemonViewHolder(
 
     private fun loadExtraInfo(item: Pokemon) {
         binding.apply {
-            binding.pokemonContainer.setBackgroundResource(getBackground(item.name))
+            binding.pokemonContainer.setBackgroundResource(getBackground(item.extraInfo?.species?.color?.name ?: ""))
         }
     }
 

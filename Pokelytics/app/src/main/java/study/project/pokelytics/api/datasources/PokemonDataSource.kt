@@ -5,6 +5,7 @@ import kotlinx.coroutines.flow.flow
 import study.project.pokelytics.api.client.PokeApiClient
 import study.project.pokelytics.api.model.PaginationRange
 import study.project.pokelytics.api.model.Pokemon
+import study.project.pokelytics.api.model.PokemonExtraInfo
 
 class PokemonDataSource(
     val remote: PokeApiClient
@@ -14,8 +15,9 @@ class PokemonDataSource(
         remote.getPokemonList(paginationRange.from, paginationRange.count)
 
     fun getPokemonExtraInfo(params: Pokemon): Flow<Pokemon> = flow {
-        /*val specie = params.species?.url.let { it1 -> remote.getSpecieFromUrl(it1 ?: "").execute() }
-        val newPokemon = params.copy(extraInfo = PokemonExtraInfo(species = specie.body()))
-        emit(newPokemon)*/
+        val specie = remote.getPokemonSpecies(params.id)
+        val newPokemon = params.copy(extraInfo = PokemonExtraInfo(species = specie))
+        emit(newPokemon)
+
     }
 }

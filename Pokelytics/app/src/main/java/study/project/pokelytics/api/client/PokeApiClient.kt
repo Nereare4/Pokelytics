@@ -1,5 +1,6 @@
 package study.project.pokelytics.api.client
 
+import android.util.Log
 import kotlinx.coroutines.flow.flow
 import retrofit2.Call
 
@@ -213,6 +214,9 @@ class PokeApiClient(
 
     override fun getPokemonList(offset: Int, limit: Int) = flow {
         val res = service.getPokemonList(offset, limit).execute().body()?.results
+        if (res != null) {
+            Log.i("Pokemon Step Issue", "subscribe: ${res.last().id}")
+        }
         val list = res?.map {
             getPokemon(it.id)
         }
@@ -475,9 +479,8 @@ class PokeApiClient(
         emit(service.getPokemonShape(id).result())
     }
 
-    override fun getPokemonSpecies(id: Int) = flow {
-        emit(service.getPokemonSpecies(id).result())
-    }
+    override fun getPokemonSpecies(id: Int) =
+        service.getPokemonSpecies(id).result()
 
     override fun getStat(id: Int) = flow {
         emit(service.getStat(id).result())

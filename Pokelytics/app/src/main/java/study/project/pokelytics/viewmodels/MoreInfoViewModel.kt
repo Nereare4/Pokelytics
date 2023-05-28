@@ -16,7 +16,7 @@ class MoreInfoViewModel(
     val pokemon: LiveEvent<Pokemon>
         get() = mutablePokemon
 
-    fun getPokemons(item: Pokemon) {
+    fun getPokemonExtraInfo(item: Pokemon) {
         mutableState.postValue(ViewState.LOADING)
         viewModelScope.launch {
             getPokemonMoreInfoUseCase(
