@@ -9,6 +9,5 @@ import study.project.pokelytics.firebase.FirebaseHelper
 @FlowPreview
 @ExperimentalCoroutinesApi
 val repositoryModule = module {
-    factory { PokemonDataSource(get()) }
     factory { FirebaseHelper(get(), get()) }
 }

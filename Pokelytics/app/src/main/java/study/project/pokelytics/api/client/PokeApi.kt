@@ -55,7 +55,7 @@ import study.project.pokelytics.api.model.VersionGroup
 
 interface PokeApi {
 
-    fun getBerryList(offset: Int, limit: Int): Flow<NamedApiResourceList>
+    fun getBerryList(offset: Int, limit: Int): Flow<List<Item>>
 
     fun getBerryFirmnessList(offset: Int, limit: Int): Flow<NamedApiResourceList>
 
@@ -95,7 +95,7 @@ interface PokeApi {
 
     fun getItemPocketList(offset: Int, limit: Int): Flow<NamedApiResourceList>
 
-    fun getMoveList(offset: Int, limit: Int): Flow<NamedApiResourceList>
+    fun getMoveList(offset: Int, limit: Int): Flow<List<Move>>
 
     fun getMoveAilmentList(offset: Int, limit: Int): Flow<NamedApiResourceList>
 
@@ -151,101 +151,58 @@ interface PokeApi {
 
     fun getLanguageList(offset: Int, limit: Int): Flow<NamedApiResourceList>
 
-    fun getBerry(id: Int): Flow<Berry>
+    fun getBerry(id: Int): Berry
 
-    fun getBerryFirmness(id: Int): Flow<BerryFirmness>
+    fun getBerryFirmness(id: Int): BerryFirmness
+    fun getBerryFlavor(id: Int): BerryFlavor
+    fun getContestType(id: Int): ContestType
+    fun getContestEffect(id: Int): ContestEffect
+    fun getSuperContestEffect(id: Int): SuperContestEffect
+    fun getEncounterMethod(id: Int): EncounterMethod
+    fun getEncounterCondition(id: Int): EncounterCondition
+    fun getEncounterConditionValue(id: Int): EncounterConditionValue
+    fun getEvolutionChain(id: Int): EvolutionChain
+    fun getEvolutionTrigger(id: Int): EvolutionTrigger
+    fun getGeneration(id: Int): Generation
+    fun getPokedex(id: Int): Pokedex
+    fun getVersion(id: Int): Version
+    fun getVersionGroup(id: Int): VersionGroup
+    fun getItem(id: Int): Item
 
-    fun getBerryFlavor(id: Int): Flow<BerryFlavor>
+    fun getItemAttribute(id: Int): ItemAttribute
+    fun getItemCategory(id: Int): ItemCategory
+    fun getItemFlingEffect(id: Int): ItemFlingEffect
+    fun getItemPocket(id: Int): ItemPocket
+    fun getMove(id: Int): Move
 
-    fun getContestType(id: Int): Flow<ContestType>
-
-    fun getContestEffect(id: Int): Flow<ContestEffect>
-
-    fun getSuperContestEffect(id: Int): Flow<SuperContestEffect>
-
-    fun getEncounterMethod(id: Int): Flow<EncounterMethod>
-
-    fun getEncounterCondition(id: Int): Flow<EncounterCondition>
-
-    fun getEncounterConditionValue(id: Int): Flow<EncounterConditionValue>
-
-    fun getEvolutionChain(id: Int): Flow<EvolutionChain>
-
-    fun getEvolutionTrigger(id: Int): Flow<EvolutionTrigger>
-
-    fun getGeneration(id: Int): Flow<Generation>
-
-    fun getPokedex(id: Int): Flow<Pokedex>
-
-    fun getVersion(id: Int): Flow<Version>
-
-    fun getVersionGroup(id: Int): Flow<VersionGroup>
-
-    fun getItem(id: Int): Flow<Item>
-
-    fun getItemAttribute(id: Int): Flow<ItemAttribute>
-
-    fun getItemCategory(id: Int): Flow<ItemCategory>
-
-    fun getItemFlingEffect(id: Int): Flow<ItemFlingEffect>
-
-    fun getItemPocket(id: Int): Flow<ItemPocket>
-
-    fun getMove(id: Int): Flow<Move>
-
-    fun getMoveAilment(id: Int): Flow<MoveAilment>
-
-    fun getMoveBattleStyle(id: Int): Flow<MoveBattleStyle>
-
-    fun getMoveCategory(id: Int): Flow<MoveCategory>
-
-    fun getMoveDamageClass(id: Int): Flow<MoveDamageClass>
-
-    fun getMoveLearnMethod(id: Int): Flow<MoveLearnMethod>
-
-    fun getMoveTarget(id: Int): Flow<MoveTarget>
-
-    fun getLocation(id: Int): Flow<Location>
-
-    fun getLocationArea(id: Int): Flow<LocationArea>
-
-    fun getPalParkArea(id: Int): Flow<PalParkArea>
-
-    fun getRegion(id: Int): Flow<Region>
-
-    fun getMachine(id: Int): Flow<Machine>
-
-    fun getAbility(id: Int): Flow<Ability>
-
-    fun getCharacteristic(id: Int): Flow<Characteristic>
-
-    fun getEggGroup(id: Int): Flow<EggGroup>
-
-    fun getGender(id: Int): Flow<Gender>
-
-    fun getGrowthRate(id: Int): Flow<GrowthRate>
-
-    fun getNature(id: Int): Flow<Nature>
-
-    fun getPokeathlonStat(id: Int): Flow<PokeathlonStat>
-
+    fun getMoveAilment(id: Int): MoveAilment
+    fun getMoveBattleStyle(id: Int): MoveBattleStyle
+    fun getMoveCategory(id: Int): MoveCategory
+    fun getMoveDamageClass(id: Int): MoveDamageClass
+    fun getMoveLearnMethod(id: Int): MoveLearnMethod
+    fun getMoveTarget(id: Int): MoveTarget
+    fun getLocation(id: Int): Location
+    fun getLocationArea(id: Int): LocationArea
+    fun getPalParkArea(id: Int): PalParkArea
+    fun getRegion(id: Int): Region
+    fun getMachine(id: Int): Machine
+    fun getAbility(id: Int): Ability
+    fun getCharacteristic(id: Int): Characteristic
+    fun getEggGroup(id: Int): EggGroup
+    fun getGender(id: Int): Gender
+    fun getGrowthRate(id: Int): GrowthRate
+    fun getNature(id: Int): Nature
+    fun getPokeathlonStat(id: Int): PokeathlonStat
     fun getPokemon(id: Int): Pokemon
 
-    fun getPokemonEncounterList(id: Int): Flow<List<LocationAreaEncounter>>
-
-    fun getPokemonColor(id: Int): Flow<PokemonColor>
-
-    fun getPokemonForm(id: Int): Flow<PokemonForm>
-
-    fun getPokemonHabitat(id: Int): Flow<PokemonHabitat>
-
-    fun getPokemonShape(id: Int): Flow<PokemonShape>
-
+    fun getPokemonEncounterList(id: Int): List<LocationAreaEncounter>
+    fun getPokemonColor(id: Int): PokemonColor
+    fun getPokemonForm(id: Int): PokemonForm
+    fun getPokemonHabitat(id: Int): PokemonHabitat
+    fun getPokemonShape(id: Int): PokemonShape
     fun getPokemonSpecies(id: Int): PokemonSpecies
 
-    fun getStat(id: Int): Flow<Stat>
-
-    fun getType(id: Int): Flow<Type>
-
-    fun getLanguage(id: Int): Flow<Language>
+    fun getStat(id: Int): Stat
+    fun getType(id: Int): Type
+    fun getLanguage(id: Int): Language
 }

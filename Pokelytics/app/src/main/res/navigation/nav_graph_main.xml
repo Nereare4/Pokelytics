@@ -10,4 +10,14 @@
         android:name="study.project.pokelytics.fragments.main.PokemonListFragment"
         tools:layout="@layout/fragment_pokemon_list"/>
 
+    <fragment
+        android:id="@+id/berryList"
+        android:name="study.project.pokelytics.fragments.main.BerryListFragment"
+        tools:layout="@layout/fragment_pokemon_list"/>
+
+    <fragment
+        android:id="@+id/moveList"
+        android:name="study.project.pokelytics.fragments.main.MovesListFragment"
+        tools:layout="@layout/fragment_pokemon_list"/>
+
 </navigation>

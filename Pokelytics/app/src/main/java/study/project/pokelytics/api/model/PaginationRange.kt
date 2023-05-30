@@ -8,14 +8,6 @@ data class PaginationRange(
     var stop: Boolean = false
 ) {
     fun next() {
-        if (count == MAX) {
-            stop = true
-            return
-        }
-        from = min(from + count, MAX)
-    }
-
-    companion object {
-        const val MAX = 1010
+        from += count
     }
 }
