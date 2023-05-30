@@ -1,6 +1,8 @@
 package study.project.pokelytics.viewholders
 
 import android.annotation.SuppressLint
+import android.widget.ImageView
+import study.project.pokelytics.R
 import study.project.pokelytics.api.model.Move
 import study.project.pokelytics.databinding.MoveListItemBinding
 
@@ -9,8 +11,8 @@ class MoveViewHolder(
 ) : BaseViewHolder<Move>(binding.root) {
 
 
-    override fun bind(move: Move) {
-        drawMove(move)
+    override fun bind(item: Move) {
+        drawMove(item)
     }
 
     @SuppressLint("SetTextI18n")
@@ -24,6 +26,19 @@ class MoveViewHolder(
                     else -> id.text = "#$it"
                 }
             }
+            setImage(image, move.damageClass.name)
         }
     }
+
+    private fun setImage(image: ImageView, name: String) {
+        image.setImageResource(
+            when (name) {
+                "physical" -> R.mipmap.ic_physical
+                "special" -> R.mipmap.ic_special
+                else -> R.mipmap.ic_status
+            }
+        )
+    }
+
+
 }
