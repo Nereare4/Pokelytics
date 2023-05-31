@@ -4,11 +4,16 @@ import android.annotation.SuppressLint
 import android.os.Handler
 import android.os.Looper
 import android.view.animation.AnimationUtils
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import study.project.pokelytics.R
 import study.project.pokelytics.databinding.ActivitySplashBinding
+import study.project.pokelytics.models.User
+import study.project.pokelytics.viewmodels.SplashViewModel
+import study.project.pokelytics.viewmodels.ViewState
 
 @SuppressLint("CustomSplashScreen")
 class SplashActivity : ActivityBase<ActivitySplashBinding>() {
+    private val splashViewModel: SplashViewModel  by viewModel()
     override fun getResourceLayout(): Int = R.layout.activity_splash
     override fun initializeView() {
         openDelayedApp()
@@ -32,7 +37,17 @@ class SplashActivity : ActivityBase<ActivitySplashBinding>() {
     override fun bindViewModel() {}
 
     override fun subscribe() {
-
+        splashViewModel.state.observe(this){
+            when(it){
+                ViewState.SUCCESS -> {
+                    navigator.goToLogin()
+                }
+                ViewState.ERROR ->{
+                    navigator.goToMain(User.getDefaultUser())
+                }
+                else -> {}
+            }
+        }
     }
 
 }

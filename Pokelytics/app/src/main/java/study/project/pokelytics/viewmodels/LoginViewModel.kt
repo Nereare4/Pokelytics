@@ -8,7 +8,7 @@ import study.project.pokelytics.models.User
 import study.project.pokelytics.usecases.SaveUserPreferencesUseCase
 
 class LoginViewModel(
-    val firebaseHelper: FirebaseHelper,
+    private val firebaseHelper: FirebaseHelper,
     val saveUserPreferencesUseCase: SaveUserPreferencesUseCase
 ) : ViewModalBase() {
 
@@ -17,14 +17,14 @@ class LoginViewModel(
         viewModelScope.launch {
             firebaseHelper.subscribeToLoginListener(loginCredentials, {
                 mutableState.postValue(ViewState.SUCCESS)
-                saveUserPreferences(User(loginCredentials.email, loginCredentials.password))
+                saveUserPreferences(User(loginCredentials.email, "", ""))
             }, {
                 mutableState.postValue(ViewState.ERROR)
             }
             )
         }
     }
-    private fun saveUserPreferences(user: User){
+     fun saveUserPreferences(user: User){
         viewModelScope.launch {
             saveUserPreferencesUseCase(user)
         }

@@ -12,6 +12,7 @@ import study.project.pokelytics.adapters.NavAdapter
 import study.project.pokelytics.databinding.ActivityMainBinding
 import study.project.pokelytics.databinding.NavigationDrawerLayoutBinding
 import study.project.pokelytics.models.NavItem
+import study.project.pokelytics.models.User
 import study.project.pokelytics.viewmodels.NavigationViewModel
 
 
@@ -22,7 +23,10 @@ class MainActivity : ActivityBase<ActivityMainBinding>() {
     private lateinit var navLayoutManager: LinearLayoutManager
     private lateinit var settingsLayoutManager: LinearLayoutManager
     private lateinit var navAdapter: NavAdapter
+    private lateinit var user: User
+
     override fun initializeView() {
+        loadData()
         navLayoutManager = LinearLayoutManager(this)
         settingsLayoutManager = LinearLayoutManager(this)
         navAdapter = NavAdapter()
@@ -79,7 +83,14 @@ class MainActivity : ActivityBase<ActivityMainBinding>() {
     }
 
     companion object {
-        fun getIntent(context: Context) = Intent(context, MainActivity::class.java)
+        private const val USER = "user"
+        fun getIntent(context: Context, user: User) = Intent(context, MainActivity::class.java)
+            .apply {
+                putExtra(USER, user)
+            }
+    }
+    private fun loadData() {
+        user = intent.getSerializableExtra(USER) as User
     }
 
 

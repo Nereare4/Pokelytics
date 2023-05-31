@@ -18,6 +18,42 @@
         <item name="android:fontFamily">@font/roboto</item>
         <item name="android:textStyle">bold</item>
     </style>
+    <style name="buttonOutlinedBlueProfile" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:backgroundTint">@color/white</item>
+        <item name="strokeColor">@color/colorPrimary</item>
+        <item name="android:textSize">10sp</item>
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="cornerRadius">20dp</item>
+        <item name="android:fontFamily">@font/roboto</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="buttonOutlinedRedDeleteAccount" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/red</item>
+        <item name="android:backgroundTint">@color/white</item>
+        <item name="strokeColor">@color/red</item>
+        <item name="android:textSize">10sp</item>
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="cornerRadius">20dp</item>
+        <item name="android:fontFamily">@font/roboto</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="buttonOutlinedBlueLogOut" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:backgroundTint">@color/white</item>
+        <item name="strokeColor">@color/light_grey</item>
+        <item name="android:textSize">10sp</item>
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="cornerRadius">20dp</item>
+        <item name="android:fontFamily">@font/roboto</item>
+        <item name="android:textStyle">bold</item>
+    </style>
     <style name="lineET" parent="Theme.AppCompat.Light">
         <item name="colorControlNormal">@color/white</item>
         <item name="colorControlActivated">@color/white</item>

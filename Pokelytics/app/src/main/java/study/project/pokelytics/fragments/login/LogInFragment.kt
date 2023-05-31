@@ -22,6 +22,7 @@ import study.project.pokelytics.activities.ActivityBase
 import study.project.pokelytics.databinding.FragmentLogInBinding
 import study.project.pokelytics.fragments.FragmentBase
 import study.project.pokelytics.models.LoginCredentials
+import study.project.pokelytics.models.User
 import study.project.pokelytics.viewmodels.LoginViewModel
 import study.project.pokelytics.viewmodels.ViewState
 
@@ -67,7 +68,7 @@ class LogInFragment : FragmentBase<FragmentLogInBinding>() {
         loginViewModel.state.observe(viewLifecycleOwner){
             when(it){
                 ViewState.SUCCESS -> {
-                    (activity as ActivityBase<*>).navigator.goToMain()
+                    (activity as ActivityBase<*>).navigator.goToMain(User.getDefaultUser())
                 }
                 ViewState.ERROR ->{
                     showErrorLogin()
@@ -119,8 +120,8 @@ class LogInFragment : FragmentBase<FragmentLogInBinding>() {
                                     FirebaseAuth.getInstance().signInWithCredential(credential)
                                         .addOnCompleteListener { authTask ->
                                             if (authTask.isSuccessful) {
-                                                //fAuth.currentUser?.email?.let { PreferencesManager.getDefaultSharedPreferences(this).saveEmail(it) }
-                                                (activity as ActivityBase<*>).navigator.goToMain()
+                                                //loginViewModel.saveUserPreferences() PASAR USUARIO
+                                                (activity as ActivityBase<*>).navigator.goToMain(User("", "", ""))
                                             }
                                         }
                                 }

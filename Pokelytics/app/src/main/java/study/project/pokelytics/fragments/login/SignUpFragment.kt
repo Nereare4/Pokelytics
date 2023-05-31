@@ -11,12 +11,14 @@ import com.google.android.gms.common.api.ApiException
 import com.google.android.material.textfield.TextInputLayout
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
+import com.google.firebase.firestore.FirebaseFirestore
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import study.project.pokelytics.R
 import study.project.pokelytics.activities.ActivityBase
 import study.project.pokelytics.databinding.FragmentSignUpBinding
 import study.project.pokelytics.fragments.FragmentBase
 import study.project.pokelytics.models.LoginCredentials
+import study.project.pokelytics.models.User
 import study.project.pokelytics.viewmodels.SignUpViewModel
 import study.project.pokelytics.viewmodels.ViewState
 
@@ -68,7 +70,7 @@ class SignUpFragment : FragmentBase<FragmentSignUpBinding>() {
             when(it){
                 ViewState.SUCCESS -> {
                     Toast.makeText(requireContext(), resources.getString(R.string.verifyEmail), Toast.LENGTH_LONG).show()
-                    (activity as ActivityBase<*>).navigator.goToMain()
+                    (activity as ActivityBase<*>).navigator.goToMain(User.getDefaultUser())//COGER USUARIO BD
                 }
                 ViewState.ERROR ->{
                     showErrorSignUp()
@@ -114,8 +116,18 @@ class SignUpFragment : FragmentBase<FragmentSignUpBinding>() {
                         if (it.isSuccessful){
                             FirebaseAuth.getInstance().currentUser?.sendEmailVerification()?.addOnSuccessListener {
                                 Toast.makeText(requireContext(), resources.getString(R.string.verifyEmail), Toast.LENGTH_LONG).show()
-                                (activity as ActivityBase<*>).navigator.goToMain()
+                                FirebaseAuth.getInstance().currentUser?.email?.let { it1 ->
+                                    (activity as ActivityBase<*>).navigator.goToMain(User(it1, "", ""))//COGER DE LA BBDD
+                                }
                             }
+                            FirebaseAuth.getInstance().currentUser?.email?.let { it1 ->
+                                FirebaseFirestore.getInstance().collection("users").document(it1).set(
+                                    hashMapOf(
+                                        "favouriteList" to "",
+                                        )
+                                )
+                            }
+
                         }else{
                             Toast.makeText(requireContext(), resources.getString(R.string.emailExists), Toast.LENGTH_LONG).show()
                         }

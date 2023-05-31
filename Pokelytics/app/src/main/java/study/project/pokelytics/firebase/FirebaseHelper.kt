@@ -20,6 +20,7 @@ class FirebaseHelper(
                 it.exception?.let { it1 -> onError(it1) }
             } else {
                 onResult()
+
             }
         }
     }
@@ -48,7 +49,12 @@ class FirebaseHelper(
                 it.exception?.let { it1 -> onError(it1) }
             } else {
                 //TODO: Return user from firebase instead of creating a new one
-                onResult(User("", ""))
+                onResult(User("", "", ""))
+                firebaseFirestore.collection("users").document(params.email).set(
+                    hashMapOf(
+                        "favouriteList" to "",
+                    )
+                )
             }
         }
     }

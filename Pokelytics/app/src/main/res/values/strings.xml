@@ -38,6 +38,17 @@
     <string name="checkMail">Check your email to reset your password</string>
     <string name="verifyEmail">Please verify your email</string>
     <string name="accountNotExists">The account does not exists. Please register</string>
+    <string name="profile">Profile</string>
+    <string name="logOut">Log out</string>
+    <string name="account">Account</string>
+    <string name="infoDelete">Your Pokelytics account is completely free and saves your favorites list. If you delete your account, you\'ll lose your saved data and won\'t be able to restore it.</string>
+    <string name="delete">Delete</string>
+    <string name="deleteaccount">Delete account</string>
+    <string name="deleteAccountQuestion">Are you sure you want to delete the account?</string>
+    <string name="deleteAccountSuccesful">The account has been deleted</string>
+    <string name="accept">Accept</string>
+
+
 
 
     <!-- TODO: Remove or change this placeholder text -->
