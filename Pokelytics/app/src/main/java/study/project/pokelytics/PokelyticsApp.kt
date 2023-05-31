@@ -21,7 +21,8 @@ class PokelyticsApp : Application() {
                     useCaseModule,
                     repositoryModule,
                     appModule,
-                    preferenceModule
+                    preferenceModule,
+                    retrofitModule
                 )
             )
         }

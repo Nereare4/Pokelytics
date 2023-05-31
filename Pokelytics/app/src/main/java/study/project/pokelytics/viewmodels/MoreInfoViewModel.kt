@@ -2,7 +2,7 @@ package study.project.pokelytics.viewmodels
 
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
-import study.project.pokelytics.api.models.Pokemon
+import study.project.pokelytics.api.model.Pokemon
 import study.project.pokelytics.event.LiveEvent
 import study.project.pokelytics.event.MutableLiveEvent
 import study.project.pokelytics.event.postEvent
@@ -16,7 +16,7 @@ class MoreInfoViewModel(
     val pokemon: LiveEvent<Pokemon>
         get() = mutablePokemon
 
-    fun getPokemons(item: Pokemon) {
+    fun getPokemonExtraInfo(item: Pokemon) {
         mutableState.postValue(ViewState.LOADING)
         viewModelScope.launch {
             getPokemonMoreInfoUseCase(

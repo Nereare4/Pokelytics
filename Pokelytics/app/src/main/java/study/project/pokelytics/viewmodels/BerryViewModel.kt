@@ -1,30 +1,29 @@
 package study.project.pokelytics.viewmodels
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
+import study.project.pokelytics.api.model.Item
 import study.project.pokelytics.api.model.PaginationRange
-import study.project.pokelytics.api.model.Pokemon
-import study.project.pokelytics.usecases.GetPokemonUseCase
+import study.project.pokelytics.usecases.GetBerryUseCase
 
-class PokemonListViewModel(
-    val getPokemonUseCase: GetPokemonUseCase
+class BerryViewModel(
+    val getBerryUseCase: GetBerryUseCase
 ) : ViewModalBase() {
 
-    private val mutablePokemons = MutableLiveData<List<Pokemon>>()
-    val pokemons: LiveData<List<Pokemon>>
-        get() = mutablePokemons
+    private val mutableBerryList = MutableLiveData<List<Item>>()
+    val berryList: LiveData<List<Item>>
+        get() = mutableBerryList
 
-    fun getPokemonList(paginationRange: PaginationRange) {
+    fun getBerryList(paginationRange: PaginationRange) {
         mutableState.postValue(ViewState.LOADING)
         viewModelScope.launch {
-            getPokemonUseCase(
+            getBerryUseCase(
                 paginationRange,
-                { pokemonList ->
+                { itemList ->
                     mutableState.postValue(ViewState.SUCCESS)
-                    mutablePokemons.postValue(pokemonList)
+                    mutableBerryList.postValue(itemList)
                 }, {
                     mutableState.postValue(ViewState.ERROR)
                 }

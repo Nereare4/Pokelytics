@@ -20,5 +20,8 @@ val viewModelModule = module {
     viewModel { SignUpViewModel(get(), get()) }
     viewModel { ResetPasswordViewModel(get())}
     viewModel { NavigationViewModel(get())}
+    viewModel { BerryViewModel(get())}
+    viewModel { MoveViewModel(get())}
+
     viewModel { SplashViewModel(get())}
 }

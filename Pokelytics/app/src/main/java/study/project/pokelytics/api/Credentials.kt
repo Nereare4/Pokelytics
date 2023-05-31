@@ -1,5 +1,0 @@
-const val POKE_API_BASE_URL = "https://pokeapi.co/api/v2/"
-const val POKE_API_POKEMONS_URL = "${POKE_API_BASE_URL}pokemon"
-const val POKE_API_MOVES_URL = "${POKE_API_BASE_URL}move"
-const val POKE_API_SPECIES_URL = "${POKE_API_BASE_URL}pokemon-species"
-const val POKE_API_COLOR_URL = "${POKE_API_BASE_URL}pokemon-color"

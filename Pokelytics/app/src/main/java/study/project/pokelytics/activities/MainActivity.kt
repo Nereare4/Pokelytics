@@ -1,9 +1,11 @@
 package study.project.pokelytics.activities
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -14,6 +16,7 @@ import study.project.pokelytics.databinding.NavigationDrawerLayoutBinding
 import study.project.pokelytics.models.NavItem
 import study.project.pokelytics.models.User
 import study.project.pokelytics.viewmodels.NavigationViewModel
+import java.util.Locale
 
 
 class MainActivity : ActivityBase<ActivityMainBinding>() {
@@ -23,6 +26,8 @@ class MainActivity : ActivityBase<ActivityMainBinding>() {
     private lateinit var navLayoutManager: LinearLayoutManager
     private lateinit var settingsLayoutManager: LinearLayoutManager
     private lateinit var navAdapter: NavAdapter
+    private lateinit var navHost: NavHostFragment
+    private lateinit var navController : NavController
     private lateinit var user: User
 
     override fun initializeView() {
@@ -32,6 +37,28 @@ class MainActivity : ActivityBase<ActivityMainBinding>() {
         navAdapter = NavAdapter()
         viewModel.getNavItems()
         initializeNavGraph()
+        navAdapter = NavAdapter(
+            onClick = { id ->
+                when (id.lowercase(Locale.ROOT)) {
+                    "pokedex" -> {
+                        navController.navigate(R.id.pokemonList)
+                    }
+                    "moves" -> {
+                        navController.navigate(R.id.moveList)
+                    }
+                    "items" -> {
+                        navController.navigate(R.id.berryList)
+                    }
+                    "Settings" -> {
+                        //viewModel.navigateToSettings()
+                    }
+                    "Logout" -> {
+                        //viewModel.logout()
+                    }
+                }
+            }
+        )
+        viewModel.getNavItems()
         initializeDrawer()
         setOnClickListeners()
     }
@@ -42,6 +69,7 @@ class MainActivity : ActivityBase<ActivityMainBinding>() {
         }
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     private fun initializeDrawer() {
         val navDrawerBinding = NavigationDrawerLayoutBinding.inflate(LayoutInflater.from(this), binding.root as ViewGroup, false).apply {
             navRecycler.layoutManager = navLayoutManager
@@ -49,7 +77,21 @@ class MainActivity : ActivityBase<ActivityMainBinding>() {
 
             navRecycler.adapter = navAdapter
 
-            settingsRecycler.adapter = NavAdapter().apply {
+            settingsRecycler.adapter = NavAdapter(
+                onClick = { id ->
+                    when (id) {
+                        "About" -> {
+                            //viewModel.navigateToAbout()
+                        }
+                        "Settings" -> {
+                            //viewModel.navigateToSettings()
+                        }
+                        "Logout" -> {
+                            //viewModel.logout()
+                        }
+                    }
+                }
+            ).apply {
                 items = mutableListOf(
                     NavItem("About", "About"),
                     NavItem("Settings", "Settings"),
@@ -63,10 +105,11 @@ class MainActivity : ActivityBase<ActivityMainBinding>() {
     }
 
     private fun initializeNavGraph() {
-        val navHost =
+        navHost =
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         val graph = navHost.navController.navInflater.inflate(R.navigation.nav_graph_main)
         navHost.navController.graph = graph
+        navController = navHost.navController
     }
 
     override fun bindViewModel() {
@@ -74,9 +117,10 @@ class MainActivity : ActivityBase<ActivityMainBinding>() {
             lifecycleOwner = this@MainActivity
         }
     }
+    @SuppressLint("NotifyDataSetChanged")
     override fun subscribe() {
         viewModel.navItems.observe(this) {
-            it.forEach { it.mapId() }
+            it.forEach { navItem -> navItem.mapId() }
             navAdapter.items.addAll(it)
             navAdapter.notifyDataSetChanged()
         }
