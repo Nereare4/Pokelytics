@@ -10,6 +10,6 @@ class GetMoveUseCase(
 ) : FlowUseCase<List<Move>, PaginationRange>() {
 
     override suspend fun execute(params: PaginationRange): Flow<List<Move>> {
-        return moveDataSource.getPokemonFromPage(params)
+        return moveDataSource.getMoveFromPage(params)
     }
 }

@@ -9,7 +9,7 @@ class BerryDataSource(
     val remote: PokeApiClient
 ) {
 
-    fun getPokemonFromPage(paginationRange: PaginationRange): Flow<List<Item>> =
+    fun getBerryFromPage(paginationRange: PaginationRange): Flow<List<Item>> =
         remote.getBerryList(paginationRange.from, paginationRange.count)
 
 }
