@@ -167,7 +167,11 @@ class PokeApiClient(
     // region Locations
 
     override fun getLocationList(offset: Int, limit: Int) = flow {
-        emit(service.getLocationList(offset, limit).result())
+        val res = service.getLocationList(offset, limit).execute().body()?.results
+        val locationList = res?.map {
+            getLocation(it.id)
+        }
+        locationList?.let { emit(it) }
     }
 
     override fun getLocationAreaList(offset: Int, limit: Int) = flow {
@@ -179,7 +183,11 @@ class PokeApiClient(
     }
 
     override fun getRegionList(offset: Int, limit: Int) = flow {
-        emit(service.getRegionList(offset, limit).result())
+        val res = service.getRegionList(offset, limit).execute().body()?.results
+        val regionList = res?.map {
+            getRegion(it.id)
+        }
+        regionList?.let { emit(it) }
     }
 
     // endregion

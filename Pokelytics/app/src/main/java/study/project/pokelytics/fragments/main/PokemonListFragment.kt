@@ -1,6 +1,5 @@
 package study.project.pokelytics.fragments.main
 
-import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -19,8 +18,8 @@ class PokemonListFragment : FragmentBase<FragmentPokemonListBinding>() {
 
     private val viewModel: PokemonListViewModel by viewModel()
     private lateinit var adapter: PokemonListAdapter
-    private val layoutManager: LinearLayoutManager = LinearLayoutManager(context)
-    private val paginationRange = PaginationRange()
+    private lateinit var layoutManager: LinearLayoutManager
+    private var paginationRange = PaginationRange()
     private val pokemonMoreInfoUseCase: GetPokemonMoreInfoUseCase by inject()
 
     override fun bindViewModel() {
@@ -33,6 +32,7 @@ class PokemonListFragment : FragmentBase<FragmentPokemonListBinding>() {
         adapter = PokemonListAdapter(
             pokemonInterface = createPokemonInterface()
         )
+        layoutManager = LinearLayoutManager(context)
 
         binding.apply {
             pokemonRecycler.layoutManager = layoutManager

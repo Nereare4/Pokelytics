@@ -69,6 +69,7 @@ class SignUpFragment : FragmentBase<FragmentSignUpBinding>() {
                 ViewState.SUCCESS -> {
                     Toast.makeText(requireContext(), resources.getString(R.string.verifyEmail), Toast.LENGTH_LONG).show()
                     (activity as ActivityBase<*>).navigator.goToMain()
+                    activity?.finish()
                 }
                 ViewState.ERROR ->{
                     showErrorSignUp()
@@ -115,6 +116,7 @@ class SignUpFragment : FragmentBase<FragmentSignUpBinding>() {
                             FirebaseAuth.getInstance().currentUser?.sendEmailVerification()?.addOnSuccessListener {
                                 Toast.makeText(requireContext(), resources.getString(R.string.verifyEmail), Toast.LENGTH_LONG).show()
                                 (activity as ActivityBase<*>).navigator.goToMain()
+                                activity?.finish()
                             }
                         }else{
                             Toast.makeText(requireContext(), resources.getString(R.string.emailExists), Toast.LENGTH_LONG).show()

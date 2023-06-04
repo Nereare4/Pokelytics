@@ -14,8 +14,8 @@ class MovesListFragment : FragmentBase<FragmentPokemonListBinding>() {
 
     private val viewModel: MoveViewModel by viewModel()
     private lateinit var adapter: MoveListAdapter
-    private val layoutManager: LinearLayoutManager = LinearLayoutManager(context)
-    private val paginationRange = PaginationRange()
+    private lateinit var layoutManager: LinearLayoutManager
+    private var paginationRange = PaginationRange()
 
     override fun bindViewModel() {
         binding.apply {
@@ -25,6 +25,7 @@ class MovesListFragment : FragmentBase<FragmentPokemonListBinding>() {
 
     override fun initializeView() {
         adapter = MoveListAdapter()
+        layoutManager = LinearLayoutManager(context)
 
         binding.apply {
             pokemonRecycler.layoutManager = layoutManager
@@ -42,7 +43,11 @@ class MovesListFragment : FragmentBase<FragmentPokemonListBinding>() {
     override fun subscribe() {
         viewModel.state.observe(this) {
             when (it) {
-                ViewState.IDLE -> viewModel.getMoveList(paginationRange)
+                ViewState.IDLE -> {
+                    adapter.items.clear()
+                    paginationRange = PaginationRange()
+                    viewModel.getMoveList(paginationRange)
+                }
                 else -> {}
             }
         }

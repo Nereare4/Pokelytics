@@ -109,13 +109,13 @@ interface PokeApi {
 
     fun getMoveTargetList(offset: Int, limit: Int): Flow<NamedApiResourceList>
 
-    fun getLocationList(offset: Int, limit: Int): Flow<NamedApiResourceList>
+    fun getLocationList(offset: Int, limit: Int): Flow<List<Location>>
 
     fun getLocationAreaList(offset: Int, limit: Int): Flow<NamedApiResourceList>
 
     fun getPalParkAreaList(offset: Int, limit: Int): Flow<NamedApiResourceList>
 
-    fun getRegionList(offset: Int, limit: Int): Flow<NamedApiResourceList>
+    fun getRegionList(offset: Int, limit: Int): Flow<List<Region>>
 
     fun getMachineList(offset: Int, limit: Int): Flow<ApiResourceList>
 

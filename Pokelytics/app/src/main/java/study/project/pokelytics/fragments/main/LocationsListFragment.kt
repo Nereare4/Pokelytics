@@ -3,28 +3,27 @@ package study.project.pokelytics.fragments.main
 import androidx.recyclerview.widget.LinearLayoutManager
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import study.project.pokelytics.R
-import study.project.pokelytics.adapters.BerryListAdapter
+import study.project.pokelytics.adapters.LocationListAdapter
 import study.project.pokelytics.api.model.PaginationRange
-import study.project.pokelytics.databinding.FragmentPokemonListBinding
+import study.project.pokelytics.databinding.FragmentLocationsListBinding
 import study.project.pokelytics.fragments.FragmentBase
-import study.project.pokelytics.viewmodels.BerryViewModel
+import study.project.pokelytics.viewmodels.LocationViewModel
 import study.project.pokelytics.viewmodels.ViewState
 
-class BerryListFragment : FragmentBase<FragmentPokemonListBinding>() {
-
-    private val viewModel: BerryViewModel by viewModel()
-    private lateinit var adapter: BerryListAdapter
+class LocationsListFragment : FragmentBase<FragmentLocationsListBinding>()  {
+    private val viewModel: LocationViewModel by viewModel()
+    private lateinit var adapter: LocationListAdapter
     private lateinit var layoutManager: LinearLayoutManager
     private var paginationRange = PaginationRange()
 
     override fun bindViewModel() {
         binding.apply {
-            this.lifecycleOwner = this@BerryListFragment
+            this.lifecycleOwner = this@LocationsListFragment
         }
     }
 
     override fun initializeView() {
-        adapter = BerryListAdapter()
+        adapter = LocationListAdapter()
         layoutManager = LinearLayoutManager(context)
 
         binding.apply {
@@ -38,7 +37,7 @@ class BerryListFragment : FragmentBase<FragmentPokemonListBinding>() {
         viewModel.refreshState(ViewState.IDLE)
     }
 
-    override fun getResourceLayout(): Int = R.layout.fragment_pokemon_list
+    override fun getResourceLayout(): Int = R.layout.fragment_locations_list
 
     override fun subscribe() {
         viewModel.state.observe(this) {
@@ -46,15 +45,15 @@ class BerryListFragment : FragmentBase<FragmentPokemonListBinding>() {
                 ViewState.IDLE -> {
                     adapter.items.clear()
                     paginationRange = PaginationRange()
-                    viewModel.getBerryList(paginationRange)
+                    viewModel.getLocationList(paginationRange)
                 }
                 else -> {}
             }
         }
 
-        viewModel.berryList.observe(this) {
-            it.forEachIndexed { index, berry ->
-                adapter.items.add(berry)
+        viewModel.locationList.observe(this) {
+            it.forEachIndexed { index, location ->
+                adapter.items.add(location)
                 adapter.notifyItemInserted(layoutManager.itemCount + index)
             }
 
@@ -63,7 +62,7 @@ class BerryListFragment : FragmentBase<FragmentPokemonListBinding>() {
                     return@observe
                 }
                 paginationRange.next()
-                viewModel.getBerryList(paginationRange)
+                viewModel.getLocationList(paginationRange)
             }
         }
     }

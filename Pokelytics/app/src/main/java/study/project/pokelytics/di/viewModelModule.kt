@@ -22,5 +22,7 @@ val viewModelModule = module {
     viewModel { NavigationViewModel(get())}
     viewModel { BerryViewModel(get())}
     viewModel { MoveViewModel(get())}
+    viewModel { LocationViewModel(get())}
+    viewModel { RegionViewModel(get())}
 
 }
