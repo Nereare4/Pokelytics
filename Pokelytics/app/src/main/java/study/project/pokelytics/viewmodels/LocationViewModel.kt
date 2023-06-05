@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import study.project.pokelytics.api.model.Location
-import study.project.pokelytics.api.model.PaginationRange
+import study.project.pokelytics.models.LocationList
 import study.project.pokelytics.usecases.GetLocationUseCase
 
 class LocationViewModel(
@@ -16,11 +16,11 @@ class LocationViewModel(
     val locationList: LiveData<List<Location>>
         get() = mutableLocationList
 
-    fun getLocationList(paginationRange: PaginationRange) {
+    fun getLocationList(locationList: LocationList) {
         mutableState.postValue(ViewState.LOADING)
         viewModelScope.launch {
             getLocationUseCase(
-                paginationRange,
+                locationList,
                 { locationList ->
                     mutableState.postValue(ViewState.SUCCESS)
                     mutableLocationList.postValue(locationList)

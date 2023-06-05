@@ -2,6 +2,7 @@ package study.project.pokelytics.api.client
 
 import kotlinx.coroutines.flow.flow
 import retrofit2.Call
+import study.project.pokelytics.models.LocationList
 
 class PokeApiClient(
     clientConfig: ClientConfig = ClientConfig()
@@ -166,12 +167,8 @@ class PokeApiClient(
 
     // region Locations
 
-    override fun getLocationList(offset: Int, limit: Int) = flow {
-        val res = service.getLocationList(offset, limit).execute().body()?.results
-        val locationList = res?.map {
-            getLocation(it.id)
-        }
-        locationList?.let { emit(it) }
+    override fun getLocationList(locationList: LocationList) = flow {
+            emit(locationList.list.map { getLocation(it.id)})
     }
 
     override fun getLocationAreaList(offset: Int, limit: Int) = flow {

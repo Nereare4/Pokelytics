@@ -52,6 +52,7 @@ import study.project.pokelytics.api.model.SuperContestEffect
 import study.project.pokelytics.api.model.Type
 import study.project.pokelytics.api.model.Version
 import study.project.pokelytics.api.model.VersionGroup
+import study.project.pokelytics.models.LocationList
 
 interface PokeApi {
 
@@ -109,7 +110,7 @@ interface PokeApi {
 
     fun getMoveTargetList(offset: Int, limit: Int): Flow<NamedApiResourceList>
 
-    fun getLocationList(offset: Int, limit: Int): Flow<List<Location>>
+    fun getLocationList(locationList: LocationList): Flow<List<Location>>
 
     fun getLocationAreaList(offset: Int, limit: Int): Flow<NamedApiResourceList>
 

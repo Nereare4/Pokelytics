@@ -23,11 +23,25 @@
     <fragment
         android:id="@+id/locationList"
         android:name="study.project.pokelytics.fragments.main.LocationsListFragment"
-        tools:layout="@layout/fragment_locations_list"/>
+        tools:layout="@layout/fragment_locations_list">
+        <argument
+            android:name="locationList"
+            app:argType="study.project.pokelytics.models.LocationList"
+            />
+    </fragment>
 
     <fragment
         android:id="@+id/regionList"
         android:name="study.project.pokelytics.fragments.main.RegionListFragment"
-        tools:layout="@layout/fragment_regions_list"/>
+        tools:layout="@layout/fragment_regions_list">
+        <action
+            android:id="@+id/action_regionList_to_locationList"
+            app:destination="@id/locationList">
+            <argument
+                android:name="locationList"
+                app:argType="study.project.pokelytics.models.LocationList"
+                />
+        </action>
+    </fragment>
 
 </navigation>

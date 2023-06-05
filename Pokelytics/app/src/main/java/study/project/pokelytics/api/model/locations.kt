@@ -1,5 +1,7 @@
 package study.project.pokelytics.api.model
 
+import study.project.pokelytics.models.LocationList
+
 data class Location(
     val id: Int,
     val name: String,
@@ -55,4 +57,10 @@ data class Region(
     val names: List<Name>,
     val pokedexes: List<NamedApiResource>,
     val versionGroups: List<NamedApiResource>
-)
+) {
+    fun toLocationList(): LocationList {
+        return LocationList(
+            locations
+        )
+    }
+}

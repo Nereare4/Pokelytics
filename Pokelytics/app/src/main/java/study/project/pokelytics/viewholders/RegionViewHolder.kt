@@ -8,6 +8,7 @@ import study.project.pokelytics.databinding.RegionListItemBinding
 
 class RegionViewHolder(
     private val binding: RegionListItemBinding,
+    private val onClick : (Region) -> Unit,
 ) : BaseViewHolder<Region>(binding.root) {
 
 
@@ -20,6 +21,9 @@ class RegionViewHolder(
         binding.apply {
             name.text = region.name
             setImage(image, region.name)
+            root.setOnClickListener {
+                onClick(region)
+            }
         }
     }
 

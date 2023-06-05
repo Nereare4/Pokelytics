@@ -1,5 +1,6 @@
 package study.project.pokelytics.fragments.main
 
+import androidx.navigation.fragment.findNavController
 import com.google.android.flexbox.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import study.project.pokelytics.R
@@ -23,11 +24,16 @@ class RegionListFragment : FragmentBase<FragmentRegionsListBinding>()  {
     }
 
     override fun initializeView() {
-        adapter = RegionListAdapter()
+        adapter = RegionListAdapter(
+            onClick = {
+                val action = RegionListFragmentDirections.actionRegionListToLocationList(it.toLocationList())
+                findNavController().navigate(action)
+            }
+        )
         layoutManager = FlexboxLayoutManager(binding.root.context).apply {
             flexDirection = FlexDirection.ROW
             flexWrap = FlexWrap.WRAP
-            justifyContent = JustifyContent.CENTER
+            justifyContent = JustifyContent.SPACE_EVENLY
             alignItems = AlignItems.CENTER
         }
 
