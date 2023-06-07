@@ -5,7 +5,7 @@ import study.project.pokelytics.api.model.PaginationRange
 import study.project.pokelytics.api.datasources.PokemonDataSource
 import study.project.pokelytics.api.model.Pokemon
 
-class GetPokemonUseCase(
+open class GetPokemonUseCase(
     private val pokemonDataSource: PokemonDataSource
 ) : FlowUseCase<List<Pokemon>, PaginationRange>() {
 

@@ -4,7 +4,7 @@ import kotlinx.coroutines.flow.flow
 import retrofit2.Call
 import study.project.pokelytics.models.LocationList
 
-class PokeApiClient(
+open class PokeApiClient(
     clientConfig: ClientConfig = ClientConfig()
 ) : PokeApi {
 
