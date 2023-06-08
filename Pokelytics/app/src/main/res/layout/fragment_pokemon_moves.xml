@@ -7,36 +7,12 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/pokemon_container"
         android:layout_width="match_parent"
-        android:layout_height="699dp"
+        android:layout_height="match_parent"
         android:layout_marginStart="5dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="5dp"
         android:background="@drawable/pokemon_green"
         android:padding="@dimen/default_padding">
-
-        <TextView
-            android:id="@+id/textViewStatistics"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="304dp"
-            android:text="Statistics"
-
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
-
-        <LinearLayout
-            android:id="@+id/linearLayout3"
-            android:layout_width="360dp"
-            android:layout_height="141dp"
-            android:background="@color/white"
-            android:orientation="vertical"
-
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
-            app:layout_constraintVertical_bias="0.574"></LinearLayout>
 
         <LinearLayout
             android:id="@+id/name_id_container"
@@ -144,28 +120,16 @@
 
         <LinearLayout
             android:id="@+id/linearLayout2"
-            android:layout_width="360dp"
-            android:layout_height="141dp"
+            android:layout_width="362dp"
+            android:layout_height="546dp"
             android:background="@color/white"
             android:orientation="vertical"
+            app:flow_horizontalAlign="center"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.38"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.306"></LinearLayout>
-
-        <TextView
-            android:id="@+id/textViewHabilities"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:text="Habilities"
-            android:fontFamily="@font/roboto"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.501"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+            app:layout_constraintVertical_bias="0.775"></LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
