@@ -29,8 +29,7 @@ class SplashActivity : ActivityBase<ActivitySplashBinding>() {
     private fun openDelayedApp() {
         Handler(Looper.getMainLooper()).postDelayed(
             {
-                navigator.goToLogin()
-                finish()
+                splashViewModel.openDelayedApp()
             }, 3000
         )
     }
@@ -40,10 +39,12 @@ class SplashActivity : ActivityBase<ActivitySplashBinding>() {
         splashViewModel.state.observe(this){
             when(it){
                 ViewState.SUCCESS -> {
-                    navigator.goToLogin()
+                    navigator.goToMain(User.getDefaultUser())//COGER USUARIO BD
+                    finish()
                 }
                 ViewState.ERROR ->{
-                    navigator.goToMain(User.getDefaultUser())
+                    navigator.goToLogin()
+                    finish()
                 }
                 else -> {}
             }

@@ -21,7 +21,7 @@
             android:id="@+id/profile_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Profile Name"
+            android:text="@string/userName"
             android:textColor="@color/colorPrimary"
             android:textSize="20sp"
             android:layout_marginStart="10dp"
@@ -90,11 +90,51 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/info_account"/>
 
+        <ImageView
+            android:id="@+id/info_image"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/ic_info_policy"
+            app:layout_constraintStart_toStartOf="@id/leftguide"
+            app:layout_constraintTop_toBottomOf="@+id/deleteAccount"/>
+
+        <TextView
+            android:id="@+id/info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/privacy_policy"
+            android:textColor="@color/colorPrimary"
+            android:textSize="15sp"
+            android:layout_marginStart="10dp"
+            app:layout_constraintStart_toEndOf="@id/info_image"
+            app:layout_constraintTop_toTopOf="@id/info_image"
+            app:layout_constraintBottom_toBottomOf="@id/info_image"/>
+
+        <TextView
+            android:id="@+id/privacy_policy"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:text="@string/txt_privacy_policy"
+            android:textColor="@color/light_grey"
+            android:layout_marginTop="10dp"
+            android:textSize="15sp"
+            app:layout_constraintStart_toStartOf="@id/info"
+            app:layout_constraintTop_toBottomOf="@+id/info"
+            app:layout_constraintEnd_toEndOf="@id/rightguide"/>
+
+
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/rightguide"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
             app:layout_constraintGuide_percent="0.9"/>
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/leftguide"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.1"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

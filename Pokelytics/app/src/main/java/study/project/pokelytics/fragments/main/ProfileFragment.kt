@@ -11,6 +11,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.squareup.picasso.Picasso
 import org.koin.android.ext.android.inject
 import study.project.pokelytics.R
 import study.project.pokelytics.activities.ActivityBase
@@ -23,19 +24,45 @@ import study.project.pokelytics.services.PreferenceService
 class ProfileFragment : FragmentBase<FragmentProfileBinding>() {
 
     private val fAuth: FirebaseAuth by inject()
-    lateinit var preferenceService: PreferenceService
-
-
-
-    override fun getResourceLayout(): Int = R.layout.fragment_welcome
+    private val fStore: FirebaseFirestore by inject()
+    private lateinit var preferenceService: PreferenceService
+    override fun getResourceLayout(): Int = R.layout.fragment_profile
 
     override fun initializeView() {
-        binding.logOut.setOnClickListener{
-            //PreferencesManager.getDefaultSharedPreferences(binding.root.context).wipe()
-            preferenceService.removePreference(KeyConstants.EMAIL_KEY)
-            fAuth.signOut()
-            (activity as ActivityBase<*>).navigator.goToMain(User.getDefaultUser())
+        val photoUser = fAuth.currentUser?.photoUrl
+        val nameUser = fAuth.currentUser?.displayName
+        val emailUser = preferenceService.getPreference(KeyConstants.EMAIL_KEY)
+
+        binding.apply {
+            profileName.text = nameUser
+            Picasso.get().load(photoUser).into(profileImage)
+            profileEmail.text = emailUser
+            logOut.setOnClickListener{
+                preferenceService.removePreference(KeyConstants.EMAIL_KEY)
+                fAuth.signOut()
+                (activity as ActivityBase<*>).navigator.goToMain(User.getDefaultUser())
+            }
+            deleteAccount.setOnClickListener(){
+                val builder = AlertDialog.Builder(requireContext())
+                builder.setTitle(resources.getString(R.string.deleteaccount))
+                builder.setMessage(resources.getString(R.string.deleteAccountQuestion))
+                builder.setPositiveButton(resources.getString(R.string.accept)) { dialog, which ->
+                    if (emailUser != null) {
+                        fStore.collection("users").document(emailUser).delete()
+                    }
+                    fAuth.currentUser?.delete()
+                    Toast.makeText(requireContext(), resources.getString(R.string.deleteAccountSuccesful), Toast.LENGTH_LONG).show()
+                    preferenceService.removePreference(KeyConstants.EMAIL_KEY)
+                    (activity as ActivityBase<*>).navigator.goToLogin()
+                }
+                builder.setNegativeButton(resources.getString(R.string.cancel)) { dialog, which ->}
+                builder.show()
+            }
+            privacyPolicy.setOnClickListener(){
+                (activity as ActivityBase<*>).navigator.goToPolicy()
+            }
         }
+
 
     }
 

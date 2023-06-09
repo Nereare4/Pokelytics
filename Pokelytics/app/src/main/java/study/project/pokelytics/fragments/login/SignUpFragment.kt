@@ -42,7 +42,7 @@ class SignUpFragment : FragmentBase<FragmentSignUpBinding>() {
                     showError(etemail, resources.getString(R.string.emailValid))  //This field can´t be empty
                 } else if (!expRegular.matches(password.text.toString())) {
                     showError(etpassword, resources.getString(R.string.passNeeds))
-                } else if (!password.text.toString().equals(repassword.text.toString())) {
+                } else if (password.text.toString() != repassword.text.toString()) {
                     showError(etpassword, resources.getString(R.string.passSame))
                 } else {
                     val credentials = LoginCredentials(email.text.toString(), password.text.toString())
@@ -56,6 +56,9 @@ class SignUpFragment : FragmentBase<FragmentSignUpBinding>() {
                 signUpGoogle()
                 //val credentials = LoginCredentials(email.text.toString(), "")
                 //signUpViewModel.signUp(credentials)
+            }
+            tvsTermsPolicy.setOnClickListener{
+                (activity as ActivityBase<*>).navigator.goToPolicy()
             }
         }
     }
@@ -124,7 +127,7 @@ class SignUpFragment : FragmentBase<FragmentSignUpBinding>() {
                                 FirebaseFirestore.getInstance().collection("users").document(it1).set(
                                     hashMapOf(
                                         "favouriteList" to "",
-                                        )
+                                    )
                                 )
                             }
 

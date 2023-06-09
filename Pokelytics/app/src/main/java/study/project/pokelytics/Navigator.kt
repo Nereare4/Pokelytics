@@ -3,6 +3,7 @@ package study.project.pokelytics
 import android.content.Context
 import study.project.pokelytics.activities.LoginActivity
 import study.project.pokelytics.activities.MainActivity
+import study.project.pokelytics.activities.PolicyActivity
 import study.project.pokelytics.models.User
 
 class Navigator(
@@ -18,5 +19,7 @@ class Navigator(
             startActivity(MainActivity.getIntent(context, user))
         }
     }
-
+    fun goToPolicy() {
+        context.apply { startActivity(PolicyActivity.getIntent(context)) }
+    }
 }

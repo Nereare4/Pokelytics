@@ -10,7 +10,7 @@ class SplashViewModel (
     val preferenceService: PreferenceService
     ): ViewModalBase() {
 
-    private fun openDelayedApp() {
+     fun openDelayedApp() {
 
         viewModelScope.launch {
             mutableState.postValue(ViewState.LOADING)

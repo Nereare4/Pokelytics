@@ -34,7 +34,6 @@ class MainActivity : ActivityBase<ActivityMainBinding>() {
         loadData()
         navLayoutManager = LinearLayoutManager(this)
         settingsLayoutManager = LinearLayoutManager(this)
-        navAdapter = NavAdapter()
         viewModel.getNavItems()
         initializeNavGraph()
         navAdapter = NavAdapter(
@@ -50,7 +49,7 @@ class MainActivity : ActivityBase<ActivityMainBinding>() {
                         navController.navigate(R.id.berryList)
                     }
                     "Settings" -> {
-                        //viewModel.navigateToSettings()
+                        navController.navigate(R.id.userProfile)
                     }
                     "Logout" -> {
                         //viewModel.logout()
@@ -84,7 +83,7 @@ class MainActivity : ActivityBase<ActivityMainBinding>() {
                             //viewModel.navigateToAbout()
                         }
                         "Settings" -> {
-                            //viewModel.navigateToSettings()
+                            navController.navigate(R.id.userProfile)
                         }
                         "Logout" -> {
                             //viewModel.logout()
