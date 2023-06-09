@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tool="http://schemas.android.com/tools">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -9,11 +8,11 @@
         android:background="@color/colorBackground">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/pokemon_recycler"
+            android:id="@+id/region_recycler"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tool:listitem="@layout/pokemon_list_item" />
+            tool:listitem="@layout/region_list_item"
+            android:layout_marginBottom="10dp"/>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

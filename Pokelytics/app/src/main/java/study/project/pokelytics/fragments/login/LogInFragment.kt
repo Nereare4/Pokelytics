@@ -2,11 +2,7 @@ package study.project.pokelytics.fragments.login
 
 import android.content.ContentValues
 import android.content.Intent
-import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.util.Log
-import android.view.View
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.navigation.fragment.findNavController
@@ -69,6 +65,7 @@ class LogInFragment : FragmentBase<FragmentLogInBinding>() {
             when(it){
                 ViewState.SUCCESS -> {
                     (activity as ActivityBase<*>).navigator.goToMain(User.getDefaultUser())
+                    activity?.finish()
                 }
                 ViewState.ERROR ->{
                     showErrorLogin()
@@ -122,6 +119,7 @@ class LogInFragment : FragmentBase<FragmentLogInBinding>() {
                                             if (authTask.isSuccessful) {
                                                 //loginViewModel.saveUserPreferences() PASAR USUARIO
                                                 (activity as ActivityBase<*>).navigator.goToMain(User("", "", ""))
+                                                activity?.finish()
                                             }
                                         }
                                 }

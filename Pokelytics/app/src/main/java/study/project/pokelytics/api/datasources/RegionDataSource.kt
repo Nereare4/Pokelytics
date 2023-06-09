@@ -2,14 +2,14 @@ package study.project.pokelytics.api.datasources
 
 import kotlinx.coroutines.flow.Flow
 import study.project.pokelytics.api.client.PokeApiClient
-import study.project.pokelytics.api.model.Item
+import study.project.pokelytics.api.model.Region
 import study.project.pokelytics.api.model.PaginationRange
 
-class BerryDataSource(
+class RegionDataSource(
     val remote: PokeApiClient
 ) {
 
-    fun getBerryFromPage(paginationRange: PaginationRange): Flow<List<Item>> =
-        remote.getBerryList(paginationRange.from, paginationRange.count)
+    fun getRegionFromPage(paginationRange: PaginationRange): Flow<List<Region>> =
+        remote.getRegionList(paginationRange.from, paginationRange.count)
 
 }

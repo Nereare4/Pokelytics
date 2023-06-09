@@ -16,4 +16,6 @@ val useCaseModule = module {
     factory { ResetPasswordUseCase(get()) }
     factory { GetBerryUseCase(get()) }
     factory { GetMoveUseCase(get()) }
+    factory { GetLocationUseCase(get()) }
+    factory { GetRegionUseCase(get()) }
 }

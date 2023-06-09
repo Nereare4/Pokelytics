@@ -9,7 +9,7 @@ class MoveDataSource(
     val remote: PokeApiClient
 ) {
 
-    fun getPokemonFromPage(paginationRange: PaginationRange): Flow<List<Move>> =
+    fun getMoveFromPage(paginationRange: PaginationRange): Flow<List<Move>> =
         remote.getMoveList(paginationRange.from, paginationRange.count)
 
 }

@@ -10,6 +10,6 @@ class GetBerryUseCase(
 ) : FlowUseCase<List<Item>, PaginationRange>() {
 
     override suspend fun execute(params: PaginationRange): Flow<List<Item>> {
-        return berryDataSource.getPokemonFromPage(params)
+        return berryDataSource.getBerryFromPage(params)
     }
 }

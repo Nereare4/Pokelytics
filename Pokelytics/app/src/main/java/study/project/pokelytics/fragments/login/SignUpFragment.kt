@@ -74,6 +74,7 @@ class SignUpFragment : FragmentBase<FragmentSignUpBinding>() {
                 ViewState.SUCCESS -> {
                     Toast.makeText(requireContext(), resources.getString(R.string.verifyEmail), Toast.LENGTH_LONG).show()
                     (activity as ActivityBase<*>).navigator.goToMain(User.getDefaultUser())//COGER USUARIO BD
+                    activity?.finish()
                 }
                 ViewState.ERROR ->{
                     showErrorSignUp()
@@ -121,6 +122,7 @@ class SignUpFragment : FragmentBase<FragmentSignUpBinding>() {
                                 Toast.makeText(requireContext(), resources.getString(R.string.verifyEmail), Toast.LENGTH_LONG).show()
                                 FirebaseAuth.getInstance().currentUser?.email?.let { it1 ->
                                     (activity as ActivityBase<*>).navigator.goToMain(User(it1, "", ""))//COGER DE LA BBDD
+                                    activity?.finish()
                                 }
                             }
                             FirebaseAuth.getInstance().currentUser?.email?.let { it1 ->

@@ -22,6 +22,7 @@ class LoginSelectionFragment : FragmentBase<FragmentLoginSelectionBinding>() {
             }
             btnNext.setOnClickListener{
                 (activity as ActivityBase<*>).navigator.goToMain(User.getDefaultUser())
+                activity?.finish()
             }
         }
     }

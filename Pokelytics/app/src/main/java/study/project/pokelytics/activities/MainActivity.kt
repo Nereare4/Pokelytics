@@ -5,6 +5,8 @@ import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -28,9 +30,12 @@ class MainActivity : ActivityBase<ActivityMainBinding>() {
     private lateinit var navAdapter: NavAdapter
     private lateinit var navHost: NavHostFragment
     private lateinit var navController : NavController
+    private var backPressedTime: Long = 0
+
     private lateinit var user: User
 
     override fun initializeView() {
+        initializeCallbacks()
         loadData()
         navLayoutManager = LinearLayoutManager(this)
         settingsLayoutManager = LinearLayoutManager(this)
@@ -48,6 +53,9 @@ class MainActivity : ActivityBase<ActivityMainBinding>() {
                     "items" -> {
                         navController.navigate(R.id.berryList)
                     }
+                    "locations" -> {
+                        navController.navigate(R.id.regionList)
+                    }
                     "Settings" -> {
                         navController.navigate(R.id.userProfile)
                     }
@@ -60,6 +68,29 @@ class MainActivity : ActivityBase<ActivityMainBinding>() {
         viewModel.getNavItems()
         initializeDrawer()
         setOnClickListeners()
+    }
+
+    private fun initializeCallbacks() {
+        val onBackPressedCallback = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                if (binding.drawerLayout.isOpen) {
+                    binding.drawerLayout.close()
+                } else {
+                    val currentTime = System.currentTimeMillis()
+                    if (currentTime - backPressedTime > 2000) {
+                        Toast.makeText(
+                            this@MainActivity,
+                            "Press back again to exit",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                        backPressedTime = currentTime
+                    } else {
+                        finish()
+                    }
+                }
+            }
+        }
+        onBackPressedDispatcher.addCallback(this, onBackPressedCallback)
     }
 
     private fun setOnClickListeners() {
@@ -135,6 +166,4 @@ class MainActivity : ActivityBase<ActivityMainBinding>() {
     private fun loadData() {
         user = intent.getSerializableExtra(USER) as User
     }
-
-
 }

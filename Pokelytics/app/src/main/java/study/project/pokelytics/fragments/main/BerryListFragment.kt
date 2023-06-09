@@ -14,8 +14,8 @@ class BerryListFragment : FragmentBase<FragmentPokemonListBinding>() {
 
     private val viewModel: BerryViewModel by viewModel()
     private lateinit var adapter: BerryListAdapter
-    private val layoutManager: LinearLayoutManager = LinearLayoutManager(context)
-    private val paginationRange = PaginationRange()
+    private lateinit var layoutManager: LinearLayoutManager
+    private var paginationRange = PaginationRange()
 
     override fun bindViewModel() {
         binding.apply {
@@ -25,6 +25,7 @@ class BerryListFragment : FragmentBase<FragmentPokemonListBinding>() {
 
     override fun initializeView() {
         adapter = BerryListAdapter()
+        layoutManager = LinearLayoutManager(context)
 
         binding.apply {
             pokemonRecycler.layoutManager = layoutManager
@@ -42,7 +43,11 @@ class BerryListFragment : FragmentBase<FragmentPokemonListBinding>() {
     override fun subscribe() {
         viewModel.state.observe(this) {
             when (it) {
-                ViewState.IDLE -> viewModel.getBerryList(paginationRange)
+                ViewState.IDLE -> {
+                    adapter.items.clear()
+                    paginationRange = PaginationRange()
+                    viewModel.getBerryList(paginationRange)
+                }
                 else -> {}
             }
         }
