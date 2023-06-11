@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.navigation.NavController
@@ -16,6 +17,7 @@ import study.project.pokelytics.adapters.NavAdapter
 import study.project.pokelytics.databinding.ActivityMainBinding
 import study.project.pokelytics.databinding.NavigationDrawerLayoutBinding
 import study.project.pokelytics.models.NavItem
+import study.project.pokelytics.models.User
 import study.project.pokelytics.viewmodels.NavigationViewModel
 import java.util.Locale
 
@@ -30,6 +32,7 @@ class MainActivity : ActivityBase<ActivityMainBinding>() {
     private lateinit var navHost: NavHostFragment
     private lateinit var navController : NavController
     private var backPressedTime: Long = 0
+    private lateinit var navDrawerBinding: NavigationDrawerLayoutBinding
 
     override fun initializeView() {
         initializeCallbacks()
@@ -96,7 +99,7 @@ class MainActivity : ActivityBase<ActivityMainBinding>() {
 
     @SuppressLint("NotifyDataSetChanged")
     private fun initializeDrawer() {
-        val navDrawerBinding = NavigationDrawerLayoutBinding.inflate(LayoutInflater.from(this), binding.root as ViewGroup, false).apply {
+        navDrawerBinding = NavigationDrawerLayoutBinding.inflate(LayoutInflater.from(this), binding.root as ViewGroup, false).apply {
             navRecycler.layoutManager = navLayoutManager
             settingsRecycler.layoutManager = settingsLayoutManager
 
@@ -126,7 +129,7 @@ class MainActivity : ActivityBase<ActivityMainBinding>() {
             }
         }
         binding.navigationDrawer.removeAllViews()
-        binding.navigationDrawer.addView(navDrawerBinding.root)
+        viewModel.setUser(User("", ""))
     }
 
     private fun initializeNavGraph() {
@@ -149,9 +152,25 @@ class MainActivity : ActivityBase<ActivityMainBinding>() {
             navAdapter.items.addAll(it)
             navAdapter.notifyDataSetChanged()
         }
+        viewModel.user.observe(this) {
+            //Change 1 to it.image
+            setImage(navDrawerBinding.profileImage, 0)
+            navDrawerBinding.profileName.text = it.email
+            binding.navigationDrawer.addView(navDrawerBinding.root)
+        }
     }
 
     companion object {
         fun getIntent(context: Context) = Intent(context, MainActivity::class.java)
+    }
+
+    private fun setImage(image: ImageView, avatar: Int) {
+        image.setImageResource(
+            when (avatar) {
+                1 -> R.drawable.ic_user
+                2 -> R.drawable.ic_user
+                else -> R.drawable.ic_sword
+            }
+        )
     }
 }
