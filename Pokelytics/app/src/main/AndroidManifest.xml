@@ -32,6 +32,7 @@
 
         <activity
             android:name=".activities.PolicyActivity"
+            android:theme="@style/Theme.Pokelytics.NoActionBar"
             android:exported="false" />
 
         <activity

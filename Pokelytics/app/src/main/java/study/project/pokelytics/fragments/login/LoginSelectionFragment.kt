@@ -6,6 +6,7 @@ import study.project.pokelytics.R
 import study.project.pokelytics.activities.ActivityBase
 import study.project.pokelytics.databinding.FragmentLoginSelectionBinding
 import study.project.pokelytics.fragments.FragmentBase
+import study.project.pokelytics.models.User
 
 class LoginSelectionFragment : FragmentBase<FragmentLoginSelectionBinding>() {
 
@@ -20,7 +21,7 @@ class LoginSelectionFragment : FragmentBase<FragmentLoginSelectionBinding>() {
                 findNavController().navigate(R.id.loginSelectionFragmentToLogInFragment)
             }
             btnNext.setOnClickListener{
-                (activity as ActivityBase<*>).navigator.goToMain()
+                (activity as ActivityBase<*>).navigator.goToMain(User.getDefaultUser())
                 activity?.finish()
             }
         }

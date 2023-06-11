@@ -11,12 +11,14 @@ import com.google.android.gms.common.api.ApiException
 import com.google.android.material.textfield.TextInputLayout
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
+import com.google.firebase.firestore.FirebaseFirestore
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import study.project.pokelytics.R
 import study.project.pokelytics.activities.ActivityBase
 import study.project.pokelytics.databinding.FragmentSignUpBinding
 import study.project.pokelytics.fragments.FragmentBase
 import study.project.pokelytics.models.LoginCredentials
+import study.project.pokelytics.models.User
 import study.project.pokelytics.viewmodels.SignUpViewModel
 import study.project.pokelytics.viewmodels.ViewState
 
@@ -40,7 +42,7 @@ class SignUpFragment : FragmentBase<FragmentSignUpBinding>() {
                     showError(etemail, resources.getString(R.string.emailValid))  //This field can´t be empty
                 } else if (!expRegular.matches(password.text.toString())) {
                     showError(etpassword, resources.getString(R.string.passNeeds))
-                } else if (!password.text.toString().equals(repassword.text.toString())) {
+                } else if (password.text.toString() != repassword.text.toString()) {
                     showError(etpassword, resources.getString(R.string.passSame))
                 } else {
                     val credentials = LoginCredentials(email.text.toString(), password.text.toString())
@@ -55,6 +57,9 @@ class SignUpFragment : FragmentBase<FragmentSignUpBinding>() {
                 //val credentials = LoginCredentials(email.text.toString(), "")
                 //signUpViewModel.signUp(credentials)
             }
+            tvsTermsPolicy.setOnClickListener{
+                (activity as ActivityBase<*>).navigator.goToPolicy()
+            }
         }
     }
     override fun bindViewModel() {
@@ -68,7 +73,7 @@ class SignUpFragment : FragmentBase<FragmentSignUpBinding>() {
             when(it){
                 ViewState.SUCCESS -> {
                     Toast.makeText(requireContext(), resources.getString(R.string.verifyEmail), Toast.LENGTH_LONG).show()
-                    (activity as ActivityBase<*>).navigator.goToMain()
+                    (activity as ActivityBase<*>).navigator.goToMain(User.getDefaultUser())//COGER USUARIO BD
                     activity?.finish()
                 }
                 ViewState.ERROR ->{
@@ -115,9 +120,20 @@ class SignUpFragment : FragmentBase<FragmentSignUpBinding>() {
                         if (it.isSuccessful){
                             FirebaseAuth.getInstance().currentUser?.sendEmailVerification()?.addOnSuccessListener {
                                 Toast.makeText(requireContext(), resources.getString(R.string.verifyEmail), Toast.LENGTH_LONG).show()
-                                (activity as ActivityBase<*>).navigator.goToMain()
-                                activity?.finish()
+                                FirebaseAuth.getInstance().currentUser?.email?.let { it1 ->
+                                    signUpViewModel.saveUserPreferences(User(it1, "", ""))
+                                    (activity as ActivityBase<*>).navigator.goToMain(User(it1, "", ""))
+                                    activity?.finish()
+                                }
                             }
+                            FirebaseAuth.getInstance().currentUser?.email?.let { it1 ->
+                                FirebaseFirestore.getInstance().collection("users").document(it1).set(
+                                    hashMapOf(
+                                        "favouriteList" to "",
+                                    )
+                                )
+                            }
+
                         }else{
                             Toast.makeText(requireContext(), resources.getString(R.string.emailExists), Toast.LENGTH_LONG).show()
                         }

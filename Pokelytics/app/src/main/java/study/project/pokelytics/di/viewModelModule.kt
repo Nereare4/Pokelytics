@@ -24,4 +24,5 @@ val viewModelModule = module {
     viewModel { MoveViewModel(get())}
     viewModel { RegionViewModel(get())}
 
+    viewModel { SplashViewModel(get())}
 }

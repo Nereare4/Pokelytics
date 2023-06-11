@@ -11,6 +11,8 @@ import androidx.activity.OnBackPressedCallback
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.firebase.auth.FirebaseAuth
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import study.project.pokelytics.R
 import study.project.pokelytics.adapters.NavAdapter
@@ -18,6 +20,8 @@ import study.project.pokelytics.databinding.ActivityMainBinding
 import study.project.pokelytics.databinding.NavigationDrawerLayoutBinding
 import study.project.pokelytics.models.NavItem
 import study.project.pokelytics.models.User
+import study.project.pokelytics.services.KeyConstants
+import study.project.pokelytics.services.PreferenceService
 import study.project.pokelytics.viewmodels.NavigationViewModel
 import java.util.Locale
 
@@ -33,11 +37,18 @@ class MainActivity : ActivityBase<ActivityMainBinding>() {
     private lateinit var navController : NavController
     private var backPressedTime: Long = 0
     private lateinit var navDrawerBinding: NavigationDrawerLayoutBinding
+    private val preferenceService: PreferenceService by inject()
+    private val fAuth: FirebaseAuth by inject()
+
+
+    private lateinit var user: User
 
     override fun initializeView() {
         initializeCallbacks()
+        loadData()
         navLayoutManager = LinearLayoutManager(this)
         settingsLayoutManager = LinearLayoutManager(this)
+        viewModel.getNavItems()
         initializeNavGraph()
         navAdapter = NavAdapter(
             onClick = { id ->
@@ -55,10 +66,10 @@ class MainActivity : ActivityBase<ActivityMainBinding>() {
                         navController.navigate(R.id.regionList)
                     }
                     "Settings" -> {
-                        //viewModel.navigateToSettings()
+                        navController.navigate(R.id.userProfile)
                     }
                     "Logout" -> {
-                        //viewModel.logout()
+
                     }
                 }
             }
@@ -112,10 +123,13 @@ class MainActivity : ActivityBase<ActivityMainBinding>() {
                             //viewModel.navigateToAbout()
                         }
                         "Settings" -> {
-                            //viewModel.navigateToSettings()
+                            navController.navigate(R.id.userProfile)
                         }
                         "Logout" -> {
-                            //viewModel.logout()
+                            preferenceService.removePreference(KeyConstants.EMAIL_KEY)
+                            fAuth.signOut()
+                            navigator.goToLogin()
+                            finish()
                         }
                     }
                 }
@@ -129,7 +143,7 @@ class MainActivity : ActivityBase<ActivityMainBinding>() {
             }
         }
         binding.navigationDrawer.removeAllViews()
-        viewModel.setUser(User("", ""))
+        viewModel.setUser(User("", "", ""))
     }
 
     private fun initializeNavGraph() {
@@ -161,7 +175,14 @@ class MainActivity : ActivityBase<ActivityMainBinding>() {
     }
 
     companion object {
-        fun getIntent(context: Context) = Intent(context, MainActivity::class.java)
+        private const val USER = "user"
+        fun getIntent(context: Context, user: User) = Intent(context, MainActivity::class.java)
+            .apply {
+                putExtra(USER, user)
+            }
+    }
+    private fun loadData() {
+        user = intent.getSerializableExtra(USER) as User
     }
 
     private fun setImage(image: ImageView, avatar: Int) {

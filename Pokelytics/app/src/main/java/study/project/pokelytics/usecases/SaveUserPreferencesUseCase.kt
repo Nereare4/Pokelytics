@@ -15,7 +15,6 @@ class SaveUserPreferencesUseCase (
 
     override suspend fun execute(params: User): Flow<Unit> {
         preferenceService.savePreference(KeyConstants.EMAIL_KEY, params.email)
-        preferenceService.savePreference(KeyConstants.PASSWORD_KEY, params.password)
         return flowOf()
     }
 }

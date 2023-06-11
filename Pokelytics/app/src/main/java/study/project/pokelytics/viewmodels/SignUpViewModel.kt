@@ -26,7 +26,7 @@ class SignUpViewModel (
 
         }
     }
-    private fun saveUserPreferences(user: User){
+    fun saveUserPreferences(user: User){
         viewModelScope.launch {
             saveUserPreferencesUseCase(user)
         }
