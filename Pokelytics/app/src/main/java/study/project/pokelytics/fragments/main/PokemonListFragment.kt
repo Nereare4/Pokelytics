@@ -24,7 +24,7 @@ class PokemonListFragment : FragmentBase<FragmentPokemonListBinding>() {
 
     override fun bindViewModel() {
         binding.apply {
-            this.lifecycleOwner = this@PokemonListFragment
+            //this.lifecycleOwner = this@PokemonListFragment
         }
     }
 
@@ -62,14 +62,14 @@ class PokemonListFragment : FragmentBase<FragmentPokemonListBinding>() {
     override fun getResourceLayout(): Int = R.layout.fragment_pokemon_list
 
     override fun subscribe() {
-        viewModel.state.observe(this) {
+        viewModel.state.observe(viewLifecycleOwner) {
             when (it) {
                 ViewState.IDLE -> viewModel.getPokemonList(paginationRange)
                 else -> {}
             }
         }
 
-        viewModel.pokemons.observe(this) {
+        viewModel.pokemons.observe(viewLifecycleOwner) {
             it.forEachIndexed { index, pokemon ->
                 adapter.items.add(pokemon)
                 adapter.notifyItemInserted(layoutManager.itemCount + index)
@@ -88,5 +88,10 @@ class PokemonListFragment : FragmentBase<FragmentPokemonListBinding>() {
     interface PokemonViewHolderInterface {
         fun onPokemonClick(pokemon: Pokemon)
         fun createMoreInfoViewModel(): MoreInfoViewModel
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        adapter.items.clear()
     }
 }
