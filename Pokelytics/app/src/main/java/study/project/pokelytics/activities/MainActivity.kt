@@ -11,6 +11,8 @@ import androidx.activity.OnBackPressedCallback
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.firebase.auth.FirebaseAuth
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import study.project.pokelytics.R
 import study.project.pokelytics.adapters.NavAdapter
@@ -18,6 +20,8 @@ import study.project.pokelytics.databinding.ActivityMainBinding
 import study.project.pokelytics.databinding.NavigationDrawerLayoutBinding
 import study.project.pokelytics.models.NavItem
 import study.project.pokelytics.models.User
+import study.project.pokelytics.services.KeyConstants
+import study.project.pokelytics.services.PreferenceService
 import study.project.pokelytics.viewmodels.NavigationViewModel
 import java.util.Locale
 
@@ -33,6 +37,9 @@ class MainActivity : ActivityBase<ActivityMainBinding>() {
     private lateinit var navController : NavController
     private var backPressedTime: Long = 0
     private lateinit var navDrawerBinding: NavigationDrawerLayoutBinding
+    private val preferenceService: PreferenceService by inject()
+    private val fAuth: FirebaseAuth by inject()
+
 
     private lateinit var user: User
 
@@ -61,9 +68,9 @@ class MainActivity : ActivityBase<ActivityMainBinding>() {
                     "Settings" -> {
                         navController.navigate(R.id.userProfile)
                     }
-                    /*"Logout" -> {
-                        //viewModel.logout()
-                    }*/
+                    "Logout" -> {
+
+                    }
                 }
             }
         )
@@ -118,22 +125,25 @@ class MainActivity : ActivityBase<ActivityMainBinding>() {
                         "Settings" -> {
                             navController.navigate(R.id.userProfile)
                         }
-                        /*"Logout" -> {
-                            //viewModel.logout()
-                        }*/
+                        "Logout" -> {
+                            preferenceService.removePreference(KeyConstants.EMAIL_KEY)
+                            fAuth.signOut()
+                            navigator.goToLogin()
+                            finish()
+                        }
                     }
                 }
             ).apply {
                 items = mutableListOf(
                     NavItem("About", "About"),
                     NavItem("Settings", "Settings"),
-                    //NavItem("Logout", "Logout")
+                    NavItem("Logout", "Logout")
                 )
                 notifyDataSetChanged()
             }
         }
         binding.navigationDrawer.removeAllViews()
-        viewModel.setUser(User("", ""))
+        viewModel.setUser(User("", "", ""))
     }
 
     private fun initializeNavGraph() {
