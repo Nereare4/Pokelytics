@@ -9,14 +9,17 @@ import study.project.pokelytics.api.ApiConstants.COLLECTIONS_NAV_ITEMS
 import study.project.pokelytics.api.ApiConstants.NAV_ITEMS_ID
 import study.project.pokelytics.firebase.FirebaseHelper
 import study.project.pokelytics.models.NavItem
+import study.project.pokelytics.models.User
 
 class NavigationViewModel(
     private val firebaseHelper: FirebaseHelper
 ): ViewModalBase() {
 
     private val mutableNavItems = MutableLiveData<List<NavItem>>()
-    val navItems: LiveData<List<NavItem>>
-        get() = mutableNavItems
+    val navItems: LiveData<List<NavItem>> = mutableNavItems
+
+    private val mutableUser = MutableLiveData<User>()
+    val user: LiveData<User> = mutableUser
 
     fun getNavItems() {
         mutableState.postValue(ViewState.LOADING)
@@ -38,5 +41,9 @@ class NavigationViewModel(
                 }
             )
         }
+    }
+
+    fun setUser(user: User) {
+        mutableUser.postValue(user)
     }
 }
