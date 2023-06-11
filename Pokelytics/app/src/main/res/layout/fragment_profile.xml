@@ -9,44 +9,44 @@
         xmlns:app="http://schemas.android.com/apk/res-auto">
 
         <ImageView
-            android:id="@+id/profile_image"
+            android:id="@+id/profileImage"
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:layout_margin="20dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:background="@drawable/baseline_person_24"/>
+            />
 
         <TextView
-            android:id="@+id/profile_name"
+            android:id="@+id/profileName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/userName"
             android:textColor="@color/colorPrimary"
             android:textSize="20sp"
             android:layout_marginStart="10dp"
-            app:layout_constraintStart_toEndOf="@id/profile_image"
-            app:layout_constraintTop_toTopOf="@id/profile_image"
-            app:layout_constraintBottom_toBottomOf="@id/profile_email"/>
+            app:layout_constraintStart_toEndOf="@id/profileImage"
+            app:layout_constraintTop_toTopOf="@id/profileImage"
+            app:layout_constraintBottom_toBottomOf="@id/profileEmail"/>
 
         <TextView
-            android:id="@+id/profile_email"
+            android:id="@+id/profileEmail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Profile Email"
             android:textColor="@color/colorItemDark"
             android:textSize="15sp"
-            app:layout_constraintStart_toStartOf="@id/profile_name"
-            app:layout_constraintTop_toBottomOf="@+id/profile_name"/>
+            app:layout_constraintStart_toStartOf="@id/profileName"
+            app:layout_constraintTop_toBottomOf="@+id/profileName"/>
 
         <ImageView
             android:id="@+id/account_image"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_margin="20dp"
-            android:background="@drawable/ic_user"
-            app:layout_constraintStart_toStartOf="@id/profile_image"
-            app:layout_constraintTop_toBottomOf="@+id/profile_image"/>
+            android:background="@drawable/ic_profile_user"
+            app:layout_constraintStart_toStartOf="@id/profileImage"
+            app:layout_constraintTop_toBottomOf="@+id/profileImage"/>
 
         <TextView
             android:id="@+id/account"
@@ -71,8 +71,16 @@
             app:layout_constraintStart_toStartOf="@id/account"
             app:layout_constraintTop_toBottomOf="@+id/account"
             app:layout_constraintEnd_toEndOf="@id/rightguide"/>
-
         <Button
+        android:id="@+id/deleteAccount"
+        style="@style/buttonOutlinedRedDeleteAccount"
+        android:text="@string/delete"
+        android:drawableLeft="@drawable/ic_trash"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/rightguide"
+        app:layout_constraintTop_toBottomOf="@+id/info_account"/>
+
+        <!--<Button
             android:id="@+id/deleteAccount"
             style="@style/buttonOutlinedRedDeleteAccount"
             android:text="@string/delete"
@@ -88,7 +96,7 @@
             android:drawableLeft="@drawable/ic_exit"
             app:layout_constraintStart_toEndOf="@+id/deleteAccount"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/info_account"/>
+            app:layout_constraintTop_toBottomOf="@+id/info_account"/>-->
 
         <ImageView
             android:id="@+id/info_image"

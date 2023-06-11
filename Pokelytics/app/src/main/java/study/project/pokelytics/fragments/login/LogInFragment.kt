@@ -12,6 +12,7 @@ import com.google.android.gms.common.api.ApiException
 import com.google.android.material.textfield.TextInputLayout
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import study.project.pokelytics.R
 import study.project.pokelytics.activities.ActivityBase
@@ -19,6 +20,8 @@ import study.project.pokelytics.databinding.FragmentLogInBinding
 import study.project.pokelytics.fragments.FragmentBase
 import study.project.pokelytics.models.LoginCredentials
 import study.project.pokelytics.models.User
+import study.project.pokelytics.services.KeyConstants
+import study.project.pokelytics.services.PreferenceService
 import study.project.pokelytics.viewmodels.LoginViewModel
 import study.project.pokelytics.viewmodels.ViewState
 
@@ -26,6 +29,7 @@ class LogInFragment : FragmentBase<FragmentLogInBinding>() {
 
     override fun getResourceLayout(): Int = R.layout.fragment_log_in
     private val loginViewModel: LoginViewModel by viewModel()
+    private val preferenceService: PreferenceService by inject()
     private val GOOGLE_SIGN_IN = 1
 
     override fun initializeView() {
@@ -64,7 +68,8 @@ class LogInFragment : FragmentBase<FragmentLogInBinding>() {
         loginViewModel.state.observe(viewLifecycleOwner){
             when(it){
                 ViewState.SUCCESS -> {
-                    (activity as ActivityBase<*>).navigator.goToMain(User.getDefaultUser())
+                    val emailUser = preferenceService.getPreference(KeyConstants.EMAIL_KEY)
+                    (activity as ActivityBase<*>).navigator.goToMain(User(emailUser.toString(), "", ""))
                     activity?.finish()
                 }
                 ViewState.ERROR ->{
@@ -117,9 +122,11 @@ class LogInFragment : FragmentBase<FragmentLogInBinding>() {
                                     FirebaseAuth.getInstance().signInWithCredential(credential)
                                         .addOnCompleteListener { authTask ->
                                             if (authTask.isSuccessful) {
-                                                //loginViewModel.saveUserPreferences() PASAR USUARIO
-                                                (activity as ActivityBase<*>).navigator.goToMain(User("", "", ""))
-                                                activity?.finish()
+                                                FirebaseAuth.getInstance().currentUser?.email?.let { it1 ->
+                                                    loginViewModel.saveUserPreferences(User(it1, "", ""))
+                                                    (activity as ActivityBase<*>).navigator.goToMain(User(it1, "", ""))
+                                                    activity?.finish()
+                                                }
                                             }
                                         }
                                 }

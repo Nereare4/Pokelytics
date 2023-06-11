@@ -23,17 +23,14 @@ class ProfileFragment : FragmentBase<FragmentProfileBinding>() {
     override fun initializeView() {
         val photoUser = fAuth.currentUser?.photoUrl
         val nameUser = fAuth.currentUser?.displayName
+        //val emailUser = fAuth.currentUser?.email
         val emailUser = preferenceService.getPreference(KeyConstants.EMAIL_KEY)
 
         binding.apply {
             profileName.text = nameUser
-            Picasso.get().load(photoUser).into(profileImage)
             profileEmail.text = emailUser
-            logOut.setOnClickListener{
-                preferenceService.removePreference(KeyConstants.EMAIL_KEY)
-                fAuth.signOut()
-                (activity as ActivityBase<*>).navigator.goToLogin()
-            }
+            Picasso.get().load(photoUser).error(R.drawable.ic_user).into(profileImage)
+
             deleteAccount.setOnClickListener(){
                 val builder = AlertDialog.Builder(requireContext())
                 builder.setTitle(resources.getString(R.string.deleteaccount))
@@ -46,6 +43,7 @@ class ProfileFragment : FragmentBase<FragmentProfileBinding>() {
                     Toast.makeText(requireContext(), resources.getString(R.string.deleteAccountSuccesful), Toast.LENGTH_LONG).show()
                     preferenceService.removePreference(KeyConstants.EMAIL_KEY)
                     (activity as ActivityBase<*>).navigator.goToLogin()
+                    activity?.finish()
                 }
                 builder.setNegativeButton(resources.getString(R.string.cancel)) { dialog, which ->}
                 builder.show()
