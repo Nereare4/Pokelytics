@@ -168,8 +168,6 @@ class MainActivity : ActivityBase<ActivityMainBinding>() {
             navAdapter.notifyDataSetChanged()
         }
         viewModel.user.observe(this) {
-            //Change 1 to it.image
-            setImage(navDrawerBinding.profileImage, 0)
             navDrawerBinding.profileName.text = it.email
             binding.navigationDrawer.addView(navDrawerBinding.root)
         }
@@ -186,15 +184,6 @@ class MainActivity : ActivityBase<ActivityMainBinding>() {
         intent.serializable<User>(USER)?.let {
             user = it
         }
-    }
-
-    private fun setImage(image: ImageView, avatar: Int) {
-        image.setImageResource(
-            when (avatar) {
-                1 -> R.drawable.ic_user
-                2 -> R.drawable.ic_user
-                else -> R.drawable.ic_sword
-            }
-        )
+        User.setInstance(user)
     }
 }

@@ -1,24 +1,25 @@
 package study.project.pokelytics.models
 
-import com.google.firebase.firestore.DocumentSnapshot
 import study.project.pokelytics.api.model.Pokemon
 
 class User (val email: String, val name: String, var favouriteList: String): java.io.Serializable{
 
     fun addFav(pokemon: Pokemon): Boolean {
         val list = favouriteList.split(",").toMutableList()
-        if (list.size >= 6) {
-            return false
+        if (list.contains(pokemon.id.toString())) {
+            list.remove(pokemon.id.toString())
+        } else {
+            list.add(pokemon.id.toString())
         }
-        list.add(pokemon.id.toString())
-        favouriteList = list.joinToString(",")
+        favouriteList = list.filter { it.isNotBlank() }.joinToString(",")
         return true
     }
 
+    fun isFavorite(item: Pokemon): Boolean {
+        return favouriteList.split(",").contains(item.id.toString())
+    }
+
     companion object {
-        fun fromDataBase(it: DocumentSnapshot): User {
-            return User("", "", "")
-        }
         fun getDefaultUser(): User {
             return User("", "", "")
         }

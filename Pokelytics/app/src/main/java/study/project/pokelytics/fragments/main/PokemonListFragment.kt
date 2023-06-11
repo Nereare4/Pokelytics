@@ -1,5 +1,6 @@
 package study.project.pokelytics.fragments.main
 
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -15,6 +16,7 @@ import study.project.pokelytics.viewmodels.FavViewModel
 import study.project.pokelytics.viewmodels.MoreInfoViewModel
 import study.project.pokelytics.viewmodels.PokemonListViewModel
 import study.project.pokelytics.viewmodels.ViewState
+import java.util.Locale
 
 class PokemonListFragment : FragmentBase<FragmentPokemonListBinding>() {
 
@@ -46,10 +48,19 @@ class PokemonListFragment : FragmentBase<FragmentPokemonListBinding>() {
     private fun createPokemonInterface(): PokemonViewHolderInterface {
         return object : PokemonViewHolderInterface {
             override fun onFavoriteClick(pokemon: Pokemon) {
+                if (User.getInstance().email.isEmpty()) {
+                    Toast.makeText(context, "Please login to add favorites", Toast.LENGTH_SHORT).show()
+                    return
+                }
                 if (User.getInstance().addFav(pokemon)) {
                     favViewModel.saveFavs(User.getInstance())
+                    Toast.makeText(context, "${pokemon.name.replaceFirstChar {
+                        if (it.isLowerCase()) it.titlecase(
+                            Locale.ROOT
+                        ) else it.toString()
+                    }} added to favourites", Toast.LENGTH_SHORT).show()
                 } else {
-
+                    Toast.makeText(context, "Cant add more than 6 pokemon to favourites", Toast.LENGTH_SHORT).show()
                 }
             }
 

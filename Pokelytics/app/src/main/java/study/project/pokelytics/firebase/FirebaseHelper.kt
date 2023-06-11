@@ -20,7 +20,6 @@ class FirebaseHelper(
                 it.exception?.let { it1 -> onError(it1) }
             } else {
                 onResult()
-
             }
         }
     }
@@ -67,21 +66,6 @@ class FirebaseHelper(
         onResult()
     }
 
-    fun subscribeToUserListener(
-        onResult: (User) -> Unit = {},
-        onError: (Throwable) -> Unit = {}
-    ) {
-        firebaseAuth.currentUser?.let {
-            firebaseFirestore.collection("users").document(it.uid).get().addOnCompleteListener { task ->
-                if (!task.isSuccessful) {
-                    task.exception?.let { it1 -> onError(it1) }
-                } else {
-                    task.result?.let { onResult(User.fromDataBase(it)) }
-                }
-            }
-        }
-    }
-
     fun <T : Any>subscribeToKeyResponse(
         collection: String,
         document: String,
@@ -104,7 +88,7 @@ class FirebaseHelper(
         onResult: () -> Unit = {},
         onError: (Throwable) -> Unit = {}
     ) {
-        firebaseFirestore.collection("users").document("joaquin.ayllongar@gmail.com").set(
+        firebaseFirestore.collection("users").document(user.email).set(
             hashMapOf(
                 "favouriteList" to user.favouriteList,
             )

@@ -28,6 +28,7 @@ class PokemonViewHolder(
     @SuppressLint("SetTextI18n")
     private fun drawItem(item: Pokemon) {
         binding.apply {
+            setFavorite(item)
             root.setOnClickListener {
                 pokemonInterface.onPokemonClick(item)
             }
@@ -48,6 +49,10 @@ class PokemonViewHolder(
             }
             binding.image.setImageToUrl(
                 item.sprites.other?.officialArtwork?.frontDefault ?: "",)
+            favorite.setOnClickListener {
+                pokemonInterface.onFavoriteClick(item)
+                setFavorite(item)
+            }
         }
     }
 
@@ -70,5 +75,15 @@ class PokemonViewHolder(
             "yellow" -> R.drawable.pokemon_yellow
             else -> R.drawable.pokemon_green
         }
+    }
+
+    private fun setFavorite(item: Pokemon) {
+        val isFavorite = moreInfoViewModel.getIsFavorite(item)
+        binding.favorite.setImageResource(
+            if (isFavorite)
+                R.drawable.ic_star
+            else
+                R.drawable.ic_star_border
+        )
     }
 }

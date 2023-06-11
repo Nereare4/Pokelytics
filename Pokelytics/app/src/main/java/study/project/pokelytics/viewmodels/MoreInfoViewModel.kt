@@ -6,6 +6,7 @@ import study.project.pokelytics.api.model.Pokemon
 import study.project.pokelytics.event.LiveEvent
 import study.project.pokelytics.event.MutableLiveEvent
 import study.project.pokelytics.event.postEvent
+import study.project.pokelytics.models.User
 import study.project.pokelytics.usecases.GetPokemonMoreInfoUseCase
 
 class MoreInfoViewModel(
@@ -29,5 +30,9 @@ class MoreInfoViewModel(
                 }
             )
         }
+    }
+
+    fun getIsFavorite(item: Pokemon): Boolean {
+        return User.getInstance().isFavorite(item)
     }
 }
