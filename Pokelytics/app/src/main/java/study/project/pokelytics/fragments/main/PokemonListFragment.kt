@@ -9,7 +9,9 @@ import study.project.pokelytics.api.model.PaginationRange
 import study.project.pokelytics.api.model.Pokemon
 import study.project.pokelytics.databinding.FragmentPokemonListBinding
 import study.project.pokelytics.fragments.FragmentBase
+import study.project.pokelytics.models.User
 import study.project.pokelytics.usecases.GetPokemonMoreInfoUseCase
+import study.project.pokelytics.viewmodels.FavViewModel
 import study.project.pokelytics.viewmodels.MoreInfoViewModel
 import study.project.pokelytics.viewmodels.PokemonListViewModel
 import study.project.pokelytics.viewmodels.ViewState
@@ -18,6 +20,7 @@ class PokemonListFragment : FragmentBase<FragmentPokemonListBinding>() {
 
     private val viewModel: PokemonListViewModel by viewModel()
     private lateinit var adapter: PokemonListAdapter
+    private val favViewModel: FavViewModel by viewModel()
     private lateinit var layoutManager: LinearLayoutManager
     private var paginationRange = PaginationRange()
     private val pokemonMoreInfoUseCase: GetPokemonMoreInfoUseCase by inject()
@@ -42,6 +45,14 @@ class PokemonListFragment : FragmentBase<FragmentPokemonListBinding>() {
 
     private fun createPokemonInterface(): PokemonViewHolderInterface {
         return object : PokemonViewHolderInterface {
+            override fun onFavoriteClick(pokemon: Pokemon) {
+                if (User.getInstance().addFav(pokemon)) {
+                    favViewModel.saveFavs(User.getInstance())
+                } else {
+
+                }
+            }
+
             override fun onPokemonClick(pokemon: Pokemon) {
                // viewModel.navigateToPokemonDetail(pokemon)
             }
@@ -86,6 +97,7 @@ class PokemonListFragment : FragmentBase<FragmentPokemonListBinding>() {
     }
 
     interface PokemonViewHolderInterface {
+        fun onFavoriteClick(pokemon: Pokemon)
         fun onPokemonClick(pokemon: Pokemon)
         fun createMoreInfoViewModel(): MoreInfoViewModel
     }

@@ -17,6 +17,7 @@ import study.project.pokelytics.databinding.ActivityMainBinding
 import study.project.pokelytics.databinding.NavigationDrawerLayoutBinding
 import study.project.pokelytics.models.NavItem
 import study.project.pokelytics.models.User
+import study.project.pokelytics.serializable
 import study.project.pokelytics.viewmodels.NavigationViewModel
 import java.util.Locale
 
@@ -164,6 +165,8 @@ class MainActivity : ActivityBase<ActivityMainBinding>() {
             }
     }
     private fun loadData() {
-        user = intent.getSerializableExtra(USER) as User
+        intent.serializable<User>(USER)?.let {
+            user = it
+        }
     }
 }

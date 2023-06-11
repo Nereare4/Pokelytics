@@ -99,4 +99,21 @@ class FirebaseHelper(
         }
     }
 
+    fun saveFavs(
+        user: User,
+        onResult: () -> Unit = {},
+        onError: (Throwable) -> Unit = {}
+    ) {
+        firebaseFirestore.collection("users").document("joaquin.ayllongar@gmail.com").set(
+            hashMapOf(
+                "favouriteList" to user.favouriteList,
+            )
+        ).addOnCompleteListener {
+            if (!it.isSuccessful) {
+                it.exception?.let { it1 -> onError(it1) }
+            } else {
+                onResult()
+            }
+        }
+    }
 }
