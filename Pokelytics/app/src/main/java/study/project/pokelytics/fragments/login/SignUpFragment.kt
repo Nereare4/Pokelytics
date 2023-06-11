@@ -121,7 +121,8 @@ class SignUpFragment : FragmentBase<FragmentSignUpBinding>() {
                             FirebaseAuth.getInstance().currentUser?.sendEmailVerification()?.addOnSuccessListener {
                                 Toast.makeText(requireContext(), resources.getString(R.string.verifyEmail), Toast.LENGTH_LONG).show()
                                 FirebaseAuth.getInstance().currentUser?.email?.let { it1 ->
-                                    (activity as ActivityBase<*>).navigator.goToMain(User(it1, "", ""))//COGER DE LA BBDD
+                                    signUpViewModel.saveUserPreferences(User(it1, "", ""))
+                                    (activity as ActivityBase<*>).navigator.goToMain(User(it1, "", ""))
                                     activity?.finish()
                                 }
                             }

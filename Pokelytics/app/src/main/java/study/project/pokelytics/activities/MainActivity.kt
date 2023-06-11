@@ -59,9 +59,9 @@ class MainActivity : ActivityBase<ActivityMainBinding>() {
                     "Settings" -> {
                         navController.navigate(R.id.userProfile)
                     }
-                    "Logout" -> {
+                    /*"Logout" -> {
                         //viewModel.logout()
-                    }
+                    }*/
                 }
             }
         )
@@ -116,16 +116,16 @@ class MainActivity : ActivityBase<ActivityMainBinding>() {
                         "Settings" -> {
                             navController.navigate(R.id.userProfile)
                         }
-                        "Logout" -> {
+                        /*"Logout" -> {
                             //viewModel.logout()
-                        }
+                        }*/
                     }
                 }
             ).apply {
                 items = mutableListOf(
                     NavItem("About", "About"),
                     NavItem("Settings", "Settings"),
-                    NavItem("Logout", "Logout")
+                    //NavItem("Logout", "Logout")
                 )
                 notifyDataSetChanged()
             }

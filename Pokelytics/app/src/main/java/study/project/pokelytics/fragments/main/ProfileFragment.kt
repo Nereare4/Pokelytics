@@ -25,22 +25,23 @@ class ProfileFragment : FragmentBase<FragmentProfileBinding>() {
 
     private val fAuth: FirebaseAuth by inject()
     private val fStore: FirebaseFirestore by inject()
-    private lateinit var preferenceService: PreferenceService
+    private val preferenceService: PreferenceService by inject()
     override fun getResourceLayout(): Int = R.layout.fragment_profile
 
     override fun initializeView() {
         val photoUser = fAuth.currentUser?.photoUrl
         val nameUser = fAuth.currentUser?.displayName
-        val emailUser = preferenceService.getPreference(KeyConstants.EMAIL_KEY)
+        val emailUser = fAuth.currentUser?.email
 
         binding.apply {
             profileName.text = nameUser
-            Picasso.get().load(photoUser).into(profileImage)
+            Picasso.get().load(photoUser).error(R.drawable.baseline_person_24).into(profileImage)
             profileEmail.text = emailUser
             logOut.setOnClickListener{
                 preferenceService.removePreference(KeyConstants.EMAIL_KEY)
                 fAuth.signOut()
-                (activity as ActivityBase<*>).navigator.goToMain(User.getDefaultUser())
+                (activity as ActivityBase<*>).navigator.goToLogin()
+                activity?.finish()
             }
             deleteAccount.setOnClickListener(){
                 val builder = AlertDialog.Builder(requireContext())
@@ -54,6 +55,7 @@ class ProfileFragment : FragmentBase<FragmentProfileBinding>() {
                     Toast.makeText(requireContext(), resources.getString(R.string.deleteAccountSuccesful), Toast.LENGTH_LONG).show()
                     preferenceService.removePreference(KeyConstants.EMAIL_KEY)
                     (activity as ActivityBase<*>).navigator.goToLogin()
+                    activity?.finish()
                 }
                 builder.setNegativeButton(resources.getString(R.string.cancel)) { dialog, which ->}
                 builder.show()

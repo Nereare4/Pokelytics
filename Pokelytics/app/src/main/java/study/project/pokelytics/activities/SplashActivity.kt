@@ -4,16 +4,20 @@ import android.annotation.SuppressLint
 import android.os.Handler
 import android.os.Looper
 import android.view.animation.AnimationUtils
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import study.project.pokelytics.R
 import study.project.pokelytics.databinding.ActivitySplashBinding
 import study.project.pokelytics.models.User
+import study.project.pokelytics.services.KeyConstants
+import study.project.pokelytics.services.PreferenceService
 import study.project.pokelytics.viewmodels.SplashViewModel
 import study.project.pokelytics.viewmodels.ViewState
 
 @SuppressLint("CustomSplashScreen")
 class SplashActivity : ActivityBase<ActivitySplashBinding>() {
     private val splashViewModel: SplashViewModel  by viewModel()
+    private val preferenceService: PreferenceService by inject()
     override fun getResourceLayout(): Int = R.layout.activity_splash
     override fun initializeView() {
         openDelayedApp()
@@ -39,7 +43,8 @@ class SplashActivity : ActivityBase<ActivitySplashBinding>() {
         splashViewModel.state.observe(this){
             when(it){
                 ViewState.SUCCESS -> {
-                    navigator.goToMain(User.getDefaultUser())//COGER USUARIO BD
+                    val emailUser = preferenceService.getPreference(KeyConstants.EMAIL_KEY)
+                    navigator.goToMain(User(emailUser.toString(), "", ""))
                     finish()
                 }
                 ViewState.ERROR ->{
