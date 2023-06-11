@@ -64,6 +64,23 @@ class PokemonListFragment : FragmentBase<FragmentPokemonListBinding>() {
                 }
             }
 
+            override fun onTeamClick(pokemon: Pokemon) {
+                if (User.getInstance().email.isEmpty()) {
+                    Toast.makeText(context, "Please login to add pokemon to team", Toast.LENGTH_SHORT).show()
+                    return
+                }
+                if (User.getInstance().addTeam(pokemon)) {
+                    favViewModel.saveTeam(User.getInstance())
+                    Toast.makeText(context, "${pokemon.name.replaceFirstChar {
+                        if (it.isLowerCase()) it.titlecase(
+                            Locale.ROOT
+                        ) else it.toString()
+                    }} added to team", Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(context, "Cant add more than 6 pokemon to team", Toast.LENGTH_SHORT).show()
+                }
+            }
+
             override fun onPokemonClick(pokemon: Pokemon) {
                // viewModel.navigateToPokemonDetail(pokemon)
             }
@@ -109,6 +126,7 @@ class PokemonListFragment : FragmentBase<FragmentPokemonListBinding>() {
 
     interface PokemonViewHolderInterface {
         fun onFavoriteClick(pokemon: Pokemon)
+        fun onTeamClick(pokemon: Pokemon)
         fun onPokemonClick(pokemon: Pokemon)
         fun createMoreInfoViewModel(): MoreInfoViewModel
     }

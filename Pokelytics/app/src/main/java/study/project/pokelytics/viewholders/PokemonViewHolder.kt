@@ -53,6 +53,10 @@ class PokemonViewHolder(
                 pokemonInterface.onFavoriteClick(item)
                 setFavorite(item)
             }
+            team.setOnClickListener {
+                pokemonInterface.onTeamClick(item)
+                setTeam(item)
+            }
         }
     }
 
@@ -86,4 +90,15 @@ class PokemonViewHolder(
                 R.drawable.ic_star_border
         )
     }
+
+    private fun setTeam(item: Pokemon) {
+        val isTeam = moreInfoViewModel.getIsTeam(item)
+        binding.team.setImageResource(
+            if (isTeam)
+                R.drawable.ic_pokeball
+            else
+                R.drawable.ic_outline_circle
+        )
+    }
+
 }

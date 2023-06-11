@@ -5,7 +5,6 @@ import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.navigation.NavController
@@ -144,7 +143,7 @@ class MainActivity : ActivityBase<ActivityMainBinding>() {
             }
         }
         binding.navigationDrawer.removeAllViews()
-        viewModel.setUser(User("", "", ""))
+        viewModel.setUser(User("", "", "", ""))
     }
 
     private fun initializeNavGraph() {

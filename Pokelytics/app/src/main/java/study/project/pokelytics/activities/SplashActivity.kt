@@ -45,7 +45,7 @@ class SplashActivity : ActivityBase<ActivitySplashBinding>() {
                 ViewState.SUCCESS -> {
                     val emailUser = preferenceService.getPreference(KeyConstants.EMAIL_KEY)
                     navigator.goToMain(
-                        User(emailUser.toString(), "", "")
+                        User(emailUser.toString(), "", "", "")
                     )
                     finish()
                 }

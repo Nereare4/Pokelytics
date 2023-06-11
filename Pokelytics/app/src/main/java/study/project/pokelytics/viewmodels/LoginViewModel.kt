@@ -17,7 +17,7 @@ class LoginViewModel(
         viewModelScope.launch {
             firebaseHelper.subscribeToLoginListener(loginCredentials, {
                 mutableState.postValue(ViewState.SUCCESS)
-                saveUserPreferences(User(loginCredentials.email, "", ""))
+                saveUserPreferences(User(loginCredentials.email, "", "", ""))
             }, {
                 mutableState.postValue(ViewState.ERROR)
             }

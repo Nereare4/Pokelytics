@@ -35,4 +35,8 @@ class MoreInfoViewModel(
     fun getIsFavorite(item: Pokemon): Boolean {
         return User.getInstance().isFavorite(item)
     }
+
+    fun getIsTeam(item: Pokemon): Boolean {
+        return User.getInstance().isTeam(item)
+    }
 }

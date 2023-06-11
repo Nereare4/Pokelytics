@@ -10,4 +10,8 @@ class FavViewModel(
     fun saveFavs(user: User) {
         firebaseHelper.saveFavs(user)
     }
+
+    fun saveTeam(user: User) {
+        firebaseHelper.saveTeam(user)
+    }
 }
