@@ -24,8 +24,8 @@
     <string name="barOpt1">info</string>
     <string name="barOpt2">attacks</string>
     <string name="barOpt3">more</string>
-    <string name="habilities">Habilidades</string>
-    <string name="statistics">Estadisticas</string>
+    <string name="habilities">Habilities</string>
+    <string name="Statistics">Estadisticas</string>
     <string name="emailRequired">Email is required</string>
     <string name="passRequired">Password is required</string>
     <string name="repassRequired">Repeat password is required</string>
@@ -53,6 +53,8 @@
     <string name="userName">Name</string>
     <string name="welcomeUser">Welcome trainer</string>
     <string name="termsPolicy">By registering you indicate that you agree with our terms and conditions of use and our Cookies policy.</string>
+    <string name="statistics">Statistics</string>
+    <string name="vulnerable">Vulnerable at</string>
 
 
 
@@ -127,4 +129,6 @@ In compliance with the LSSI (Law on Information Society Services), Pokelitycs wi
     <string name="id_title">ID</string>
     <string name="name_title">Name</string>
     <string name="area_title">Areas</string>
+    <string name="no_pokemon_fav">"You don't have any favourite Pokemon, go to pokedex to get started"</string>
+    <string name="no_pokemon_team">"You don't have any Pokemon in your team, go to pokedex to get started"</string>
 </resources>

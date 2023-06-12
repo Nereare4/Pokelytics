@@ -18,6 +18,12 @@ class PokemonDataSource(
         val specie = remote.getPokemonSpecies(params.id)
         val newPokemon = params.copy(extraInfo = PokemonExtraInfo(species = specie))
         emit(newPokemon)
+    }
 
+    fun getPokemonFromId(ids: String): Flow<List<Pokemon>> = flow {
+        val list = ids.split(",").map { it.toIntOrNull() ?: -1 }.map {
+            remote.getPokemon(it)
+        }
+        emit(list)
     }
 }

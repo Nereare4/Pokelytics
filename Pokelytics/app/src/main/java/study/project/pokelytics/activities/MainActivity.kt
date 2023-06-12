@@ -72,10 +72,16 @@ class MainActivity : ActivityBase<ActivityMainBinding>() {
                     "locations" -> {
                         navController.navigate(R.id.regionList)
                     }
-                    "Settings" -> {
+                    "settings" -> {
                         navController.navigate(R.id.userProfile)
                     }
-                    "Logout" -> {
+                    "team" -> {
+                        navController.navigate(R.id.teamList)
+                    }
+                    "favourites" -> {
+                        navController.navigate(R.id.favList)
+                    }
+                    "logout" -> {
                     }
                 }
             }
