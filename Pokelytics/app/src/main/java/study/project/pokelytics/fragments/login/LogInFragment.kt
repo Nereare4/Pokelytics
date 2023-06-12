@@ -32,6 +32,7 @@ class LogInFragment : FragmentBase<FragmentLogInBinding>() {
     private val loginViewModel: LoginViewModel by viewModel()
     private val preferenceService: PreferenceService by inject()
     private val GOOGLE_SIGN_IN = 1
+    private val firebaseFirestore: FirebaseFirestore by inject()
 
     override fun initializeView() {
         binding.apply {
@@ -71,7 +72,7 @@ class LogInFragment : FragmentBase<FragmentLogInBinding>() {
                 ViewState.SUCCESS -> {
                     val emailUser = preferenceService.getPreference(KeyConstants.EMAIL_KEY)
                     if (emailUser != null) {
-                        FirebaseFirestore.getInstance().collection("users").document(emailUser).get().addOnSuccessListener {
+                        firebaseFirestore.collection("users").document(emailUser).get().addOnSuccessListener {
                             (activity as ActivityBase<*>).navigator.goToMain(User(emailUser.toString(), it.get("name") as String, it.get("favouriteList") as String, it.get("team") as String))
                             activity?.finish()
                         }

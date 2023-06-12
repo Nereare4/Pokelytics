@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.os.Handler
 import android.os.Looper
 import android.view.animation.AnimationUtils
+import com.google.firebase.firestore.FirebaseFirestore
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import study.project.pokelytics.R
@@ -18,6 +19,7 @@ import study.project.pokelytics.viewmodels.ViewState
 class SplashActivity : ActivityBase<ActivitySplashBinding>() {
     private val splashViewModel: SplashViewModel  by viewModel()
     private val preferenceService: PreferenceService by inject()
+    private val firebaseFirestore: FirebaseFirestore by inject()
     override fun getResourceLayout(): Int = R.layout.activity_splash
     override fun initializeView() {
         openDelayedApp()
@@ -44,10 +46,12 @@ class SplashActivity : ActivityBase<ActivitySplashBinding>() {
             when(it){
                 ViewState.SUCCESS -> {
                     val emailUser = preferenceService.getPreference(KeyConstants.EMAIL_KEY)
-                    navigator.goToMain(
-                        User(emailUser.toString(), "", "", "")
-                    )
-                    finish()
+                    if (emailUser != null) {
+                        firebaseFirestore.collection("users").document(emailUser).get().addOnSuccessListener {
+                            navigator.goToMain(User(emailUser.toString(), it.get("name") as String, it.get("favouriteList") as String, it.get("team") as String))
+                            finish()
+                        }
+                    }
                 }
                 ViewState.ERROR ->{
                     navigator.goToLogin()
