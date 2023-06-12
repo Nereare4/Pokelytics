@@ -7,7 +7,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/pokemon_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="699dp"
         android:layout_marginStart="5dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="5dp"
@@ -120,23 +120,30 @@
 
         <LinearLayout
             android:id="@+id/linearLayout2"
-            android:layout_width="362dp"
-            android:layout_height="546dp"
+            android:layout_width="375dp"
+            android:layout_height="494dp"
             android:background="@color/white"
             android:orientation="vertical"
-            app:flow_horizontalAlign="center"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.775">
-            <TableLayout
-                android:id="@+id/tableVulnerable"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:tableView_columnCount= "5"/>
+            app:layout_constraintVertical_bias="0.875">
+
+
 
         </LinearLayout>
+
+        <TextView
+            android:id="@+id/textViewHabilities"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="@string/vulnerable"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.501"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
