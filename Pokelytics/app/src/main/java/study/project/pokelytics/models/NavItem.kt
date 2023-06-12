@@ -26,6 +26,7 @@ data class NavItem(
             "items" -> R.drawable.ic_items
             "locations" -> R.drawable.ic_location
             "settings" -> R.drawable.ic_settings
+            "logout" -> R.drawable.ic_exit
             else -> R.drawable.ic_pokeball
         }
     }
