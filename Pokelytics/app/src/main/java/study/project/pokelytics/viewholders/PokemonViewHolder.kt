@@ -29,6 +29,7 @@ class PokemonViewHolder(
     private fun drawItem(item: Pokemon) {
         binding.apply {
             setFavorite(item)
+            setTeam(item)
             root.setOnClickListener {
                 pokemonInterface.onPokemonClick(item)
             }
