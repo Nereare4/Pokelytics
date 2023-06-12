@@ -4,6 +4,7 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.flexbox.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import study.project.pokelytics.R
+import study.project.pokelytics.activities.MainActivity
 import study.project.pokelytics.adapters.RegionListAdapter
 import study.project.pokelytics.api.model.PaginationRange
 import study.project.pokelytics.databinding.FragmentRegionsListBinding
@@ -60,6 +61,7 @@ class RegionListFragment : FragmentBase<FragmentRegionsListBinding>()  {
                 }
                 else -> {}
             }
+            (activity as MainActivity).showLoading(it == ViewState.LOADING && adapter.items.isEmpty())
         }
 
         viewModel.regionList.observe(viewLifecycleOwner) {

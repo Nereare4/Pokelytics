@@ -3,6 +3,7 @@ package study.project.pokelytics.fragments.main
 import androidx.recyclerview.widget.LinearLayoutManager
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import study.project.pokelytics.R
+import study.project.pokelytics.activities.MainActivity
 import study.project.pokelytics.adapters.BerryListAdapter
 import study.project.pokelytics.api.model.PaginationRange
 import study.project.pokelytics.databinding.FragmentPokemonListBinding
@@ -50,6 +51,7 @@ class BerryListFragment : FragmentBase<FragmentPokemonListBinding>() {
                 }
                 else -> {}
             }
+            (activity as MainActivity).showLoading(it == ViewState.LOADING && adapter.items.isEmpty())
         }
 
         viewModel.berryList.observe(viewLifecycleOwner) {
