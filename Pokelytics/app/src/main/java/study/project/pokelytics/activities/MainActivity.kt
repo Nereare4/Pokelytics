@@ -67,6 +67,9 @@ class MainActivity : ActivityBase<ActivityMainBinding>() {
                     "items" -> {
                         navController.navigate(R.id.berryList)
                     }
+                    "berries" -> {
+                        navController.navigate(R.id.berryList)
+                    }
                     "locations" -> {
                         navController.navigate(R.id.regionList)
                     }
