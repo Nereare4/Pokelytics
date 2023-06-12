@@ -8,10 +8,13 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
+import androidx.core.view.isVisible
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.airbnb.lottie.LottieAnimationView
 import com.google.firebase.auth.FirebaseAuth
+import com.squareup.picasso.Picasso
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import study.project.pokelytics.R
@@ -42,6 +45,8 @@ class MainActivity : ActivityBase<ActivityMainBinding>() {
 
 
     private lateinit var user: User
+    val photoUser = fAuth.currentUser?.photoUrl
+    val emailUser = preferenceService.getPreference(KeyConstants.EMAIL_KEY)
 
     override fun initializeView() {
         initializeCallbacks()
@@ -69,7 +74,6 @@ class MainActivity : ActivityBase<ActivityMainBinding>() {
                         navController.navigate(R.id.userProfile)
                     }
                     "Logout" -> {
-
                     }
                 }
             }
@@ -115,7 +119,6 @@ class MainActivity : ActivityBase<ActivityMainBinding>() {
             settingsRecycler.layoutManager = settingsLayoutManager
 
             navRecycler.adapter = navAdapter
-
             settingsRecycler.adapter = NavAdapter(
                 onClick = { id ->
                     when (id) {
@@ -168,9 +171,11 @@ class MainActivity : ActivityBase<ActivityMainBinding>() {
         }
         viewModel.user.observe(this) {
             //Change 1 to it.image
-            setImage(navDrawerBinding.profileImage, 0)
-            navDrawerBinding.profileName.text = it.email
+            //setImage(navDrawerBinding.profileImage, 0)
+            navDrawerBinding.profileName.text = emailUser
+            Picasso.get().load(photoUser).error(R.drawable.ic_user).into(navDrawerBinding.profileImage)
             binding.navigationDrawer.addView(navDrawerBinding.root)
+
         }
     }
 
@@ -193,5 +198,9 @@ class MainActivity : ActivityBase<ActivityMainBinding>() {
                 else -> R.drawable.ic_sword
             }
         )
+    }
+
+    fun showLoading(value : Boolean) {
+        binding.loadingAnimation.isVisible = value
     }
 }

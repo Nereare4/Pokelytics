@@ -4,6 +4,7 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import study.project.pokelytics.R
+import study.project.pokelytics.activities.MainActivity
 import study.project.pokelytics.adapters.LocationListAdapter
 import study.project.pokelytics.databinding.FragmentLocationsListBinding
 import study.project.pokelytics.fragments.FragmentBase
@@ -41,6 +42,9 @@ class LocationsListFragment : FragmentBase<FragmentLocationsListBinding>()  {
     override fun getResourceLayout(): Int = R.layout.fragment_locations_list
 
     override fun subscribe() {
+        viewModel.state.observe(this){
+            (activity as MainActivity).showLoading(it == ViewState.LOADING && adapter.items.isNotEmpty())
+        }
         viewModel.locationList.observe(this) {
             it.forEachIndexed { index, location ->
                 adapter.items.add(location)

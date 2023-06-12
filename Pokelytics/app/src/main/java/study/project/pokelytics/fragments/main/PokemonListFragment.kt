@@ -4,6 +4,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import study.project.pokelytics.R
+import study.project.pokelytics.activities.MainActivity
 import study.project.pokelytics.adapters.PokemonListAdapter
 import study.project.pokelytics.api.model.PaginationRange
 import study.project.pokelytics.api.model.Pokemon
@@ -67,6 +68,8 @@ class PokemonListFragment : FragmentBase<FragmentPokemonListBinding>() {
                 ViewState.IDLE -> viewModel.getPokemonList(paginationRange)
                 else -> {}
             }
+            (activity as MainActivity).showLoading(it == ViewState.LOADING && adapter.items.isNotEmpty())
+
         }
 
         viewModel.pokemons.observe(this) {
