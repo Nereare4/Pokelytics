@@ -1,24 +1,54 @@
 package study.project.pokelytics.viewholders
 
 import android.annotation.SuppressLint
-import android.widget.ImageView
-import study.project.pokelytics.R
 import study.project.pokelytics.api.model.Location
+import study.project.pokelytics.api.model.NamedApiResource
 import study.project.pokelytics.databinding.LocationListItemBinding
+import study.project.pokelytics.event.observeEvent
+import study.project.pokelytics.fragments.main.LocationsListFragment
+import java.util.Locale
 
 class LocationViewHolder(
     private val binding: LocationListItemBinding,
-) : BaseViewHolder<Location>(binding.root) {
+    locationsViewHolderInterface: LocationsListFragment.LocationsViewHolderInterface
+) : BaseViewHolder<NamedApiResource>(binding.root) {
 
 
-    override fun bind(item: Location) {
-        drawLocation(item)
+    val viewModel = locationsViewHolderInterface.createMoreInfoViewModel()
+
+    override fun bind(item: NamedApiResource) {
+        drawItem(item)
+        subscribe()
+        viewModel.getLocationExtraInfo(item)
+    }
+
+    private fun subscribe() {
+        viewModel.location.observeEvent(this) {
+            drawItem(it)
+        }
     }
 
     @SuppressLint("SetTextI18n")
-    private fun drawLocation(location: Location) {
+    private fun drawItem(location: Location) {
         binding.apply {
-            name.text = location.name
+            areas.text = location.areas.joinToString(separator = ", ") { area ->
+                area.name.replaceFirstChar {
+                    if (it.isLowerCase()) it.titlecase(
+                        Locale.ROOT
+                    ) else it.toString()
+                }
+            }.replace("-", " ").ifEmpty { "No Areas" }
+        }
+    }
+
+    @SuppressLint("SetTextI18n")
+    private fun drawItem(location: NamedApiResource) {
+        binding.apply {
+            name.text = location.name.replace("-", " ").replaceFirstChar {
+                if (it.isLowerCase()) it.titlecase(
+                    Locale.ROOT
+                ) else it.toString()
+            }
             location.id.toString().let {
                 when (it.length) {
                     1 -> id.text = "#00$it"
@@ -26,19 +56,6 @@ class LocationViewHolder(
                     else -> id.text = "#$it"
                 }
             }
-            location.region?.let { setImage(image, it.name) }
         }
     }
-
-    private fun setImage(image: ImageView, name: String) {
-        image.setImageResource(
-            when (name) {
-                "physical" -> R.mipmap.ic_physical
-                "special" -> R.mipmap.ic_special
-                else -> R.mipmap.ic_status
-            }
-        )
-    }
-
-
 }

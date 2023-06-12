@@ -5,7 +5,6 @@ import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.core.view.isVisible
@@ -23,6 +22,7 @@ import study.project.pokelytics.databinding.ActivityMainBinding
 import study.project.pokelytics.databinding.NavigationDrawerLayoutBinding
 import study.project.pokelytics.models.NavItem
 import study.project.pokelytics.models.User
+import study.project.pokelytics.serializable
 import study.project.pokelytics.services.KeyConstants
 import study.project.pokelytics.services.PreferenceService
 import study.project.pokelytics.viewmodels.NavigationViewModel
@@ -146,7 +146,7 @@ class MainActivity : ActivityBase<ActivityMainBinding>() {
             }
         }
         binding.navigationDrawer.removeAllViews()
-        viewModel.setUser(User("", "", ""))
+        viewModel.setUser(User("", "", "", ""))
     }
 
     private fun initializeNavGraph() {
@@ -187,17 +187,10 @@ class MainActivity : ActivityBase<ActivityMainBinding>() {
             }
     }
     private fun loadData() {
-        user = intent.getSerializableExtra(USER) as User
-    }
-
-    private fun setImage(image: ImageView, avatar: Int) {
-        image.setImageResource(
-            when (avatar) {
-                1 -> R.drawable.ic_user
-                2 -> R.drawable.ic_user
-                else -> R.drawable.ic_sword
-            }
-        )
+        intent.serializable<User>(USER)?.let {
+            user = it
+        }
+        User.setInstance(user)
     }
 
     fun showLoading(value : Boolean) {

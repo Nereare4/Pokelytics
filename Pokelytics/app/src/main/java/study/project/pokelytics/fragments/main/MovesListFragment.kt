@@ -20,7 +20,7 @@ class MovesListFragment : FragmentBase<FragmentPokemonListBinding>() {
 
     override fun bindViewModel() {
         binding.apply {
-            this.lifecycleOwner = this@MovesListFragment
+            //this.lifecycleOwner = this@MovesListFragment
         }
     }
 
@@ -42,7 +42,7 @@ class MovesListFragment : FragmentBase<FragmentPokemonListBinding>() {
     override fun getResourceLayout(): Int = R.layout.fragment_pokemon_list
 
     override fun subscribe() {
-        viewModel.state.observe(this) {
+        viewModel.state.observe(viewLifecycleOwner) {
             when (it) {
                 ViewState.IDLE -> {
                     adapter.items.clear()
@@ -55,7 +55,7 @@ class MovesListFragment : FragmentBase<FragmentPokemonListBinding>() {
 
         }
 
-        viewModel.moveList.observe(this) {
+        viewModel.moveList.observe(viewLifecycleOwner) {
             it.forEachIndexed { index, move ->
                 adapter.items.add(move)
                 adapter.notifyItemInserted(layoutManager.itemCount + index)
@@ -69,5 +69,10 @@ class MovesListFragment : FragmentBase<FragmentPokemonListBinding>() {
                 viewModel.getMoveList(paginationRange)
             }
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        adapter.items.clear()
     }
 }

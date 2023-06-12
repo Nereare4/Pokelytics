@@ -122,4 +122,7 @@ Pokelytics informs the User that they have the rights of access, rectification, 
 9.	COMMERCIAL COMMUNICATIONS BY ELECTRONIC MEANS.\n\n
 In compliance with the LSSI (Law on Information Society Services), Pokelitycs will not send advertising or promotional communications by email or other equivalent electronic means that have not previously been requested or expressly authorized by the recipients. In the case of users with whom there is a prior contractual, legal, or service relationship, the Data Controller is authorized to send commercial communications regarding products or services of the Controller that are similar to those that were initially contracted with the client. If the User wishes to unsubscribe from receiving such communications, they may do so by sending their request by email to the following email address: pokelytics.project@gmail.com.
 </string>
+    <string name="id_title">ID</string>
+    <string name="name_title">Name</string>
+    <string name="area_title">Areas</string>
 </resources>

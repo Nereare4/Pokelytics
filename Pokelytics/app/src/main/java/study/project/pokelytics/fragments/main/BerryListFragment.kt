@@ -20,7 +20,7 @@ class BerryListFragment : FragmentBase<FragmentPokemonListBinding>() {
 
     override fun bindViewModel() {
         binding.apply {
-            this.lifecycleOwner = this@BerryListFragment
+            //this.lifecycleOwner = this@BerryListFragment
         }
     }
 
@@ -42,7 +42,7 @@ class BerryListFragment : FragmentBase<FragmentPokemonListBinding>() {
     override fun getResourceLayout(): Int = R.layout.fragment_pokemon_list
 
     override fun subscribe() {
-        viewModel.state.observe(this) {
+        viewModel.state.observe(viewLifecycleOwner) {
             when (it) {
                 ViewState.IDLE -> {
                     adapter.items.clear()
@@ -54,7 +54,7 @@ class BerryListFragment : FragmentBase<FragmentPokemonListBinding>() {
             (activity as MainActivity).showLoading(it == ViewState.LOADING && adapter.items.isNotEmpty())
         }
 
-        viewModel.berryList.observe(this) {
+        viewModel.berryList.observe(viewLifecycleOwner) {
             it.forEachIndexed { index, berry ->
                 adapter.items.add(berry)
                 adapter.notifyItemInserted(layoutManager.itemCount + index)
@@ -70,5 +70,8 @@ class BerryListFragment : FragmentBase<FragmentPokemonListBinding>() {
         }
     }
 
-
+    override fun onDestroyView() {
+        super.onDestroyView()
+        adapter.items.clear()
+    }
 }

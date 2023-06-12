@@ -4,7 +4,6 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import com.squareup.picasso.Picasso
 import org.koin.android.ext.android.inject
 import study.project.pokelytics.R
 import study.project.pokelytics.activities.ActivityBase
@@ -12,6 +11,7 @@ import study.project.pokelytics.databinding.FragmentProfileBinding
 import study.project.pokelytics.fragments.FragmentBase
 import study.project.pokelytics.services.KeyConstants
 import study.project.pokelytics.services.PreferenceService
+import study.project.pokelytics.setImageToUrl
 
 class ProfileFragment : FragmentBase<FragmentProfileBinding>() {
 
@@ -28,8 +28,7 @@ class ProfileFragment : FragmentBase<FragmentProfileBinding>() {
         binding.apply {
             profileName.text = nameUser
             profileEmail.text = emailUser
-            Picasso.get().load(photoUser).error(R.drawable.ic_user).into(profileImage)
-
+            profileImage.setImageToUrl(photoUser.toString(), R.drawable.ic_user)
             deleteAccount.setOnClickListener(){
                 val builder = AlertDialog.Builder(requireContext())
                 builder.setTitle(resources.getString(R.string.deleteaccount))

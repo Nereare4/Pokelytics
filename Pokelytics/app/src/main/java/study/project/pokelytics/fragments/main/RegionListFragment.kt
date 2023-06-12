@@ -20,7 +20,7 @@ class RegionListFragment : FragmentBase<FragmentRegionsListBinding>()  {
 
     override fun bindViewModel() {
         binding.apply {
-            this.lifecycleOwner = this@RegionListFragment
+            //this.lifecycleOwner = this@RegionListFragment
         }
     }
 
@@ -52,7 +52,7 @@ class RegionListFragment : FragmentBase<FragmentRegionsListBinding>()  {
     override fun getResourceLayout(): Int = R.layout.fragment_regions_list
 
     override fun subscribe() {
-        viewModel.state.observe(this) {
+        viewModel.state.observe(viewLifecycleOwner) {
             when (it) {
                 ViewState.IDLE -> {
                     adapter.items.clear()
@@ -64,7 +64,7 @@ class RegionListFragment : FragmentBase<FragmentRegionsListBinding>()  {
             (activity as MainActivity).showLoading(it == ViewState.LOADING && adapter.items.isNotEmpty())
         }
 
-        viewModel.regionList.observe(this) {
+        viewModel.regionList.observe(viewLifecycleOwner) {
             it.forEachIndexed { index, region ->
                 adapter.items.add(region)
                 adapter.notifyItemInserted(layoutManager.itemCount + index)
@@ -78,5 +78,10 @@ class RegionListFragment : FragmentBase<FragmentRegionsListBinding>()  {
                 viewModel.getRegionList(paginationRange)
             }
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        adapter.items.clear()
     }
 }

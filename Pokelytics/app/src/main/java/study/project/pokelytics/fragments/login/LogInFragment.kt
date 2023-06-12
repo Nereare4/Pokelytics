@@ -69,7 +69,7 @@ class LogInFragment : FragmentBase<FragmentLogInBinding>() {
             when(it){
                 ViewState.SUCCESS -> {
                     val emailUser = preferenceService.getPreference(KeyConstants.EMAIL_KEY)
-                    (activity as ActivityBase<*>).navigator.goToMain(User(emailUser.toString(), "", ""))
+                    (activity as ActivityBase<*>).navigator.goToMain(User(emailUser.toString(), "", "", ""))
                     activity?.finish()
                 }
                 ViewState.ERROR ->{
@@ -123,8 +123,8 @@ class LogInFragment : FragmentBase<FragmentLogInBinding>() {
                                         .addOnCompleteListener { authTask ->
                                             if (authTask.isSuccessful) {
                                                 FirebaseAuth.getInstance().currentUser?.email?.let { it1 ->
-                                                    loginViewModel.saveUserPreferences(User(it1, "", ""))
-                                                    (activity as ActivityBase<*>).navigator.goToMain(User(it1, "", ""))
+                                                    loginViewModel.saveUserPreferences(User(it1, "", "", ""))
+                                                    (activity as ActivityBase<*>).navigator.goToMain(User(it1, "", "", ""))
                                                     activity?.finish()
                                                 }
                                             }

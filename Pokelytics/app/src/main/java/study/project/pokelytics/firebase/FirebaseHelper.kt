@@ -20,7 +20,6 @@ class FirebaseHelper(
                 it.exception?.let { it1 -> onError(it1) }
             } else {
                 onResult()
-
             }
         }
     }
@@ -49,10 +48,11 @@ class FirebaseHelper(
                 it.exception?.let { it1 -> onError(it1) }
             } else {
                 //TODO: Return user from firebase instead of creating a new one
-                onResult(User(params.email, "", ""))
+                onResult(User(params.email, "", "", ""))
                 firebaseFirestore.collection("users").document(params.email).set(
                     hashMapOf(
                         "favouriteList" to "",
+                        "team" to "",
                     )
                 )
             }
@@ -65,21 +65,6 @@ class FirebaseHelper(
     ) {
         firebaseAuth.signOut()
         onResult()
-    }
-
-    fun subscribeToUserListener(
-        onResult: (User) -> Unit = {},
-        onError: (Throwable) -> Unit = {}
-    ) {
-        firebaseAuth.currentUser?.let {
-            firebaseFirestore.collection("users").document(it.uid).get().addOnCompleteListener { task ->
-                if (!task.isSuccessful) {
-                    task.exception?.let { it1 -> onError(it1) }
-                } else {
-                    task.result?.let { onResult(User.fromDataBase(it)) }
-                }
-            }
-        }
     }
 
     fun <T : Any>subscribeToKeyResponse(
@@ -99,4 +84,39 @@ class FirebaseHelper(
         }
     }
 
+    fun saveFavs(
+        user: User,
+        onResult: () -> Unit = {},
+        onError: (Throwable) -> Unit = {}
+    ) {
+        firebaseFirestore.collection("users").document(user.email).update(
+            hashMapOf<String, Any>(
+                "favouriteList" to user.favouriteList,
+            )
+        ).addOnCompleteListener {
+            if (!it.isSuccessful) {
+                it.exception?.let { it1 -> onError(it1) }
+            } else {
+                onResult()
+            }
+        }
+    }
+
+    fun saveTeam(
+        user: User,
+        onResult: () -> Unit = {},
+        onError: (Throwable) -> Unit = {}
+    ) {
+        firebaseFirestore.collection("users").document(user.email).update(
+            hashMapOf<String, Any>(
+                "team" to user.team,
+            )
+        ).addOnCompleteListener {
+            if (!it.isSuccessful) {
+                it.exception?.let { it1 -> onError(it1) }
+            } else {
+                onResult()
+            }
+        }
+    }
 }

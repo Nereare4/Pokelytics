@@ -1,29 +1,29 @@
 package study.project.pokelytics.viewmodels
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import study.project.pokelytics.api.model.Location
-import study.project.pokelytics.models.LocationList
+import study.project.pokelytics.api.model.NamedApiResource
+import study.project.pokelytics.event.LiveEvent
+import study.project.pokelytics.event.MutableLiveEvent
+import study.project.pokelytics.event.postEvent
 import study.project.pokelytics.usecases.GetLocationUseCase
 
-class LocationViewModel(
+class MoreInfoLocationViewModel(
     val getLocationUseCase: GetLocationUseCase
-) : ViewModalBase() {
+): ViewModalBase() {
 
-    private val mutableLocationList = MutableLiveData<List<Location>>()
-    val locationList: LiveData<List<Location>>
-        get() = mutableLocationList
+    private val mutableLocation = MutableLiveEvent<Location>()
+    val location: LiveEvent<Location> = mutableLocation
 
-    fun getLocationList(locationList: LocationList) {
+    fun getLocationExtraInfo(item: NamedApiResource) {
         mutableState.postValue(ViewState.LOADING)
         viewModelScope.launch {
             getLocationUseCase(
-                locationList,
-                { locationList ->
+                item,
+                {
                     mutableState.postValue(ViewState.SUCCESS)
-                    mutableLocationList.postValue(locationList)
+                    mutableLocation.postEvent(it)
                 }, {
                     mutableState.postValue(ViewState.ERROR)
                 }
