@@ -15,6 +15,7 @@
     <string name="other2">or log in with</string>
     <string name="or">or </string>
     <string name="email">Email</string>
+    <string name="name">Name</string>
     <string name="login">LOGIN</string>
     <string name="signup">SIGN UP</string>
     <string name="pass">Password</string>
@@ -50,6 +51,7 @@
     <string name="privacy_policy">Privacy policy</string>
     <string name="txt_privacy_policy">Click here to see our privacy policy</string>
     <string name="userName">Name</string>
+    <string name="welcomeUser">Welcome trainer</string>
     <string name="termsPolicy">By registering you indicate that you agree with our terms and conditions of use and our Cookies policy.</string>
     <string name="statistics">Statistics</string>
     <string name="vulnerable">Vulnerable at</string>

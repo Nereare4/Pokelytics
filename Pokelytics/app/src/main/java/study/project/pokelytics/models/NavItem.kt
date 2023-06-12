@@ -28,6 +28,7 @@ data class NavItem(
             "settings" -> R.drawable.ic_settings
             "favourites" -> R.drawable.ic_star
             "team" -> R.drawable.ic_pc
+            "logout" -> R.drawable.ic_logout
             else -> R.drawable.ic_pokeball
         }
     }

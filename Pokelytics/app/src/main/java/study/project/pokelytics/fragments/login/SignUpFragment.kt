@@ -45,7 +45,7 @@ class SignUpFragment : FragmentBase<FragmentSignUpBinding>() {
                 } else if (password.text.toString() != repassword.text.toString()) {
                     showError(etpassword, resources.getString(R.string.passSame))
                 } else {
-                    val credentials = LoginCredentials(email.text.toString(), password.text.toString())
+                    val credentials = LoginCredentials(email.text.toString(), password.text.toString(), name.text.toString())
                     signUpViewModel.signUp(credentials)
                 }
             }
@@ -54,8 +54,6 @@ class SignUpFragment : FragmentBase<FragmentSignUpBinding>() {
             }
             btnGoogle.setOnClickListener {
                 signUpGoogle()
-                //val credentials = LoginCredentials(email.text.toString(), "")
-                //signUpViewModel.signUp(credentials)
             }
             tvsTermsPolicy.setOnClickListener{
                 (activity as ActivityBase<*>).navigator.goToPolicy()
@@ -120,9 +118,11 @@ class SignUpFragment : FragmentBase<FragmentSignUpBinding>() {
                         if (it.isSuccessful){
                             FirebaseAuth.getInstance().currentUser?.sendEmailVerification()?.addOnSuccessListener {
                                 Toast.makeText(requireContext(), resources.getString(R.string.verifyEmail), Toast.LENGTH_LONG).show()
+
                                 FirebaseAuth.getInstance().currentUser?.email?.let { it1 ->
-                                    signUpViewModel.saveUserPreferences(User(it1, "", "", ""))
-                                    (activity as ActivityBase<*>).navigator.goToMain(User(it1, "", "", ""))
+                                    val name = FirebaseAuth.getInstance().currentUser?.displayName.toString()
+                                    signUpViewModel.saveUserPreferences(User(it1, name, "", ""))
+                                    (activity as ActivityBase<*>).navigator.goToMain(User(it1, name, "", ""))
                                     activity?.finish()
                                 }
                             }
@@ -131,6 +131,7 @@ class SignUpFragment : FragmentBase<FragmentSignUpBinding>() {
                                     hashMapOf(
                                         "favouriteList" to "",
                                         "team" to "",
+                                        "name" to FirebaseAuth.getInstance().currentUser?.displayName
                                     )
                                 )
                             }

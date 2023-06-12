@@ -6,7 +6,6 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.material.textfield.TextInputLayout
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import study.project.pokelytics.R
-import study.project.pokelytics.activities.ActivityBase
 import study.project.pokelytics.databinding.FragmentResetPasswordBinding
 import study.project.pokelytics.fragments.FragmentBase
 import study.project.pokelytics.models.LoginCredentials
@@ -26,7 +25,7 @@ class ResetPasswordFragment : FragmentBase<FragmentResetPasswordBinding>() {
                 }else if(!email.text.contains("@")){
                     showError(etemail, resources.getString(R.string.emailValid))
                 }else {
-                    val credentials = LoginCredentials(email.text.toString(), "")
+                    val credentials = LoginCredentials(email.text.toString(), "", "")
                     resetPasswordViewModel.resetPassword(credentials)
                     Toast.makeText(requireContext(), resources.getString(R.string.checkMail), Toast.LENGTH_LONG).show()
                     findNavController().navigate(R.id.resetPasswordFragmentToLogInFragment)
