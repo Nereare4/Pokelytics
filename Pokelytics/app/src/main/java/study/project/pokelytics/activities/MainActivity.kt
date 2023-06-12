@@ -12,7 +12,6 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseAuth
-import com.squareup.picasso.Picasso
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import study.project.pokelytics.R
@@ -24,6 +23,7 @@ import study.project.pokelytics.models.User
 import study.project.pokelytics.serializable
 import study.project.pokelytics.services.KeyConstants
 import study.project.pokelytics.services.PreferenceService
+import study.project.pokelytics.setImageToUrl
 import study.project.pokelytics.viewmodels.NavigationViewModel
 import java.util.Locale
 
@@ -172,10 +172,8 @@ class MainActivity : ActivityBase<ActivityMainBinding>() {
             navAdapter.notifyDataSetChanged()
         }
         viewModel.user.observe(this) {
-            //Change 1 to it.image
-            //setImage(navDrawerBinding.profileImage, 0)
-            navDrawerBinding.profileName.text = emailUser
-            Picasso.get().load(photoUser).error(R.drawable.ic_user).into(navDrawerBinding.profileImage)
+            navDrawerBinding.profileName.text = emailUser?.replaceAfter("@", "") ?: "".replace("@", "")
+            navDrawerBinding.profileImage.setImageToUrl(photoUser.toString())
             binding.navigationDrawer.addView(navDrawerBinding.root)
 
         }
