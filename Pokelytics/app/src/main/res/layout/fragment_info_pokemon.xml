@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:background="@color/darkGreen">
+    >
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/pokemon_container"
@@ -28,7 +27,7 @@
             android:id="@+id/linearLayout3"
             android:layout_width="360dp"
             android:layout_height="141dp"
-            android:background="@color/white"
+            android:background="@drawable/pokemon_white"
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -144,7 +143,7 @@
             android:id="@+id/linearLayout2"
             android:layout_width="360dp"
             android:layout_height="141dp"
-            android:background="@color/white"
+            android:background="@drawable/pokemon_white"
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
