@@ -6,11 +6,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import study.project.pokelytics.R
+import study.project.pokelytics.activities.ActivityBase
 import study.project.pokelytics.activities.MainActivity
 import study.project.pokelytics.adapters.TeamAdapter
 import study.project.pokelytics.api.model.Pokemon
 import study.project.pokelytics.databinding.FragmentTeamBinding
 import study.project.pokelytics.fragments.FragmentBase
+import study.project.pokelytics.models.PokemonInterface
 import study.project.pokelytics.models.User
 import study.project.pokelytics.usecases.GetPokemonMoreInfoUseCase
 import study.project.pokelytics.viewmodels.FavViewModel
@@ -45,8 +47,8 @@ class TeamListFragment : FragmentBase<FragmentTeamBinding>() {
         }
     }
 
-    private fun createPokemonInterface(): PokemonViewHolderInterface {
-        return object : PokemonViewHolderInterface {
+    private fun createPokemonInterface(): PokemonInterface {
+        return object : PokemonInterface {
             override fun onFavoriteClick(pokemon: Pokemon) {
                 if (User.getInstance().email.isEmpty()) {
                     Toast.makeText(context, "Please login to add favorites", Toast.LENGTH_SHORT).show()
@@ -82,7 +84,7 @@ class TeamListFragment : FragmentBase<FragmentTeamBinding>() {
             }
 
             override fun onPokemonClick(pokemon: Pokemon) {
-               //viewModel.navigateToPokemonDetail(pokemon)
+                (activity as ActivityBase<*>).navigator.goToInfoPage(pokemon)
             }
 
             override fun createMoreInfoViewModel(): MoreInfoViewModel {
@@ -117,13 +119,6 @@ class TeamListFragment : FragmentBase<FragmentTeamBinding>() {
                 adapter.notifyItemInserted(layoutManager.itemCount + index)
             }
         }
-    }
-
-    interface PokemonViewHolderInterface {
-        fun onFavoriteClick(pokemon: Pokemon)
-        fun onTeamClick(pokemon: Pokemon)
-        fun onPokemonClick(pokemon: Pokemon)
-        fun createMoreInfoViewModel(): MoreInfoViewModel
     }
 
     override fun onDestroyView() {

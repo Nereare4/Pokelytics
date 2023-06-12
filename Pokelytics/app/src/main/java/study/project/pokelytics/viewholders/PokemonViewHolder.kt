@@ -6,13 +6,13 @@ import study.project.pokelytics.R
 import study.project.pokelytics.api.model.Pokemon
 import study.project.pokelytics.databinding.PokemonListItemBinding
 import study.project.pokelytics.event.observeEvent
-import study.project.pokelytics.fragments.main.PokemonListFragment
+import study.project.pokelytics.models.PokemonInterface
 import study.project.pokelytics.setImageToUrl
 import java.util.Locale
 
 class PokemonViewHolder(
     private val binding: PokemonListItemBinding,
-    private val pokemonInterface : PokemonListFragment.PokemonViewHolderInterface
+    private val pokemonInterface : PokemonInterface
 ) : BaseViewHolder<Pokemon>(binding.root) {
 
     private val moreInfoViewModel = pokemonInterface.createMoreInfoViewModel()

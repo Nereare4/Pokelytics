@@ -26,4 +26,9 @@ class PokemonDataSource(
         }
         emit(list)
     }
+
+    fun getPokemonFromId(id: Int): Flow<Pokemon> = flow {
+        emit(remote.getPokemon(id))
+    }
+
 }

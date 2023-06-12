@@ -4,11 +4,11 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import study.project.pokelytics.api.model.Pokemon
 import study.project.pokelytics.databinding.PokemonTeamItemBinding
-import study.project.pokelytics.fragments.main.TeamListFragment
+import study.project.pokelytics.models.PokemonInterface
 import study.project.pokelytics.viewholders.TeamViewHolder
 
 class TeamAdapter(
-    private val pokemonInterface : TeamListFragment.PokemonViewHolderInterface
+    private val pokemonInterface : PokemonInterface
 ) : BaseRecyclerAdapter<Pokemon, TeamViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TeamViewHolder {

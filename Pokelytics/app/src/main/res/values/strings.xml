@@ -24,8 +24,7 @@
     <string name="barOpt1">info</string>
     <string name="barOpt2">attacks</string>
     <string name="barOpt3">more</string>
-    <string name="habilities">Habilities</string>
-    <string name="Statistics">Estadisticas</string>
+    <string name="abilities">Abilities</string>
     <string name="emailRequired">Email is required</string>
     <string name="passRequired">Password is required</string>
     <string name="repassRequired">Repeat password is required</string>

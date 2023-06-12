@@ -4,11 +4,11 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import study.project.pokelytics.api.model.Pokemon
 import study.project.pokelytics.databinding.PokemonListItemBinding
-import study.project.pokelytics.fragments.main.FavListFragment
+import study.project.pokelytics.models.PokemonInterface
 import study.project.pokelytics.viewholders.PokemonFavViewHolder
 
 class PokemonFavAdapter(
-    private val pokemonInterface : FavListFragment.PokemonViewHolderInterface
+    private val pokemonInterface : PokemonInterface
 ) : BaseRecyclerAdapter<Pokemon, PokemonFavViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PokemonFavViewHolder {
