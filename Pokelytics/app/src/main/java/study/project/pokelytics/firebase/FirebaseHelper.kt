@@ -53,6 +53,7 @@ class FirebaseHelper(
                     hashMapOf(
                         "favouriteList" to "",
                         "team" to "",
+                        "name" to params.name
                     )
                 )
             }

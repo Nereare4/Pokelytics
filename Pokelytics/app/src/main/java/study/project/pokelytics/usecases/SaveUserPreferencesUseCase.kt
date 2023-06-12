@@ -1,6 +1,5 @@
 package study.project.pokelytics.usecases
 
-import android.content.SharedPreferences
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
 import study.project.pokelytics.models.User
@@ -15,6 +14,7 @@ class SaveUserPreferencesUseCase (
 
     override suspend fun execute(params: User): Flow<Unit> {
         preferenceService.savePreference(KeyConstants.EMAIL_KEY, params.email)
+        preferenceService.savePreference(KeyConstants.NAME_KEY, params.name)
         return flowOf()
     }
 }

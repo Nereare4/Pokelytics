@@ -12,6 +12,7 @@ import com.google.android.gms.common.api.ApiException
 import com.google.android.material.textfield.TextInputLayout
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
+import com.google.firebase.firestore.FirebaseFirestore
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import study.project.pokelytics.R
@@ -41,7 +42,7 @@ class LogInFragment : FragmentBase<FragmentLogInBinding>() {
                 }else if(!email.text.contains("@")) {
                     showError(etemail, resources.getString(R.string.emailValid))
                 }else{
-                    val credentials = LoginCredentials(email.text.toString(), password.text.toString())
+                    val credentials = LoginCredentials(email.text.toString(), password.text.toString(), "")
                     loginViewModel.login(credentials)
                 }
             }
@@ -69,8 +70,12 @@ class LogInFragment : FragmentBase<FragmentLogInBinding>() {
             when(it){
                 ViewState.SUCCESS -> {
                     val emailUser = preferenceService.getPreference(KeyConstants.EMAIL_KEY)
-                    (activity as ActivityBase<*>).navigator.goToMain(User(emailUser.toString(), "", "", ""))
-                    activity?.finish()
+                    if (emailUser != null) {
+                        FirebaseFirestore.getInstance().collection("users").document(emailUser).get().addOnSuccessListener {
+                            (activity as ActivityBase<*>).navigator.goToMain(User(emailUser.toString(), it.get("name") as String, it.get("favouriteList") as String, it.get("team") as String))
+                            activity?.finish()
+                        }
+                    }
                 }
                 ViewState.ERROR ->{
                     showErrorLogin()
@@ -122,11 +127,12 @@ class LogInFragment : FragmentBase<FragmentLogInBinding>() {
                                     FirebaseAuth.getInstance().signInWithCredential(credential)
                                         .addOnCompleteListener { authTask ->
                                             if (authTask.isSuccessful) {
-                                                FirebaseAuth.getInstance().currentUser?.email?.let { it1 ->
-                                                    loginViewModel.saveUserPreferences(User(it1, "", "", ""))
-                                                    (activity as ActivityBase<*>).navigator.goToMain(User(it1, "", "", ""))
+                                                FirebaseFirestore.getInstance().collection("users").document(email).get().addOnSuccessListener {
+                                                    loginViewModel.saveUserPreferences(User(email, it.get("name") as String, it.get("favouriteList") as String, it.get("team") as String))
+                                                    (activity as ActivityBase<*>).navigator.goToMain(User(email, it.get("name") as String, it.get("favouriteList") as String, it.get("team") as String))
                                                     activity?.finish()
                                                 }
+
                                             }
                                         }
                                 }

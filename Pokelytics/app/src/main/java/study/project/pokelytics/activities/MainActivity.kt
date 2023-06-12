@@ -45,7 +45,7 @@ class MainActivity : ActivityBase<ActivityMainBinding>() {
 
     private lateinit var user: User
     val photoUser = fAuth.currentUser?.photoUrl
-    val emailUser = preferenceService.getPreference(KeyConstants.EMAIL_KEY)
+    val nameUser = preferenceService.getPreference(KeyConstants.NAME_KEY)
 
     override fun initializeView() {
         initializeCallbacks()
@@ -132,6 +132,7 @@ class MainActivity : ActivityBase<ActivityMainBinding>() {
                         }
                         "Logout" -> {
                             preferenceService.removePreference(KeyConstants.EMAIL_KEY)
+                            preferenceService.removePreference(KeyConstants.NAME_KEY)
                             fAuth.signOut()
                             navigator.goToLogin()
                             finish()
@@ -152,8 +153,7 @@ class MainActivity : ActivityBase<ActivityMainBinding>() {
     }
 
     private fun initializeNavGraph() {
-        navHost =
-            supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        navHost = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         val graph = navHost.navController.navInflater.inflate(R.navigation.nav_graph_main)
         navHost.navController.graph = graph
         navController = navHost.navController
@@ -172,7 +172,7 @@ class MainActivity : ActivityBase<ActivityMainBinding>() {
             navAdapter.notifyDataSetChanged()
         }
         viewModel.user.observe(this) {
-            navDrawerBinding.profileName.text = emailUser?.replaceAfter("@", "") ?: "".replace("@", "")
+            navDrawerBinding.profileName.text = nameUser
             navDrawerBinding.profileImage.setImageToUrl(photoUser.toString())
             binding.navigationDrawer.addView(navDrawerBinding.root)
 
