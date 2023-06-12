@@ -49,4 +49,9 @@
         android:name="study.project.pokelytics.fragments.main.ProfileFragment"
         tools:layout="@layout/fragment_profile"/>
 
+    <fragment
+        android:id="@+id/favList"
+        android:name="study.project.pokelytics.fragments.main.FavListFragment"
+        tools:layout="@layout/fragment_pokemon_list"/>
+
 </navigation>

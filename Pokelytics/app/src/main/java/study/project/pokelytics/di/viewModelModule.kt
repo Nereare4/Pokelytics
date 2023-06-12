@@ -14,7 +14,7 @@ import study.project.pokelytics.viewmodels.*
 @ExperimentalCoroutinesApi
 @FlowPreview
 val viewModelModule = module {
-    viewModel { PokemonListViewModel(get()) }
+    viewModel { PokemonListViewModel(get(), get()) }
     viewModel { MoreInfoViewModel(get()) }
     viewModel { LoginViewModel(get(), get()) }
     viewModel { SignUpViewModel(get(), get()) }
