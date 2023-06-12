@@ -127,5 +127,6 @@ In compliance with the LSSI (Law on Information Society Services), Pokelitycs wi
     <string name="id_title">ID</string>
     <string name="name_title">Name</string>
     <string name="area_title">Areas</string>
-    <string name="no_pokemon">"You don't have any favourite Pokemon, go to pokedex to choose one "</string>
+    <string name="no_pokemon_fav">"You don't have any favourite Pokemon, go to pokedex to get started"</string>
+    <string name="no_pokemon_team">"You don't have any Pokemon in your team, go to pokedex to get started"</string>
 </resources>

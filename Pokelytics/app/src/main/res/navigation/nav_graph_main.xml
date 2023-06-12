@@ -54,4 +54,9 @@
         android:name="study.project.pokelytics.fragments.main.FavListFragment"
         tools:layout="@layout/fragment_pokemon_list"/>
 
+    <fragment
+        android:id="@+id/teamList"
+        android:name="study.project.pokelytics.fragments.main.TeamListFragment"
+        tools:layout="@layout/fragment_pokemon_list"/>
+
 </navigation>

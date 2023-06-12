@@ -12,7 +12,7 @@ import study.project.pokelytics.usecases.GetPokemonUseCase
 
 class PokemonListViewModel(
     val getPokemonUseCase: GetPokemonUseCase,
-    val getFavPokemonUseCase: GetFavPokemonUseCase
+    val getListPokemonUseCase: GetFavPokemonUseCase
 ) : ViewModalBase() {
 
     private val mutablePokemons = MutableLiveData<List<Pokemon>>()
@@ -37,8 +37,23 @@ class PokemonListViewModel(
     fun getFavPokemon() {
         mutableState.postValue(ViewState.LOADING)
         viewModelScope.launch {
-            getFavPokemonUseCase(
+            getListPokemonUseCase(
                 User.getInstance().favouriteList,
+                { pokemonList ->
+                    mutableState.postValue(ViewState.SUCCESS)
+                    mutablePokemons.postValue(pokemonList)
+                }, {
+                    mutableState.postValue(ViewState.ERROR)
+                }
+            )
+        }
+    }
+
+    fun getTeamPokemon() {
+        mutableState.postValue(ViewState.LOADING)
+        viewModelScope.launch {
+            getListPokemonUseCase(
+                User.getInstance().team,
                 { pokemonList ->
                     mutableState.postValue(ViewState.SUCCESS)
                     mutablePokemons.postValue(pokemonList)

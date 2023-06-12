@@ -76,7 +76,7 @@ class MainActivity : ActivityBase<ActivityMainBinding>() {
                         navController.navigate(R.id.userProfile)
                     }
                     "team" -> {
-                        navController.navigate(R.id.userProfile)
+                        navController.navigate(R.id.teamList)
                     }
                     "favourites" -> {
                         navController.navigate(R.id.favList)
