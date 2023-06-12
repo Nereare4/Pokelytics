@@ -107,8 +107,7 @@ class PokemonListFragment : FragmentBase<FragmentPokemonListBinding>() {
                 ViewState.IDLE -> viewModel.getPokemonList(paginationRange)
                 else -> {}
             }
-            (activity as MainActivity).showLoading(it == ViewState.LOADING && adapter.items.isNotEmpty())
-
+            (activity as MainActivity).showLoading(it == ViewState.LOADING && adapter.items.isEmpty())
         }
 
         viewModel.pokemons.observe(viewLifecycleOwner) {

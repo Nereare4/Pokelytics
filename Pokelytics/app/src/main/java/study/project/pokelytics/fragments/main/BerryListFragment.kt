@@ -51,7 +51,7 @@ class BerryListFragment : FragmentBase<FragmentPokemonListBinding>() {
                 }
                 else -> {}
             }
-            (activity as MainActivity).showLoading(it == ViewState.LOADING && adapter.items.isNotEmpty())
+            (activity as MainActivity).showLoading(it == ViewState.LOADING && adapter.items.isEmpty())
         }
 
         viewModel.berryList.observe(viewLifecycleOwner) {
