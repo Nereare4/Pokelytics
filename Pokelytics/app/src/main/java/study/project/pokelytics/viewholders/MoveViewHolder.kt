@@ -26,6 +26,11 @@ class MoveViewHolder(
                     else -> id.text = "#$it"
                 }
             }
+            if (move.power == null || move.power <0){
+                power.text = "---"
+            }else{
+                power.text = move.power.toString()
+            }
             setImage(image, move.damageClass.name)
         }
     }
