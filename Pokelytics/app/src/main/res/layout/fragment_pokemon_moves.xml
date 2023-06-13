@@ -20,7 +20,8 @@
             android:layout_marginTop="10dp"
             android:gravity="center"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/image">
 
             <TextView
                 android:id="@+id/id"
@@ -41,33 +42,6 @@
                 android:textColor="@color/colorOnItem"
                 android:textSize="20sp" />
 
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:gravity="center"
-            app:layout_constraintEnd_toStartOf="@id/image"
-            app:layout_constraintStart_toEndOf="@+id/name_id_container"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <ImageView
-                android:id="@+id/favorite"
-                android:layout_width="27dp"
-                android:layout_height="27dp"
-                android:layout_marginStart="5dp"
-                android:contentDescription="@string/app_name"
-                android:src="@drawable/ic_star_border" />
-
-            <ImageView
-                android:id="@+id/cached"
-                android:layout_width="27dp"
-                android:layout_height="27dp"
-                android:layout_marginStart="5dp"
-                android:contentDescription="@string/app_name"
-                android:src="@drawable/ic_outline_circle" />
 
         </LinearLayout>
 
@@ -117,21 +91,19 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.0" />
 
-        <LinearLayout
-            android:id="@+id/linearLayout2"
-            android:layout_width="362dp"
-            android:layout_height="546dp"
-            android:background="@drawable/pokemon_white"
-            android:orientation="vertical"
-            app:flow_horizontalAlign="center"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/movesRecycler"
+            android:layout_marginTop="20dp"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.775">
+            app:layout_constraintTop_toBottomOf="@id/linearLayout"
+            android:layout_marginBottom="10dp">
 
 
-        </LinearLayout>
+        </androidx.recyclerview.widget.RecyclerView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

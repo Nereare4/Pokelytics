@@ -1,6 +1,7 @@
 package study.project.pokelytics.api.model
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 data class Ability(
     val id: Int,
@@ -129,7 +130,7 @@ data class Pokemon(
     val types: List<PokemonType>,
     val sprites: PokemonSprites,
     val extraInfo: PokemonExtraInfo? = null
-)
+): Serializable
 
 data class PokemonExtraInfo (
     val species: PokemonSpecies? = null

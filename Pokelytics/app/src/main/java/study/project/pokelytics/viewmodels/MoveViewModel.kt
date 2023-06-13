@@ -7,9 +7,11 @@ import kotlinx.coroutines.launch
 import study.project.pokelytics.api.model.Move
 import study.project.pokelytics.api.model.PaginationRange
 import study.project.pokelytics.usecases.GetMoveUseCase
+import study.project.pokelytics.usecases.GetMovesFromListUseCase
 
 class MoveViewModel(
-    val getMoveUseCase: GetMoveUseCase
+    val getMoveUseCase: GetMoveUseCase,
+    val getMovesFromListUseCase: GetMovesFromListUseCase
 ) : ViewModalBase() {
 
     private val mutableMoveList = MutableLiveData<List<Move>>()
@@ -21,6 +23,21 @@ class MoveViewModel(
         viewModelScope.launch {
             getMoveUseCase(
                 paginationRange,
+                { moveList ->
+                    mutableState.postValue(ViewState.SUCCESS)
+                    mutableMoveList.postValue(moveList)
+                }, {
+                    mutableState.postValue(ViewState.ERROR)
+                }
+            )
+        }
+    }
+
+    fun getMoveFromList(list: String) {
+        mutableState.postValue(ViewState.LOADING)
+        viewModelScope.launch {
+            getMovesFromListUseCase(
+                list,
                 { moveList ->
                     mutableState.postValue(ViewState.SUCCESS)
                     mutableMoveList.postValue(moveList)

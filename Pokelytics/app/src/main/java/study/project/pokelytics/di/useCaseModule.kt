@@ -7,6 +7,7 @@ import study.project.pokelytics.usecases.GetBerryUseCase
 import study.project.pokelytics.usecases.GetFavPokemonUseCase
 import study.project.pokelytics.usecases.GetLocationUseCase
 import study.project.pokelytics.usecases.GetMoveUseCase
+import study.project.pokelytics.usecases.GetMovesFromListUseCase
 import study.project.pokelytics.usecases.GetPokemonFromIdUseCase
 import study.project.pokelytics.usecases.GetPokemonMoreInfoUseCase
 import study.project.pokelytics.usecases.GetPokemonUseCase
@@ -27,4 +28,5 @@ val useCaseModule = module {
     factory { GetRegionUseCase(get()) }
     factory { GetFavPokemonUseCase(get()) }
     factory { GetPokemonFromIdUseCase(get()) }
+    factory { GetMovesFromListUseCase(get()) }
 }

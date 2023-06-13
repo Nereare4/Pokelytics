@@ -212,7 +212,7 @@ class MainActivity : ActivityBase<ActivityMainBinding>() {
         User.setInstance(user)
     }
 
-    fun showLoading(value : Boolean) {
-        binding.loadingAnimation.isVisible = value
+    override fun showLoading(show : Boolean) {
+        binding.loadingAnimation.isVisible = show
     }
 }

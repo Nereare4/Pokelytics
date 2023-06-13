@@ -21,7 +21,7 @@ val viewModelModule = module {
     viewModel { ResetPasswordViewModel(get())}
     viewModel { NavigationViewModel(get())}
     viewModel { BerryViewModel(get())}
-    viewModel { MoveViewModel(get())}
+    viewModel { MoveViewModel(get(), get())}
     viewModel { RegionViewModel(get())}
     viewModel { SplashViewModel(get())}
     viewModel { FavViewModel(get())}

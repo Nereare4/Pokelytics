@@ -3,6 +3,7 @@ package study.project.pokelytics.fragments.info
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.view.isVisible
+import androidx.navigation.fragment.findNavController
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import study.project.pokelytics.R
 import study.project.pokelytics.activities.ActivityBase
@@ -29,8 +30,7 @@ class InfoPokemonFragment: FragmentBase<FragmentInfoPokemonBinding>() {
 
     override fun bindViewModel() {}
 
-    override fun initializeView() {
-    }
+    override fun initializeView() {}
 
     private fun setUi() {
         binding.apply {
@@ -91,6 +91,10 @@ class InfoPokemonFragment: FragmentBase<FragmentInfoPokemonBinding>() {
                 }
             }
             buildPokemonStats(pokemon)
+            seeMovesButton.setOnClickListener {
+                val dir = InfoPokemonFragmentDirections.actionToPokemonMoves(pokemon)
+                findNavController().navigate(dir)
+            }
         }
     }
 
@@ -120,7 +124,7 @@ class InfoPokemonFragment: FragmentBase<FragmentInfoPokemonBinding>() {
             "pink" -> R.drawable.pokemon_pink
             "purple" -> R.drawable.pokemon_purple
             "red" -> R.drawable.pokemon_red
-            "white" -> R.drawable.pokemon_white
+            "white" -> R.drawable.pokemon_white_dark
             "yellow" -> R.drawable.pokemon_yellow
             else -> R.drawable.pokemon_green
         }
@@ -150,7 +154,8 @@ class InfoPokemonFragment: FragmentBase<FragmentInfoPokemonBinding>() {
 
     override fun subscribe() {
         moreInfoViewModel.pokemon.observeEvent(viewLifecycleOwner) {
-            loadExtraInfo(it)
+            pokemon = it
+            loadExtraInfo(pokemon)
         }
         viewModel.pokemon.observe(viewLifecycleOwner) {
             pokemon = it

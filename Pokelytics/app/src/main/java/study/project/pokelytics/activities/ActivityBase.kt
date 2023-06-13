@@ -32,4 +32,6 @@ abstract class ActivityBase<T : ViewDataBinding> : AppCompatActivity() {
 
     protected abstract fun subscribe()
 
+    open fun showLoading(show: Boolean) {}
+
 }

@@ -2,8 +2,9 @@
 <resources>
 
     <!-- COLORES POKEMONS: black, blue, brown, gray, green, pink, purple, red, white, yellow -->
-    <color name="black">#FF000000</color>
+    <color name="black">#000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="whiteDark">#CDCDCD</color>
     <color name="colorPrimary">#2349D2</color>
     <color name="colorPrimaryDark">#233C97</color>
     <color name="colorSecondary">#F52929</color>
@@ -15,6 +16,10 @@
     <color name="green">#66DA86</color>
     <color name="darkGreen">#388E4F</color>
     <color name="blue">#1E88E5</color>
+    <color name="blueLight">#03A9F4</color>
+    <color name="blueDark">#0166BD</color>
+    <color name="purpleLight">#A835FA</color>
+    <color name="orange">#FF4F4F</color>
     <color name="brown">#733A11</color>
     <color name="gray">#958B8B</color>
     <color name="pink">#D81B60</color>
@@ -22,5 +27,6 @@
     <color name="red">#CF2323</color>
     <color name="yellow">#FDD835</color>
     <color name="light_grey">#93928D</color>
+    <color name="transparent">#00000000</color>
 
 </resources>
