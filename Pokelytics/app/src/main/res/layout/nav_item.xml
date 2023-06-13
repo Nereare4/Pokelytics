@@ -5,12 +5,13 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="15dp">
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="8dp">
 
         <ImageView
             android:id="@+id/icon"
-            android:layout_width="27dp"
-            android:layout_height="27dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:background="@drawable/ic_pokeball"/>
@@ -21,7 +22,7 @@
             android:layout_height="wrap_content"
             android:text="Pokedex"
             android:textColor="@drawable/selector_nav_item_text"
-            android:textSize="15sp"
+            android:textSize="17dp"
             android:layout_marginStart="10dp"
             app:layout_constraintStart_toEndOf="@id/icon"
             app:layout_constraintTop_toTopOf="@id/icon"

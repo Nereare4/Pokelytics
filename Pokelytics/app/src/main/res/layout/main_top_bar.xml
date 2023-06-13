@@ -37,10 +37,10 @@
 
         <ImageView
             android:id="@+id/fav_icon"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_marginEnd="@dimen/default_margin"
-            android:src="@drawable/baseline_stars"
+            android:src="@drawable/logo_pokelytics"
             android:contentDescription="@string/app_name"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"

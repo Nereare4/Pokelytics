@@ -54,6 +54,8 @@
     <string name="termsPolicy">By registering you indicate that you agree with our terms and conditions of use and our Cookies policy.</string>
     <string name="statistics">Statistics</string>
     <string name="vulnerable">Vulnerable at</string>
+    <string name="loginTitle">Login</string>
+    <string name="loginQuestion">Please login to add pokemon to favourites or team</string>
 
 
 
