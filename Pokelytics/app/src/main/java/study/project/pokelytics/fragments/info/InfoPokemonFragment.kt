@@ -6,6 +6,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 import study.project.pokelytics.R
 import study.project.pokelytics.activities.InfoActivity
 import study.project.pokelytics.api.model.Pokemon
+import study.project.pokelytics.capitalized
 import study.project.pokelytics.databinding.FragmentInfoPokemonBinding
 import study.project.pokelytics.event.observeEvent
 import study.project.pokelytics.fragments.FragmentBase
@@ -43,9 +44,9 @@ class InfoPokemonFragment: FragmentBase<FragmentInfoPokemonBinding>() {
                     else -> id.text = "#$it"
                 }
             }
-            primaryType.text = pokemon.types[0].type.name
+            primaryType.text = pokemon.types[0].type.name.capitalized()
             if (pokemon.types.size > 1) {
-                secondaryType.text = pokemon.types[1].type.name
+                secondaryType.text = pokemon.types[1].type.name.capitalized()
                 secondaryType.isVisible = true
             } else {
                 secondaryType.isVisible = false
@@ -60,6 +61,45 @@ class InfoPokemonFragment: FragmentBase<FragmentInfoPokemonBinding>() {
                 pokemonInterface.onTeamClick(pokemon)
                 setTeam(pokemon)
             }
+            when (pokemon.abilities.size) {
+                3 -> {
+                    ability1.text = pokemon.abilities[0].ability.name.capitalized()
+                    ability2.text = pokemon.abilities[1].ability.name.capitalized()
+                    ability3.text = pokemon.abilities[2].ability.name.capitalized()
+                }
+
+                2 -> {
+                    if (pokemon.abilities[1].isHidden) {
+                        ability1.text = pokemon.abilities[0].ability.name.capitalized()
+                        ability2.isVisible = false
+                        ability3.text = pokemon.abilities.first { it.isHidden }.ability.name.capitalized()
+                    } else {
+                        ability1.text = pokemon.abilities[0].ability.name.capitalized()
+                        ability2.text = pokemon.abilities[1].ability.name.capitalized()
+                        abilityHidden.isVisible = false
+                        ability3.isVisible = false
+                    }
+                }
+
+                else -> {
+                    ability1.text = pokemon.abilities[0].ability.name.capitalized()
+                    ability2.isVisible = false
+                    abilityHidden.isVisible = false
+                    ability3.isVisible = false
+                }
+            }
+            buildPokemonStats(pokemon)
+        }
+    }
+
+    private fun buildPokemonStats(pokemon: Pokemon) {
+        binding.apply {
+            hpValue.text = pokemon.stats[0].baseStat.toString()
+            attackValue.text = pokemon.stats[1].baseStat.toString()
+            defenseValue.text = pokemon.stats[2].baseStat.toString()
+            specialAttackValue.text = pokemon.stats[3].baseStat.toString()
+            specialDefenseValue.text = pokemon.stats[4].baseStat.toString()
+            speedValue.text = pokemon.stats[5].baseStat.toString()
         }
     }
 
@@ -127,11 +167,7 @@ class InfoPokemonFragment: FragmentBase<FragmentInfoPokemonBinding>() {
                 }
                 if (User.getInstance().addFav(pokemon)) {
                     favViewModel.saveFavs(User.getInstance())
-                    Toast.makeText(context, "${pokemon.name.replaceFirstChar {
-                        if (it.isLowerCase()) it.titlecase(
-                            Locale.ROOT
-                        ) else it.toString()
-                    }} added to favourites", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, "${pokemon.name.capitalized()} added to favourites", Toast.LENGTH_SHORT).show()
                 } else {
                     Toast.makeText(context, "Cant add more than 6 pokemon to favourites", Toast.LENGTH_SHORT).show()
                 }
@@ -144,11 +180,7 @@ class InfoPokemonFragment: FragmentBase<FragmentInfoPokemonBinding>() {
                 }
                 if (User.getInstance().addTeam(pokemon)) {
                     favViewModel.saveTeam(User.getInstance())
-                    Toast.makeText(context, "${pokemon.name.replaceFirstChar {
-                        if (it.isLowerCase()) it.titlecase(
-                            Locale.ROOT
-                        ) else it.toString()
-                    }} added to team", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, "${pokemon.name.capitalized()} added to team", Toast.LENGTH_SHORT).show()
                 } else {
                     Toast.makeText(context, "Cant add more than 6 pokemon to team", Toast.LENGTH_SHORT).show()
                 }

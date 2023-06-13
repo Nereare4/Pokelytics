@@ -46,6 +46,7 @@ class BerryListFragment : FragmentBase<FragmentPokemonListBinding>() {
             when (it) {
                 ViewState.IDLE -> {
                     adapter.items.clear()
+                    adapter.notifyDataSetChanged()
                     paginationRange = PaginationRange()
                     viewModel.getBerryList(paginationRange)
                 }
@@ -68,10 +69,5 @@ class BerryListFragment : FragmentBase<FragmentPokemonListBinding>() {
                 viewModel.getBerryList(paginationRange)
             }
         }
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        adapter.items.clear()
     }
 }

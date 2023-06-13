@@ -32,19 +32,8 @@
             app:layout_constraintStart_toStartOf="@id/more_icon"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/fav_icon"
             android:fontFamily="@font/carterone_regular"/>
 
-        <ImageView
-            android:id="@+id/fav_icon"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginEnd="@dimen/default_margin"
-            android:src="@drawable/baseline_stars"
-            android:contentDescription="@string/app_name"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

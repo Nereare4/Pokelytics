@@ -52,9 +52,4 @@ class LocationsListFragment : FragmentBase<FragmentLocationsListBinding>()  {
             }
         }
     }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        adapter.items.clear()
-    }
 }

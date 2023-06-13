@@ -9,11 +9,31 @@ data class NavItem(
     val title: String,
     @SerializedName("icon")
     val icon: String,
-    var iconResId: Int = 0
+    var iconResId: Int = 0,
+    var iconSelectedId: Int = 0,
+    var isSelected : Boolean = false
     ) {
     init {
         if (iconResId == 0) {
             mapId()
+        }
+        if (iconSelectedId == 0) {
+            mapSelectedId()
+        }
+    }
+
+    fun mapSelectedId() {
+        this.iconSelectedId = when(icon.lowercase(Locale.ROOT)) {
+            "home" -> R.drawable.ic_home_selected
+            "pokedex" -> R.drawable.ic_pokeball_selected
+            "berries" -> R.drawable.ic_berries_selected
+            "moves" -> R.drawable.ic_sword_selected
+            "items" -> R.drawable.ic_items_selected
+            "locations" -> R.drawable.ic_location_selected
+            "settings" -> R.drawable.ic_settings_selected
+            "favourites" -> R.drawable.ic_star_selected
+            "team" -> R.drawable.ic_pc_selected
+            else -> R.drawable.ic_pokeball_selected
         }
     }
 

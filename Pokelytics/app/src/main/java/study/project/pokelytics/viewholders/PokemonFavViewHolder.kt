@@ -58,6 +58,7 @@ class PokemonFavViewHolder(
                 pokemonInterface.onTeamClick(item)
                 setTeam(item)
             }
+
         }
     }
 

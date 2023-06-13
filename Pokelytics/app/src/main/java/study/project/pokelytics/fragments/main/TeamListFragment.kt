@@ -10,6 +10,7 @@ import study.project.pokelytics.activities.ActivityBase
 import study.project.pokelytics.activities.MainActivity
 import study.project.pokelytics.adapters.TeamAdapter
 import study.project.pokelytics.api.model.Pokemon
+import study.project.pokelytics.capitalized
 import study.project.pokelytics.databinding.FragmentTeamBinding
 import study.project.pokelytics.fragments.FragmentBase
 import study.project.pokelytics.models.PokemonInterface
@@ -19,7 +20,6 @@ import study.project.pokelytics.viewmodels.FavViewModel
 import study.project.pokelytics.viewmodels.MoreInfoViewModel
 import study.project.pokelytics.viewmodels.PokemonListViewModel
 import study.project.pokelytics.viewmodels.ViewState
-import java.util.Locale
 
 class TeamListFragment : FragmentBase<FragmentTeamBinding>() {
 
@@ -56,11 +56,7 @@ class TeamListFragment : FragmentBase<FragmentTeamBinding>() {
                 }
                 if (User.getInstance().addFav(pokemon)) {
                     favViewModel.saveFavs(User.getInstance())
-                    Toast.makeText(context, "${pokemon.name.replaceFirstChar {
-                        if (it.isLowerCase()) it.titlecase(
-                            Locale.ROOT
-                        ) else it.toString()
-                    }} added to favourites", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, "${pokemon.name.capitalized()} added to favourites", Toast.LENGTH_SHORT).show()
                 } else {
                     Toast.makeText(context, "Cant add more than 6 pokemon to favourites", Toast.LENGTH_SHORT).show()
                 }
@@ -73,11 +69,7 @@ class TeamListFragment : FragmentBase<FragmentTeamBinding>() {
                 }
                 if (User.getInstance().addTeam(pokemon)) {
                     favViewModel.saveTeam(User.getInstance())
-                    Toast.makeText(context, "${pokemon.name.replaceFirstChar {
-                        if (it.isLowerCase()) it.titlecase(
-                            Locale.ROOT
-                        ) else it.toString()
-                    }} added to team", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, "${pokemon.name.capitalized()} added to team", Toast.LENGTH_SHORT).show()
                 } else {
                     Toast.makeText(context, "Cant add more than 6 pokemon to team", Toast.LENGTH_SHORT).show()
                 }
@@ -105,7 +97,11 @@ class TeamListFragment : FragmentBase<FragmentTeamBinding>() {
     override fun subscribe() {
         viewModel.state.observe(viewLifecycleOwner) {
             when (it) {
-                ViewState.IDLE -> viewModel.getTeamPokemon()
+                ViewState.IDLE -> {
+                    adapter.items.clear()
+                    adapter.notifyDataSetChanged()
+                    viewModel.getTeamPokemon()
+                }
                 else -> {}
             }
             (activity as MainActivity).showLoading(it == ViewState.LOADING && adapter.items.isEmpty())
@@ -119,10 +115,5 @@ class TeamListFragment : FragmentBase<FragmentTeamBinding>() {
                 adapter.notifyItemInserted(layoutManager.itemCount + index)
             }
         }
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        adapter.items.clear()
     }
 }

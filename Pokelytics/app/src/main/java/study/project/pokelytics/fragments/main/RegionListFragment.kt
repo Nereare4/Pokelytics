@@ -56,6 +56,7 @@ class RegionListFragment : FragmentBase<FragmentRegionsListBinding>()  {
             when (it) {
                 ViewState.IDLE -> {
                     adapter.items.clear()
+                    adapter.notifyDataSetChanged()
                     paginationRange = PaginationRange()
                     viewModel.getRegionList(paginationRange)
                 }
@@ -78,10 +79,5 @@ class RegionListFragment : FragmentBase<FragmentRegionsListBinding>()  {
                 viewModel.getRegionList(paginationRange)
             }
         }
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        adapter.items.clear()
     }
 }

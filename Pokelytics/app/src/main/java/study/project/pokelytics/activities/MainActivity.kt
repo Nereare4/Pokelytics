@@ -84,11 +84,20 @@ class MainActivity : ActivityBase<ActivityMainBinding>() {
                     "logout" -> {
                     }
                 }
+
+                setSelected(id)
             }
         )
         viewModel.getNavItems()
         initializeDrawer()
         setOnClickListeners()
+    }
+
+    private fun setSelected(id: String) {
+        navAdapter.items.forEachIndexed { index, it ->
+            it.isSelected = it.title == id
+            navAdapter.notifyItemChanged(index)
+        }
     }
 
     private fun initializeCallbacks() {
@@ -125,7 +134,7 @@ class MainActivity : ActivityBase<ActivityMainBinding>() {
         navDrawerBinding = NavigationDrawerLayoutBinding.inflate(LayoutInflater.from(this), binding.root as ViewGroup, false).apply {
             navRecycler.layoutManager = navLayoutManager
             settingsRecycler.layoutManager = settingsLayoutManager
-
+            root.setOnClickListener {  }
             navRecycler.adapter = navAdapter
             settingsRecycler.adapter = NavAdapter(
                 onClick = { id ->
@@ -173,7 +182,13 @@ class MainActivity : ActivityBase<ActivityMainBinding>() {
     @SuppressLint("NotifyDataSetChanged")
     override fun subscribe() {
         viewModel.navItems.observe(this) {
-            it.forEach { navItem -> navItem.mapId() }
+            it.forEach { navItem ->
+                navItem.mapId()
+                navItem.mapSelectedId()
+                if (navItem.title == "Pokedex") {
+                    navItem.isSelected = true
+                }
+            }
             navAdapter.items.addAll(it)
             navAdapter.notifyDataSetChanged()
         }

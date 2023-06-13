@@ -46,6 +46,7 @@ class MovesListFragment : FragmentBase<FragmentPokemonListBinding>() {
             when (it) {
                 ViewState.IDLE -> {
                     adapter.items.clear()
+                    adapter.notifyDataSetChanged()
                     paginationRange = PaginationRange()
                     viewModel.getMoveList(paginationRange)
                 }
@@ -68,10 +69,5 @@ class MovesListFragment : FragmentBase<FragmentPokemonListBinding>() {
                 viewModel.getMoveList(paginationRange)
             }
         }
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        adapter.items.clear()
     }
 }
