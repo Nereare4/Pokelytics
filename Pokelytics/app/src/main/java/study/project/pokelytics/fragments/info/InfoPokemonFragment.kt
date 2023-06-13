@@ -1,9 +1,11 @@
 package study.project.pokelytics.fragments.info
 
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.core.view.isVisible
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import study.project.pokelytics.R
+import study.project.pokelytics.activities.ActivityBase
 import study.project.pokelytics.activities.InfoActivity
 import study.project.pokelytics.api.model.Pokemon
 import study.project.pokelytics.capitalized
@@ -162,7 +164,7 @@ class InfoPokemonFragment: FragmentBase<FragmentInfoPokemonBinding>() {
         return object : PokemonInterface {
             override fun onFavoriteClick(pokemon: Pokemon) {
                 if (User.getInstance().email.isEmpty()) {
-                    Toast.makeText(context, "Please login to add favorites", Toast.LENGTH_SHORT).show()
+                    alertFavsTeam()
                     return
                 }
                 if (User.getInstance().addFav(pokemon)) {
@@ -175,7 +177,7 @@ class InfoPokemonFragment: FragmentBase<FragmentInfoPokemonBinding>() {
 
             override fun onTeamClick(pokemon: Pokemon) {
                 if (User.getInstance().email.isEmpty()) {
-                    Toast.makeText(context, "Please login to add pokemon to team", Toast.LENGTH_SHORT).show()
+                    alertFavsTeam()
                     return
                 }
                 if (User.getInstance().addTeam(pokemon)) {
@@ -192,5 +194,16 @@ class InfoPokemonFragment: FragmentBase<FragmentInfoPokemonBinding>() {
                 return moreInfoViewModel
             }
         }
+    }
+    fun alertFavsTeam(){
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setTitle(resources.getString(R.string.loginTitle))
+        builder.setMessage(resources.getString(R.string.loginQuestion))
+        builder.setPositiveButton(resources.getString(R.string.accept)) { dialog, which ->
+            (activity as ActivityBase<*>).navigator.goToLogin()
+            activity?.finish()
+        }
+        builder.setNegativeButton(resources.getString(R.string.cancel)) { dialog, which ->}
+        builder.show()
     }
 }

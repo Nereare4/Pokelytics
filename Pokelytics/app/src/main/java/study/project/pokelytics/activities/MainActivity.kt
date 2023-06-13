@@ -45,7 +45,6 @@ class MainActivity : ActivityBase<ActivityMainBinding>() {
 
     private lateinit var user: User
     val photoUser = fAuth.currentUser?.photoUrl
-    val nameUser = preferenceService.getPreference(KeyConstants.NAME_KEY)
 
     override fun initializeView() {
         initializeCallbacks()
@@ -164,7 +163,7 @@ class MainActivity : ActivityBase<ActivityMainBinding>() {
             }
         }
         binding.navigationDrawer.removeAllViews()
-        viewModel.setUser(User("", "", "", ""))
+        viewModel.setUser(User.getInstance())
     }
 
     private fun initializeNavGraph() {
@@ -193,10 +192,9 @@ class MainActivity : ActivityBase<ActivityMainBinding>() {
             navAdapter.notifyDataSetChanged()
         }
         viewModel.user.observe(this) {
-            navDrawerBinding.profileName.text = nameUser
+            navDrawerBinding.profileName.text = it.name.ifEmpty { resources.getString(R.string.welcomeUser) }
             navDrawerBinding.profileImage.setImageToUrl(photoUser.toString())
             binding.navigationDrawer.addView(navDrawerBinding.root)
-
         }
     }
 
