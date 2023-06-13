@@ -32,7 +32,6 @@ class LogInFragment : FragmentBase<FragmentLogInBinding>() {
     private val loginViewModel: LoginViewModel by viewModel()
     private val preferenceService: PreferenceService by inject()
     private val GOOGLE_SIGN_IN = 1
-    private val firebaseFirestore: FirebaseFirestore by inject()
 
     override fun initializeView() {
         binding.apply {
@@ -72,8 +71,9 @@ class LogInFragment : FragmentBase<FragmentLogInBinding>() {
                 ViewState.SUCCESS -> {
                     val emailUser = preferenceService.getPreference(KeyConstants.EMAIL_KEY)
                     if (emailUser != null) {
-                        firebaseFirestore.collection("users").document(emailUser).get().addOnSuccessListener {
-                            (activity as ActivityBase<*>).navigator.goToMain(User(emailUser.toString(), it.get("name") as String, it.get("favouriteList") as String, it.get("team") as String))
+                        FirebaseFirestore.getInstance().collection("users").document(emailUser).get().addOnSuccessListener {
+                            loginViewModel.saveUserPreferences(User(emailUser.toString(), it.get("name").toString(), it.get("favouriteList").toString(), it.get("team").toString()))
+                            (activity as ActivityBase<*>).navigator.goToMain(User(emailUser.toString(), it.get("name").toString(), it.get("favouriteList").toString(), it.get("team").toString()))
                             activity?.finish()
                         }
                     }
@@ -129,8 +129,8 @@ class LogInFragment : FragmentBase<FragmentLogInBinding>() {
                                         .addOnCompleteListener { authTask ->
                                             if (authTask.isSuccessful) {
                                                 FirebaseFirestore.getInstance().collection("users").document(email).get().addOnSuccessListener {
-                                                    loginViewModel.saveUserPreferences(User(email, it.get("name") as String, it.get("favouriteList") as String, it.get("team") as String))
-                                                    (activity as ActivityBase<*>).navigator.goToMain(User(email, it.get("name") as String, it.get("favouriteList") as String, it.get("team") as String))
+                                                    loginViewModel.saveUserPreferences(User(email, it.get("name").toString(), it.get("favouriteList").toString(), it.get("team").toString()))
+                                                    (activity as ActivityBase<*>).navigator.goToMain(User(email, it.get("name").toString(), it.get("favouriteList").toString(), it.get("team").toString()))
                                                     activity?.finish()
                                                 }
 
@@ -138,7 +138,6 @@ class LogInFragment : FragmentBase<FragmentLogInBinding>() {
                                         }
                                 }
                             } else {
-                                // Error al verificar el correo electrónico en Firebase
                                 Log.w(ContentValues.TAG, "Error fetching sign-in methods for email", task.exception)
                             }
                         }

@@ -1,6 +1,7 @@
 package study.project.pokelytics.fragments.main
 
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -52,7 +53,7 @@ class PokemonListFragment : FragmentBase<FragmentPokemonListBinding>() {
         return object : PokemonInterface {
             override fun onFavoriteClick(pokemon: Pokemon) {
                 if (User.getInstance().email.isEmpty()) {
-                    Toast.makeText(context, "Please login to add favorites", Toast.LENGTH_SHORT).show()
+                    alertFavsTeam()
                     return
                 }
                 if (User.getInstance().addFav(pokemon)) {
@@ -69,7 +70,7 @@ class PokemonListFragment : FragmentBase<FragmentPokemonListBinding>() {
 
             override fun onTeamClick(pokemon: Pokemon) {
                 if (User.getInstance().email.isEmpty()) {
-                    Toast.makeText(context, "Please login to add pokemon to team", Toast.LENGTH_SHORT).show()
+                    alertFavsTeam()
                     return
                 }
                 if (User.getInstance().addTeam(pokemon)) {
@@ -94,6 +95,18 @@ class PokemonListFragment : FragmentBase<FragmentPokemonListBinding>() {
                 )
             }
         }
+    }
+
+    fun alertFavsTeam(){
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setTitle(resources.getString(R.string.loginTitle))
+        builder.setMessage(resources.getString(R.string.loginQuestion))
+        builder.setPositiveButton(resources.getString(R.string.accept)) { dialog, which ->
+            (activity as ActivityBase<*>).navigator.goToLogin()
+            activity?.finish()
+        }
+        builder.setNegativeButton(resources.getString(R.string.cancel)) { dialog, which ->}
+        builder.show()
     }
 
     override fun onResume() {
